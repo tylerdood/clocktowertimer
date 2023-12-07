@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blood on the Clocktower Timer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Almendra&family=Xanh+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <style>
+      body {
+        text-align: center;
+        background-color: #1a1a1a;
+        color: #d6d6d6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        position: relative;
+        font-family: "Almendra", "Helvetica Neue";
+        font-size: 4em;
+      }
+
+      h1 {
+        font-size: 5em;
+        color: #d6d6d6;
+        margin: 0;
+        font-family: "Xanh Mono", serif;
+      }
+
+      button {
+        background-color: rgb(78, 0, 78);
+        color: #d6d6d6;
+        border: none;
+        padding: 10px 20px;
+        margin: 5px;
+        border-radius: 5px;
+        font-size: 0.3em;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-family: "Almendra", "Helvetica Neue";
+      }
+
+      button:hover {
+        background-color: rgb(118, 23, 107);
+      }
+
+      #toggleTimeOfDayButton {
+        background-color: transparent;
+        color: purple;
+        transition: color 0.3s;
+        font-size: 1em;
+        padding: 0px;
+        margin: 0px;
+      }
+
+      #toggleTimeOfDayButton:hover {
+        color: rgb(180, 52, 165);
+      }
+
+      #timerContainer {
+        display: flex;
+        justify-content: center;
+        position: relative;
+      }
+
+      #adjustTime {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        left: -15%;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      @media screen and (max-width: 600px) {
+        body {
+          font-size: 1.4em;
+        }
+        h1 {
+          font-size: 5.5em;
+        }
+        button {
+          font-size: 0.17em;
+          padding: 5px 10px;
+        }
+        #toggleTimeOfDayButton {
+          font-size: 1em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="trackerContainer">
+        <span id="fillerText">It Is</span>
+        <button id="toggleTimeOfDayButton" class="timeOfDayButton">Dusk</button>
+        <span id="dayLabel">Of Day </span>
+        <span id="dayValue">1</span>
+      </div>
+      <button id="incrementDay">Proceed to the Next Day</button>
+      <div id="timerContainer">
+        <div id="adjustTime">
+          <button id="incrementTime"><i class="fas fa-arrow-up"></i></button>
+          <!-- Up arrow -->
+          <button id="decrementTime"><i class="fas fa-arrow-down"></i></button>
+          <!-- Down arrow -->
+        </div>
+        <h1 id="timeDisplay">03:00</h1>
+      </div>
+      <div id="timerControls">
+        <button id="startStopButton"><i class="fas fa-play"></i></button>
+        <!-- Start/Stop -->
+        <button id="resetButton"><i class="fas fa-sync-alt"></i></button>
+        <!-- Reset -->
+      </div>
+    </div>
+
+    <script>
+      // Element references
+      const timeDisplay = document.getElementById("timeDisplay");
+      const startStopButton = document.getElementById("startStopButton");
+      const resetButton = document.getElementById("resetButton");
+      const incrementTimeButton = document.getElementById("incrementTime");
+      const decrementTimeButton = document.getElementById("decrementTime");
+      const toggleTimeOfDayButton = document.getElementById(
+        "toggleTimeOfDayButton"
+      );
+      const dayValue = document.getElementById("dayValue");
+      const incrementDayButton = document.getElementById("incrementDay");
+      const dawnButton = document.getElementById("dawnButton");
+      const duskButton = document.getElementById("duskButton");
+      const body = document.body;
+
+      // State variables
+      let countdown;
+      let isTimerRunning = false;
+      let defaultTime = 180;
+      let timeRemaining = defaultTime;
+      let currentDay = 1;
+      let isDawn = true;
+
+      function displayTimeLeft(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+        const formattedSeconds =
+          remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
+        timeDisplay.textContent = `${formattedMinutes}:${formattedSeconds}`;
+
+        if (seconds <= 15) {
+          document.body.style.backgroundColor = "#750825";
+        } else {
+          document.body.style.backgroundColor = "#1a1a1a";
+        }
+        updateBackgroundColor();
+      }
+
+      function timer() {
+        clearInterval(countdown);
+        const now = Date.now();
+        const then = now + timeRemaining * 1000;
+        countdown = setInterval(() => {
+          const secondsLeft = Math.round((then - Date.now()) / 1000);
+          if (secondsLeft < 0) {
+            clearInterval(countdown);
+            isTimerRunning = false;
+            startStopButton.textContent = "Start";
+            timeRemaining = defaultTime;
+            return;
+          }
+          timeRemaining = secondsLeft;
+          displayTimeLeft(timeRemaining);
+        }, 1000);
+      }
+
+      function updateBackgroundColor() {
+        if (timeRemaining <= 15) {
+          document.body.style.backgroundColor = "#b35657";
+        } else {
+          document.body.style.backgroundColor = isDawn ? "#7a6275" : "#1e0121";
+        }
+      }
+
+      function updateDefaultTime() {
+        const timeValues = {
+          dawn: [10, 8, 7, 7, 6, 6, 5, 5, 4, 3, 3, 3, 3, 3, 3],
+          dusk: [3, 2.5, 2.5, 2.25, 2.25, 2, 2, 1.5, 1.25, 1, 1, 1, 1, 1, 1],
+        };
+
+        let newTime = isDawn
+          ? timeValues.dawn[currentDay - 1] * 60
+          : timeValues.dusk[currentDay - 1] * 60;
+
+        if (!isTimerRunning) {
+          defaultTime = newTime;
+          timeRemaining = newTime;
+          displayTimeLeft(timeRemaining);
+        }
+      }
+
+      startStopButton.addEventListener("click", () => {
+        if (!isTimerRunning) {
+          timer();
+          isTimerRunning = true;
+          startStopButton.innerHTML = '<i class="fas fa-stop"></i>';
+        } else {
+          clearInterval(countdown);
+          isTimerRunning = false;
+          startStopButton.innerHTML = '<i class="fas fa-play"></i>';
+        }
+      });
+
+      resetButton.addEventListener("click", () => {
+        if (!isTimerRunning) {
+          timeRemaining = defaultTime;
+          displayTimeLeft(timeRemaining);
+        }
+      });
+
+      incrementTimeButton.addEventListener("click", () => {
+        if (!isTimerRunning) {
+          defaultTime = Math.min(defaultTime + 15, 3599);
+          timeRemaining = defaultTime;
+          displayTimeLeft(timeRemaining);
+        }
+      });
+
+      decrementTimeButton.addEventListener("click", () => {
+        if (!isTimerRunning) {
+          defaultTime = Math.max(defaultTime - 15, 0);
+          timeRemaining = defaultTime;
+          displayTimeLeft(timeRemaining);
+        }
+      });
+
+      incrementDayButton.addEventListener("click", function () {
+        if (currentDay < 15) {
+          currentDay += 1;
+          dayValue.textContent = currentDay;
+
+          isDawn = true;
+          updateToggleButtonText();
+          updateBackgroundColor();
+          updateDefaultTime();
+        }
+      });
+
+      toggleTimeOfDayButton.addEventListener("click", function () {
+        isDawn = !isDawn;
+        updateToggleButtonText();
+        updateBackgroundColor();
+        updateDefaultTime();
+      });
+
+      function updateToggleButtonText() {
+        toggleTimeOfDayButton.textContent = isDawn ? "Dawn" : "Dusk";
+      }
+
+      updateToggleButtonText();
+      updateBackgroundColor();
+      updateDefaultTime();
+    </script>
+  </body>
+</html>
