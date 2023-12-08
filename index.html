@@ -111,6 +111,8 @@
         <div id="adjustTime">
           <button id="incrementTime"><i class="fas fa-arrow-up"></i></button>
           <!-- Up arrow -->
+          <button id="editTime"><i class="fas fa-keyboard"></i></button>
+          <!-- Edit current time -->
           <button id="decrementTime"><i class="fas fa-arrow-down"></i></button>
           <!-- Down arrow -->
         </div>
@@ -130,6 +132,7 @@
       const startStopButton = document.getElementById("startStopButton");
       const resetButton = document.getElementById("resetButton");
       const incrementTimeButton = document.getElementById("incrementTime");
+      const editTimeButton = document.getElementById("editTime");
       const decrementTimeButton = document.getElementById("decrementTime");
       const toggleTimeOfDayButton = document.getElementById(
         "toggleTimeOfDayButton"
@@ -148,13 +151,31 @@
       let currentDay = 1;
       let isDawn = true;
 
-      function displayTimeLeft(seconds) {
+      function formatTime(seconds) {
         const minutes = Math.floor(seconds / 60);
         const remainingSeconds = seconds % 60;
         const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
         const formattedSeconds =
           remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
-        timeDisplay.textContent = `${formattedMinutes}:${formattedSeconds}`;
+        return `${formattedMinutes}:${formattedSeconds}`;
+      }
+
+      function parseTime(timeValue) {
+        if (/^\d*\.?\d+$/.test(timeValue)) {
+          parsedTime = Math.round(timeValue * 60);
+        } else if (timeValue.includes(':')) {
+          timeValue = timeValue.split(':');
+          parsedTime = timeValue[0] * 60 + timeValue[1] * 1;
+        } else if (timeValue.endsWith('s')) {
+          parsedTime = Math.round(timeValue.substr(0, timeValue.length - 1));
+        } else {
+          parsedTime = 0;
+        }
+        return parsedTime;
+      }
+
+      function displayTimeLeft(seconds) {
+        timeDisplay.textContent = formatTime(seconds)
 
         if (seconds <= 15) {
           document.body.style.backgroundColor = "#750825";
@@ -231,6 +252,20 @@
           defaultTime = Math.min(defaultTime + 15, 3599);
           timeRemaining = defaultTime;
           displayTimeLeft(timeRemaining);
+        }
+      });
+
+      editTimeButton.addEventListener("click", () => {
+        if (!isTimerRunning) {
+          userTime = prompt(
+            "New Time formatted " + defaultTime/60 + ", "
+                         + formatTime(defaultTime) + " or "
+                         + defaultTime + "s:");
+          if (userTime != null) {
+            defaultTime = parseTime(userTime);
+            timeRemaining = defaultTime;
+            displayTimeLeft(timeRemaining);
+          }
         }
       });
 
