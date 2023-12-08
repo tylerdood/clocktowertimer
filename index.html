@@ -192,13 +192,13 @@
 
       function updateDefaultTime() {
         const timeValues = {
-          dawn: [10, 8, 7, 7, 6, 6, 5, 5, 4, 3, 3, 3, 3, 3, 3],
-          dusk: [3, 2.5, 2.5, 2.25, 2.25, 2, 2, 1.5, 1.25, 1, 1, 1, 1, 1, 1],
+          dawn: [10, 8, 7, 7, 6, 6, 5, 5, 4, 3],
+          dusk: [3, 2.5, 2.5, 2.25, 2.25, 2, 2, 1.5, 1.25, 1],
         };
 
         let newTime = isDawn
-          ? timeValues.dawn[currentDay - 1] * 60
-          : timeValues.dusk[currentDay - 1] * 60;
+          ? timeValues.dawn[Math.min(currentDay, timeValues.dawn.length) - 1] * 60
+          : timeValues.dusk[Math.min(currentDay, timeValues.dusk.length) - 1] * 60;
 
         if (!isTimerRunning) {
           defaultTime = newTime;
@@ -243,15 +243,13 @@
       });
 
       incrementDayButton.addEventListener("click", function () {
-        if (currentDay < 15) {
-          currentDay += 1;
-          dayValue.textContent = currentDay;
+        currentDay += 1;
+        dayValue.textContent = currentDay;
 
-          isDawn = true;
-          updateToggleButtonText();
-          updateBackgroundColor();
-          updateDefaultTime();
-        }
+        isDawn = true;
+        updateToggleButtonText();
+        updateBackgroundColor();
+        updateDefaultTime();
       });
 
       toggleTimeOfDayButton.addEventListener("click", function () {
