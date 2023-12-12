@@ -257,10 +257,7 @@
 
       editTimeButton.addEventListener("click", () => {
         if (!isTimerRunning) {
-          userTime = prompt(
-            "New Time formatted " + defaultTime/60 + ", "
-                         + formatTime(defaultTime) + " or "
-                         + defaultTime + "s:");
+          userTime = prompt("New Time:\nPossible formats: 8, 8:00, 400s");
           if (userTime != null) {
             defaultTime = parseTime(userTime);
             timeRemaining = defaultTime;
