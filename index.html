@@ -107,11 +107,11 @@
     <div id="container">
       <div id="trackerContainer">
         <span id="fillerText">It Is</span>
-        <button id="toggleTimeOfDayButton" class="timeOfDayButton">Dusk</button>
+        <button id="toggleTimeOfDayButton" class="timeOfDayButton restricted">Dusk</button>
         <span id="dayLabel">Of Day </span>
         <span id="dayValue">1</span>
       </div>
-      <button id="incrementDay">Proceed to the Next Day</button>
+      <button id="incrementDay" class="restricted">Proceed to the Next Day</button>
       <div id="timerContainer">
         <div id="adjustTime">
           <button id="incrementTime" class="restricted"><i class="fas fa-arrow-up"></i></button>
@@ -283,20 +283,24 @@
       });
 
       incrementDayButton.addEventListener("click", function () {
-        currentDay += 1;
-        dayValue.textContent = currentDay;
+        if (!isTimerRunning) {
+          currentDay += 1;
+          dayValue.textContent = currentDay;
 
-        isDawn = true;
-        updateToggleButtonText();
-        updateBackgroundColor();
-        updateDefaultTime();
+          isDawn = true;
+          updateToggleButtonText();
+          updateBackgroundColor();
+          updateDefaultTime();
+        }
       });
 
       toggleTimeOfDayButton.addEventListener("click", function () {
-        isDawn = !isDawn;
-        updateToggleButtonText();
-        updateBackgroundColor();
-        updateDefaultTime();
+        if (!isTimerRunning) {
+          isDawn = !isDawn;
+          updateToggleButtonText();
+          updateBackgroundColor();
+          updateDefaultTime();
+        }
       });
 
       function updateToggleButtonText() {
