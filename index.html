@@ -53,6 +53,11 @@
         background-color: rgb(118, 23, 107);
       }
 
+      .timerRunning button.restricted {
+        background-color: rgb(44, 0, 44);
+        cursor: default;
+      }
+
       #toggleTimeOfDayButton {
         background-color: transparent;
         color: purple;
@@ -109,11 +114,11 @@
       <button id="incrementDay">Proceed to the Next Day</button>
       <div id="timerContainer">
         <div id="adjustTime">
-          <button id="incrementTime"><i class="fas fa-arrow-up"></i></button>
+          <button id="incrementTime" class="restricted"><i class="fas fa-arrow-up"></i></button>
           <!-- Up arrow -->
-          <button id="editTime"><i class="fas fa-keyboard"></i></button>
+          <button id="editTime" class="restricted"><i class="fas fa-keyboard"></i></button>
           <!-- Edit current time -->
-          <button id="decrementTime"><i class="fas fa-arrow-down"></i></button>
+          <button id="decrementTime" class="restricted"><i class="fas fa-arrow-down"></i></button>
           <!-- Down arrow -->
         </div>
         <h1 id="timeDisplay">03:00</h1>
@@ -121,7 +126,7 @@
       <div id="timerControls">
         <button id="startStopButton"><i class="fas fa-play"></i></button>
         <!-- Start/Stop -->
-        <button id="resetButton"><i class="fas fa-sync-alt"></i></button>
+        <button id="resetButton" class="restricted"><i class="fas fa-sync-alt"></i></button>
         <!-- Reset -->
       </div>
     </div>
@@ -194,7 +199,8 @@
           if (secondsLeft < 0) {
             clearInterval(countdown);
             isTimerRunning = false;
-            startStopButton.textContent = "Start";
+            body.classList.remove('timerRunning');
+            startStopButton.textContent = "Restart";
             timeRemaining = defaultTime;
             return;
           }
@@ -232,10 +238,12 @@
         if (!isTimerRunning) {
           timer();
           isTimerRunning = true;
+          body.classList.add('timerRunning');
           startStopButton.innerHTML = '<i class="fas fa-stop"></i>';
         } else {
           clearInterval(countdown);
           isTimerRunning = false;
+          body.classList.remove('timerRunning');
           startStopButton.innerHTML = '<i class="fas fa-play"></i>';
         }
       });
