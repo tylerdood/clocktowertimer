@@ -155,6 +155,63 @@
       let timeRemaining = defaultTime;
       let currentDay = 1;
       let isDawn = true;
+      let timeValues = {
+        dawn: [600, 480, 420, 420, 360, 360, 300, 300, 240, 180],
+        dusk: [180, 150, 150, 135, 135, 120, 120, 90, 75, 60],
+      };
+      let stepSize = 15;
+      let attentionPeriod = 15;
+
+      function applyConfig(config) {
+        if (config.timeValues) {
+          if (!('dawn' in config.timeValues && 'dusk' in config.timeValues)) {
+            console.log('no config applied: missing key in timeValues (dawn, dusk)');
+          } else {
+            let invalidElement = false;
+            for (const key in config.timeValues) {
+              config.timeValues[key] = config.timeValues[key].map(elem => {
+                if (!isNaN(elem) && elem > 0) {
+                  // formatted e.g. 480 (already meaning seconds), no conversion needed
+                  return elem;
+                }
+                parsedTime = parseTime(elem);
+                if (parsedTime <= 0) {
+                  invalidElement = String(elem);
+                  return elem;
+                }
+                // formatted e.g. 8m, 8:00 or 480s, converted to 480
+                return parsedTime;
+              });
+            };
+            if (invalidElement) {
+              console.log(`no config applied: ${invalidElement} in timeValues is of an invalid format (or <= 0)`);
+            } else {
+              console.log(`config applied: "timeValues":${JSON.stringify(config.timeValues)}`);
+              timeValues = config.timeValues;
+            }
+          }
+        }
+        if (config.stepSize) {
+          if (isNaN(config.stepSize) || config.stepSize <= 0) {
+            console.log('no config applied: stepSize is NaN (or <= 0)');
+          } else {
+            console.log(`config applied: stepSize=${config.stepSize}`);
+            stepSize = config.stepSize;
+          }
+        }
+        if (config.attentionPeriod) {
+          if (isNaN(config.attentionPeriod) || config.attentionPeriod <= 0) {
+            console.log('no config applied: attentionPeriod is NaN (or <= 0)');
+          } else {
+            console.log(`config applied: attentionPeriod=${config.attentionPeriod}`);
+            attentionPeriod = config.attentionPeriod;
+          }
+        }
+      }
+
+      function getCurrentConfigUrl() {
+          return encodeURI(`${window.location.href.split('?')[0]}?timeValues=${JSON.stringify(timeValues)}&stepSize=${stepSize}&attentionPeriod=${attentionPeriod}`);
+      }
 
       function formatTime(seconds) {
         const minutes = Math.floor(seconds / 60);
@@ -166,7 +223,8 @@
       }
 
       function parseTime(timeValue) {
-        if (/^\d*\.?\d+$/.test(timeValue)) {
+        if (/^-?\d*\.?\d+m?$/.test(timeValue)) {
+          if(typeof timeValue === 'string') timeValue = timeValue.replace('m', '');
           parsedTime = Math.round(timeValue * 60);
         } else if (timeValue.includes(':')) {
           timeValue = timeValue.split(':');
@@ -185,7 +243,7 @@
       function displayTimeLeft(seconds) {
         timeDisplay.textContent = formatTime(seconds)
 
-        if (seconds <= 15) {
+        if (seconds <= attentionPeriod) {
           document.body.style.backgroundColor = "#750825";
         } else {
           document.body.style.backgroundColor = "#1a1a1a";
@@ -213,7 +271,7 @@
       }
 
       function updateBackgroundColor() {
-        if (timeRemaining <= 15) {
+        if (timeRemaining <= attentionPeriod) {
           document.body.style.backgroundColor = "#b35657";
         } else {
           document.body.style.backgroundColor = isDawn ? "#7a6275" : "#1e0121";
@@ -221,14 +279,9 @@
       }
 
       function updateDefaultTime() {
-        const timeValues = {
-          dawn: [10, 8, 7, 7, 6, 6, 5, 5, 4, 3],
-          dusk: [3, 2.5, 2.5, 2.25, 2.25, 2, 2, 1.5, 1.25, 1],
-        };
-
         let newTime = isDawn
-          ? timeValues.dawn[Math.min(currentDay, timeValues.dawn.length) - 1] * 60
-          : timeValues.dusk[Math.min(currentDay, timeValues.dusk.length) - 1] * 60;
+          ? timeValues.dawn[Math.min(currentDay, timeValues.dawn.length) - 1]
+          : timeValues.dusk[Math.min(currentDay, timeValues.dusk.length) - 1];
 
         if (!isTimerRunning) {
           defaultTime = newTime;
@@ -260,7 +313,7 @@
 
       incrementTimeButton.addEventListener("click", () => {
         if (!isTimerRunning) {
-          defaultTime = Math.min(defaultTime + 15, 3599);
+          defaultTime = Math.min(defaultTime + stepSize, 3599);
           timeRemaining = defaultTime;
           displayTimeLeft(timeRemaining);
         }
@@ -284,7 +337,7 @@
 
       decrementTimeButton.addEventListener("click", () => {
         if (!isTimerRunning) {
-          defaultTime = Math.max(defaultTime - 15, 0);
+          defaultTime = Math.max(defaultTime - stepSize, 0);
           timeRemaining = defaultTime;
           displayTimeLeft(timeRemaining);
         }
@@ -314,6 +367,14 @@
       function updateToggleButtonText() {
         toggleTimeOfDayButton.textContent = isDawn ? "Dawn" : "Dusk";
       }
+
+      const config = {};
+      const urlParams = new URLSearchParams(window.location.search);
+      for (const [key, value] of urlParams.entries()) {
+          config[key] = JSON.parse(value);
+      }
+      applyConfig(config);
+      console.log(getCurrentConfigUrl());
 
       updateToggleButtonText();
       updateBackgroundColor();
