@@ -170,6 +170,9 @@
           parsedTime = Math.round(timeValue * 60);
         } else if (timeValue.includes(':')) {
           timeValue = timeValue.split(':');
+          if (timeValue[0].startsWith('-') || timeValue[1].startsWith('-')) {
+            return 0;
+          }
           parsedTime = timeValue[0] * 60 + timeValue[1] * 1;
         } else if (timeValue.endsWith('s')) {
           parsedTime = Math.round(timeValue.substr(0, timeValue.length - 1));
@@ -265,9 +268,14 @@
 
       editTimeButton.addEventListener("click", () => {
         if (!isTimerRunning) {
-          userTime = prompt("New Time:\nPossible formats: 8, 8:00, 400s");
+          const userTime = prompt("New Time:\nPossible formats: 7.5, 7:30, 450s\nPossible range: 1 second - 59:99");
           if (userTime != null) {
-            defaultTime = parseTime(userTime);
+            const parsedTime = parseTime(userTime);
+            if (parsedTime <= 0 || parsedTime > 3599) {
+              alert(`Invalid input '${userTime}'\nPossible formats: 7.5, 7:30, 450s\nPossible range: 1 second - 59:59`);
+              return;
+            }
+            defaultTime = parsedTime;
             timeRemaining = defaultTime;
             displayTimeLeft(timeRemaining);
           }
