@@ -82,11 +82,11 @@ button:hover {
 }
 
 #muteButton {
-  width: 60px;
-  height: 45px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: absolute;
+  top: 10px;
+  right: 40px;
+  z-index: 10;
+  background-color: transparent;
 }
 
 #adjustTime {
