@@ -244,6 +244,18 @@ editTimeButton.addEventListener("click", () => {
   }
 });
 
+document.getElementById("infoIcon").addEventListener("click", function () {
+  var dialogueBox = document.getElementById("dialogueBox");
+  dialogueBox.classList.remove("hidden");
+  dialogueBox.style.display = "block";
+});
+
+document.getElementById("closeButton").addEventListener("click", function () {
+  var dialogueBox = document.getElementById("dialogueBox");
+  dialogueBox.classList.add("hidden");
+  dialogueBox.style.display = "none";
+});
+
 decrementTimeButton.addEventListener("click", () => {
   if (!isTimerRunning) {
     defaultTime = Math.max(defaultTime - stepSize, 0);

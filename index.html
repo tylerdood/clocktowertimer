@@ -62,9 +62,42 @@
           <i class="fas fa-sync-alt"></i>
         </button>
         <!-- Reset -->
+      </div>
+      <div id="infoIconContainer">
         <button id="muteButton">
           <i class="fas fa-volume-up"></i>
         </button>
+        <i id="infoIcon" class="fas fa-info-circle"></i>
+        <div id="dialogueBox" class="hidden">
+          <span
+            id="closeButton"
+            style="
+              cursor: pointer;
+              float: right;
+              font-size: 20px;
+              font-weight: bold;
+              padding: 0 10px;
+            "
+            >&times;</span
+          >
+          <p>
+            Tips for Use: Dawn is a longer timer, and can be used when people
+            are discussing during the day. Dusk is a shorter timer, and can be
+            used when it is time for deliberation and nominations. You can
+            toggle between the two by clicking Dawn/Dusk. Clicking Proceed to
+            the next day will make the timer shorter, as there are less people
+            in play. You can increment the timer by 15 seconds using the arrows,
+            or enter a custom time by clicking the keyboard icon. Hope you
+            enjoy!
+          </p>
+          <p>-</p>
+          <p class="disclaimer">
+            Disclaimer: Clocktowertimer is an open source project and is not
+            affiliated with The Pandemonium Institute. Feel free to contribute
+            on
+            <a href="https://github.com/tydood/clocktowertimer">Github.</a>
+          </p>
+        </div>
       </div>
     </div>
     <script src="script.js"></script>
