@@ -12,6 +12,21 @@ body {
   font-size: 4em;
 }
 
+.background-dusk {
+  background-image: url("images/village-dusk-4x.webp");
+}
+
+.background-dawn {
+  background-image: url("images/village-dawn-4x.webp");
+}
+
+.background-dawn,
+.background-dusk {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 h1 {
   font-size: 5em;
   color: #d6d6d6;
@@ -28,7 +43,6 @@ button {
   border-radius: 5px;
   font-size: 0.3em;
   cursor: pointer;
-  transition: background-color 0.3s;
   font-family: "Almendra", "Helvetica Neue";
 }
 

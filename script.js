@@ -116,13 +116,6 @@ function parseTime(timeValue) {
 
 function displayTimeLeft(seconds) {
   timeDisplay.textContent = formatTime(seconds);
-
-  if (seconds <= attentionPeriod) {
-    document.body.style.backgroundColor = "#750825";
-  } else {
-    document.body.style.backgroundColor = "#1a1a1a";
-  }
-  updateBackgroundColor();
 }
 
 function timer() {
@@ -176,11 +169,17 @@ function playSound() {
   }
 }
 
-function updateBackgroundColor() {
-  if (timeRemaining <= attentionPeriod) {
-    document.body.style.backgroundColor = "#b35657";
+function updateBackground() {
+  const body = document.body; // or the main container element
+
+  // Remove both classes to start fresh
+  body.classList.remove("background-dawn", "background-dusk");
+
+  // Add the appropriate class based on whether it's Dawn or Dusk
+  if (isDawn) {
+    body.classList.add("background-dawn");
   } else {
-    document.body.style.backgroundColor = isDawn ? "#7a6275" : "#1e0121";
+    body.classList.add("background-dusk");
   }
 }
 
@@ -260,7 +259,7 @@ incrementDayButton.addEventListener("click", function () {
 
     isDawn = true;
     updateToggleButtonText();
-    updateBackgroundColor();
+    updateBackground();
     updateDefaultTime();
     playDawnSound();
   }
@@ -280,7 +279,7 @@ toggleTimeOfDayButton.addEventListener("click", function () {
   if (!isTimerRunning) {
     isDawn = !isDawn;
     updateToggleButtonText();
-    updateBackgroundColor();
+    updateBackground();
     updateDefaultTime();
     if (isDawn) {
       playDawnSound();
@@ -303,5 +302,5 @@ applyConfig(config);
 console.log(getCurrentConfigUrl());
 
 updateToggleButtonText();
-updateBackgroundColor();
+updateBackground();
 updateDefaultTime();
