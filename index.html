@@ -34,40 +34,33 @@
         </button>
         <span id="dayLabel">Of Day </span>
         <span id="dayValue">1</span>
+        <button id="incrementDay" class="restricted">
+          <i class="fas fa-arrow-right"></i>
+        </button>
       </div>
-      <button id="incrementDay" class="restricted">
-        Proceed to the Next Day
-      </button>
       <div id="timerContainer">
-        <div id="adjustTime">
-          <button id="incrementTime" class="restricted">
-            <i class="fas fa-arrow-up"></i>
-          </button>
-          <!-- Up arrow -->
-          <button id="editTime" class="restricted">
-            <i class="fas fa-keyboard"></i>
-          </button>
-          <!-- Edit current time -->
-          <button id="decrementTime" class="restricted">
-            <i class="fas fa-arrow-down"></i>
-          </button>
-          <!-- Down arrow -->
-        </div>
         <h1 id="timeDisplay">03:00</h1>
       </div>
       <div id="timerControls">
         <button id="startStopButton"><i class="fas fa-play"></i></button>
-        <!-- Start/Stop -->
         <button id="resetButton" class="restricted">
           <i class="fas fa-sync-alt"></i>
         </button>
-        <!-- Reset -->
+        <button id="editTime" class="restricted">
+          <i class="fas fa-keyboard"></i>
+        </button>
+        <button id="incrementTime" class="restricted">
+          <i class="fas fa-arrow-up"></i>
+        </button>
+        <button id="decrementTime" class="restricted">
+          <i class="fas fa-arrow-down"></i>
+        </button>
       </div>
-      <div id="infoIconContainer">
+      <div id="informationContainer">
         <button id="muteButton">
           <i class="fas fa-volume-up"></i>
         </button>
-        <i id="infoIcon" class="fas fa-info-circle"></i>
+        <button id="infoIcon" class="fas fa-info-circle"></button>
         <div id="dialogueBox" class="hidden">
           <span
             id="closeButton"

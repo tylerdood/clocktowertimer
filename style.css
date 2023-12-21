@@ -12,16 +12,16 @@ body {
   font-size: 4em;
 }
 
-#infoIconContainer {
+#informationContainer {
   position: absolute;
-  top: 0px;
-  right: 80px;
+  top: 20px;
+  right: 70px;
   z-index: 20;
 }
 
-#infoIcon {
-  font-size: 24px;
-  cursor: pointer;
+#muteButton {
+  margin: 0px;
+  padding: 0px;
 }
 
 #dialogueBox {
@@ -47,10 +47,6 @@ p {
   font-family: "Times New Roman", Times, serif;
   font-style: italic;
   font-size: 0.15em;
-}
-
-#muteButton {
-  background-color: transparent;
 }
 
 .hidden {
@@ -80,7 +76,7 @@ h1 {
 }
 
 button {
-  background-color: rgb(78, 0, 78);
+  background-color: transparent;
   color: #d6d6d6;
   border: none;
   padding: 10px 20px;
@@ -89,15 +85,22 @@ button {
   font-size: 0.3em;
   cursor: pointer;
   font-family: "Almendra", "Helvetica Neue";
+  transition: transform 0.3s ease;
 }
 
 button:hover {
-  background-color: rgb(118, 23, 107);
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+  color: rgb(177, 36, 36);
 }
 
 .timerRunning button.restricted {
-  background-color: rgb(44, 0, 44);
+  color: rgb(140, 140, 140);
   cursor: default;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
 }
 
 #toggleTimeOfDayButton {
@@ -124,15 +127,6 @@ button:hover {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-}
-
-#adjustTime {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  left: -15%;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
 @media screen and (max-width: 600px) {
