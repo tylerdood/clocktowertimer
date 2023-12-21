@@ -27,6 +27,7 @@ let timeValues = {
 };
 let stepSize = 15;
 let attentionPeriod = 15;
+let timeOfDayText = document.getElementById("timeOfDayText");
 
 function applyConfig(config) {
   if (config.timeValues) {
@@ -274,6 +275,7 @@ incrementDayButton.addEventListener("click", function () {
     updateBackground();
     updateDefaultTime();
     playDawnSound();
+    updateSpanText();
   }
 });
 
@@ -293,6 +295,7 @@ toggleTimeOfDayButton.addEventListener("click", function () {
     updateToggleButtonText();
     updateBackground();
     updateDefaultTime();
+    updateSpanText();
     if (isDawn) {
       playDawnSound();
     } else {
@@ -302,7 +305,13 @@ toggleTimeOfDayButton.addEventListener("click", function () {
 });
 
 function updateToggleButtonText() {
-  toggleTimeOfDayButton.textContent = isDawn ? "Dawn" : "Dusk";
+  toggleTimeOfDayButton.innerHTML = isDawn
+    ? '<i class="fas fa-sun"></i>'
+    : '<i class="fas fa-moon"></i>';
+}
+
+function updateSpanText() {
+  timeOfDayText.innerText = isDawn ? "Dawn" : "Dusk";
 }
 
 const config = {};

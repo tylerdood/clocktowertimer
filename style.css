@@ -5,23 +5,31 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100vw;
   position: relative;
   font-family: "Almendra", "Helvetica Neue";
   font-size: 4em;
 }
 
-#informationContainer {
-  position: absolute;
-  top: 20px;
-  right: 70px;
-  z-index: 20;
+#mainButtonsContainer {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  width: 100vw;
 }
 
-#muteButton {
-  margin: 0px;
-  padding: 0px;
+#trackerContainer {
+  margin-top: 120px;
+}
+
+#timeOfDayToggle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#informationContainer {
+  position: absolute;
+  right: 0;
 }
 
 #dialogueBox {
@@ -66,6 +74,7 @@ p {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 h1 {
@@ -96,24 +105,11 @@ button:hover {
 }
 
 .timerRunning button.restricted {
-  color: rgb(140, 140, 140);
+  color: rgb(147, 147, 147);
   cursor: default;
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
-}
-
-#toggleTimeOfDayButton {
-  background-color: transparent;
-  color: purple;
-  transition: color 0.3s;
-  font-size: 1em;
-  padding: 0px;
-  margin: 0px;
-}
-
-#toggleTimeOfDayButton:hover {
-  color: rgb(180, 52, 165);
 }
 
 #timerContainer {

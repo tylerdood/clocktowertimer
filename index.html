@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blood on the Clocktower Timer</title>
+    <title>Clocktower Timer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -27,16 +27,60 @@
     ></audio>
 
     <div id="container">
+      <div id="mainButtonsContainer">
+        <div id="timeOfDayToggle">
+          <button id="toggleTimeOfDayButton" class="restricted">
+            <i class="fas fa-sun"></i>
+          </button>
+          <button id="incrementDay" class="restricted">
+            <i class="fas fa-calendar-plus"></i>
+          </button>
+        </div>
+        <div id="informationContainer">
+          <button id="muteButton">
+            <i class="fas fa-volume-up"></i>
+          </button>
+          <button id="infoIcon" class="fas fa-info-circle"></button>
+          <div id="dialogueBox" class="hidden">
+            <span
+              id="closeButton"
+              style="
+                cursor: pointer;
+                float: right;
+                font-size: 20px;
+                font-weight: bold;
+                padding: 0 10px;
+              "
+              >&times;</span
+            >
+            <p>
+              About: This is a timer that can be used to track the discussion
+              and nomination phases for the social deduction game Blood on the
+              Clocktower. The timer controls can be found at the bottom,
+              allowing to you start, stop, reset, edit, and quick adjust the
+              current time. You can mute all sounds with the "sound" icon. To
+              switch between dawn and dusk (discussion & nomination phases),
+              press the sun/moon icon. You can move to the next day by pressing
+              the calendar icon. Switching to dusk (nomination phase) will
+              automatically shorten the timer. The timer will also be shortened
+              when advancing the days (to account for less people as the game
+              progresses). Hope you enjoy!
+            </p>
+            <p>-</p>
+            <p class="disclaimer">
+              Disclaimer: Clocktowertimer is an open source project and is not
+              affiliated with The Pandemonium Institute. Feel free to contribute
+              on
+              <a href="https://github.com/tydood/clocktowertimer">Github.</a>
+            </p>
+          </div>
+        </div>
+      </div>
       <div id="trackerContainer">
         <span id="fillerText">It Is</span>
-        <button id="toggleTimeOfDayButton" class="timeOfDayButton restricted">
-          Dusk
-        </button>
+        <span id="timeOfDayText">Dawn</span>
         <span id="dayLabel">Of Day </span>
         <span id="dayValue">1</span>
-        <button id="incrementDay" class="restricted">
-          <i class="fas fa-arrow-right"></i>
-        </button>
       </div>
       <div id="timerContainer">
         <h1 id="timeDisplay">03:00</h1>
@@ -55,42 +99,6 @@
         <button id="decrementTime" class="restricted">
           <i class="fas fa-arrow-down"></i>
         </button>
-      </div>
-      <div id="informationContainer">
-        <button id="muteButton">
-          <i class="fas fa-volume-up"></i>
-        </button>
-        <button id="infoIcon" class="fas fa-info-circle"></button>
-        <div id="dialogueBox" class="hidden">
-          <span
-            id="closeButton"
-            style="
-              cursor: pointer;
-              float: right;
-              font-size: 20px;
-              font-weight: bold;
-              padding: 0 10px;
-            "
-            >&times;</span
-          >
-          <p>
-            Tips for Use: Dawn is a longer timer, and can be used when people
-            are discussing during the day. Dusk is a shorter timer, and can be
-            used when it is time for deliberation and nominations. You can
-            toggle between the two by clicking Dawn/Dusk. Clicking Proceed to
-            the next day will make the timer shorter, as there are less people
-            in play. You can increment the timer by 15 seconds using the arrows,
-            or enter a custom time by clicking the keyboard icon. Hope you
-            enjoy!
-          </p>
-          <p>-</p>
-          <p class="disclaimer">
-            Disclaimer: Clocktowertimer is an open source project and is not
-            affiliated with The Pandemonium Institute. Feel free to contribute
-            on
-            <a href="https://github.com/tydood/clocktowertimer">Github.</a>
-          </p>
-        </div>
       </div>
     </div>
     <script src="script.js"></script>
