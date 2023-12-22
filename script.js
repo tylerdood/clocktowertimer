@@ -134,19 +134,9 @@ function timer() {
       playSound();
       return;
     }
-    if (secondsLeft % 60 === 0 && secondsLeft !== 0) {
-      playMinuteMarkSound();
-    }
     timeRemaining = secondsLeft;
     displayTimeLeft(timeRemaining);
   }, 1000);
-}
-
-function playMinuteMarkSound() {
-  if (!isMuted) {
-    const sound = document.getElementById("minuteSound");
-    sound.play();
-  }
 }
 
 function playDawnSound() {
