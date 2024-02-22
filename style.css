@@ -34,6 +34,7 @@ body {
 
 #dialogueBox {
   position: absolute;
+  z-index: 100;
   width: 300px; /* Adjust width as needed */
   background-color: rgb(244, 243, 243);
   border: 1px solid #9c9c9c;
