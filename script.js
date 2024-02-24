@@ -5,11 +5,10 @@ const resetButton = document.getElementById("resetButton");
 const incrementTimeButton = document.getElementById("incrementTime");
 const editTimeButton = document.getElementById("editTime");
 const decrementTimeButton = document.getElementById("decrementTime");
+const recallButton = document.getElementById("recallButton");
 const toggleTimeOfDayButton = document.getElementById("toggleTimeOfDayButton");
 const dayValue = document.getElementById("dayValue");
 const incrementDayButton = document.getElementById("incrementDay");
-const dawnButton = document.getElementById("dawnButton");
-const duskButton = document.getElementById("duskButton");
 const body = document.body;
 const muteButton = document.getElementById("muteButton");
 
@@ -27,6 +26,120 @@ let timeValues = {
 };
 let stepSize = 15;
 let timeOfDayText = document.getElementById("timeOfDayText");
+let keybindings = {
+  startstop:  [' ', 'Spacebar'],
+  reset:      'Backspace',
+  timer:      'Z',
+  timeplus:   ['Up', 'ArrowUp', 'Right', 'ArrowRight', '+'],
+  timeminus:  ['Down', 'ArrowDown', 'Left', 'ArrowLeft', '-'],
+  recall:     'R',
+  nextphase:  ['N', 'Enter'],
+  morning:    'F1',
+  evening:    'F2',
+  night:      'F3',
+  nextday:    'F4',
+  toggleinfo: 'Q',
+  mute:       'D',
+  fullscreen: 'F',
+}
+
+function findKey(search, map) {
+  if (search.length == 1)
+    search = search.toUpperCase();
+  for (const key in map) {
+    if (typeof map[key] === 'string' && map[key] === search ||
+        typeof map[key] === 'object' && map[key].includes(search)) {
+        return key;
+    }
+  }
+  return null;
+}
+
+function parseKeydown(e) {
+  let action = findKey(e.key, keybindings);
+  switch (action) {
+    case 'startstop':
+      startStopTimer();
+      break;
+    case 'reset':
+      resetTimer()
+      break;
+    case 'timer':
+      editTimer();
+      break;
+    case 'timeplus':
+      incrementTimer();
+      break;
+    case 'timeminus':
+      decrementTimer();
+      break;
+    case 'recall':
+      recall();
+      break;
+    case 'nextphase':
+      if (isDawn) {
+        toggleTimeOfDay();
+      } else {
+        incrementDay();
+      }
+      break;
+    case 'morning':
+      if(!isDawn) {
+        toggleTimeOfDay();
+      }
+      break;
+    case 'evening':
+      if(isDawn) {
+        toggleTimeOfDay();
+      }
+      break;
+    case 'night':
+      console.log('Night mode not yet implemented')
+      break;
+    case 'nextday':
+      incrementDay();
+      break;
+    case 'toggleinfo':
+      const dialogueBox = document.getElementById("dialogueBox");
+      if (dialogueBox.classList.contains("hidden")) {
+        showInfo();
+      } else {
+        exitInfo();
+      }
+      break;
+    case 'mute':
+      mute();
+      break;
+    case 'fullscreen':
+      if (document.fullscreenElement || /* Standard syntax */
+          document.webkitFullscreenElement || /* Safari and Opera syntax */
+          document.msFullscreenElement /* IE11 syntax */) {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) { /* Safari */
+          document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { /* IE11 */
+          document.msExitFullscreen();
+        }
+      } else {
+        const elem = document.documentElement;
+        if (elem.requestFullscreen) {
+          elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) { /* Safari */
+          elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { /* IE11 */
+          elem.msRequestFullscreen();
+        }
+      }
+      break;
+    default:
+      console.debug(`No Action for key: ${e.key} (${e.keyCode})`)
+  }
+  if(action != null) {
+    e.preventDefault();
+  }
+}
+document.addEventListener('keydown', parseKeydown);
 
 function applyConfig(config) {
   if (config.timeValues) {
@@ -120,7 +233,6 @@ function timer() {
       clearInterval(countdown);
       isTimerRunning = false;
       body.classList.remove("timerRunning");
-      startStopButton.textContent = "Restart";
       timeRemaining = defaultTime;
       playSound();
       return;
@@ -177,7 +289,7 @@ function updateDefaultTime() {
   }
 }
 
-startStopButton.addEventListener("click", () => {
+function startStopTimer() {
   if (!isTimerRunning) {
     timer();
     isTimerRunning = true;
@@ -189,24 +301,30 @@ startStopButton.addEventListener("click", () => {
     body.classList.remove("timerRunning");
     startStopButton.innerHTML = '<i class="fas fa-play"></i>';
   }
-});
+  startStopButton.blur();
+}
+startStopButton.addEventListener("click", startStopTimer);
 
-resetButton.addEventListener("click", () => {
+function resetTimer() {
   if (!isTimerRunning) {
     timeRemaining = defaultTime;
     displayTimeLeft(timeRemaining);
   }
-});
+  resetButton.blur();
+}
+resetButton.addEventListener("click", resetTimer);
 
-incrementTimeButton.addEventListener("click", () => {
+function incrementTimer() {
   if (!isTimerRunning) {
     defaultTime = Math.min(defaultTime + stepSize, 3599);
     timeRemaining = defaultTime;
     displayTimeLeft(timeRemaining);
   }
-});
+  incrementTimeButton.blur();
+}
+incrementTimeButton.addEventListener("click", incrementTimer);
 
-editTimeButton.addEventListener("click", () => {
+function editTimer() {
   if (!isTimerRunning) {
     const userTime = prompt(
       "New Time:\nPossible formats: 7.5, 7:30, 450s\nPossible range: 1 second - 59:99"
@@ -224,33 +342,24 @@ editTimeButton.addEventListener("click", () => {
       displayTimeLeft(timeRemaining);
     }
   }
-});
+  editTimeButton.blur();
+}
+editTimeButton.addEventListener("click", editTimer);
 
-document.getElementById("infoIcon").addEventListener("click", function () {
-  var dialogueBox = document.getElementById("dialogueBox");
-  dialogueBox.classList.remove("hidden");
-  dialogueBox.style.display = "block";
-});
-
-document.getElementById("closeButton").addEventListener("click", function () {
-  var dialogueBox = document.getElementById("dialogueBox");
-  dialogueBox.classList.add("hidden");
-  dialogueBox.style.display = "none";
-});
-
-decrementTimeButton.addEventListener("click", () => {
+function decrementTimer() {
   if (!isTimerRunning) {
     defaultTime = Math.max(defaultTime - stepSize, 0);
     timeRemaining = defaultTime;
     displayTimeLeft(timeRemaining);
   }
-});
+  decrementTimeButton.blur();
+}
+decrementTimeButton.addEventListener("click", decrementTimer);
 
-incrementDayButton.addEventListener("click", function () {
+function incrementDay() {
   if (!isTimerRunning) {
     currentDay += 1;
     dayValue.textContent = currentDay;
-
     isDawn = true;
     updateToggleButtonText();
     updateBackground();
@@ -258,9 +367,11 @@ incrementDayButton.addEventListener("click", function () {
     playDawnSound();
     updateSpanText();
   }
-});
+  incrementDayButton.blur();
+}
+incrementDayButton.addEventListener("click", incrementDay);
 
-muteButton.addEventListener("click", function () {
+function mute() {
   isMuted = !isMuted;
   const icon = muteButton.querySelector("i");
   if (isMuted) {
@@ -268,9 +379,21 @@ muteButton.addEventListener("click", function () {
   } else {
     icon.className = "fas fa-volume-up";
   }
-});
+  muteButton.blur();
+}
+muteButton.addEventListener("click", mute);
 
-toggleTimeOfDayButton.addEventListener("click", function () {
+
+function recall() {
+  if (isTimerRunning) {
+    startStopTimer()
+  }
+  playSound();
+  recallButton.blur();
+}
+recallButton.addEventListener("click", recall)
+
+function toggleTimeOfDay() {
   if (!isTimerRunning) {
     isDawn = !isDawn;
     updateToggleButtonText();
@@ -283,7 +406,24 @@ toggleTimeOfDayButton.addEventListener("click", function () {
       playDuskSound();
     }
   }
-});
+  toggleTimeOfDayButton.blur();
+}
+toggleTimeOfDayButton.addEventListener("click", toggleTimeOfDay );
+
+
+function showInfo() {
+  const dialogueBox = document.getElementById("dialogueBox");
+  dialogueBox.classList.remove("hidden");
+  dialogueBox.style.display = "block";
+}
+document.getElementById("infoIcon").addEventListener("click", showInfo);
+
+function exitInfo() {
+  const dialogueBox = document.getElementById("dialogueBox");
+  dialogueBox.classList.add("hidden");
+  dialogueBox.style.display = "none";
+}
+document.getElementById("closeButton").addEventListener("click", exitInfo);
 
 function updateToggleButtonText() {
   toggleTimeOfDayButton.innerHTML = isDawn
