@@ -26,7 +26,6 @@ let timeValues = {
   dusk: [180, 150, 150, 135, 135, 120, 120, 90, 75, 60],
 };
 let stepSize = 15;
-let attentionPeriod = 15;
 let timeOfDayText = document.getElementById("timeOfDayText");
 
 function applyConfig(config) {
@@ -70,21 +69,13 @@ function applyConfig(config) {
       stepSize = config.stepSize;
     }
   }
-  if (config.attentionPeriod) {
-    if (isNaN(config.attentionPeriod) || config.attentionPeriod <= 0) {
-      console.log("no config applied: attentionPeriod is NaN (or <= 0)");
-    } else {
-      console.log(`config applied: attentionPeriod=${config.attentionPeriod}`);
-      attentionPeriod = config.attentionPeriod;
-    }
-  }
 }
 
 function getCurrentConfigUrl() {
   return encodeURI(
     `${window.location.href.split("?")[0]}?timeValues=${JSON.stringify(
       timeValues
-    )}&stepSize=${stepSize}&attentionPeriod=${attentionPeriod}`
+    )}&stepSize=${stepSize}`
   );
 }
 
