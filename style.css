@@ -45,10 +45,33 @@ body {
   display: none;
 }
 
-p {
+p, dl {
   font-size: 0.2em;
   color: rgb(61, 61, 61);
   text-align: left;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: max-content auto;
+  grid-row-gap: 2px;
+}
+
+dt {
+  grid-column-start: 1;
+}
+
+dt .key {
+  background-color: #000;
+  color: #fff;
+  padding: 1px 5px;
+  border-radius: 5px;
+  margin: 2px;
+  display: inline-block;
+}
+
+dd {
+  grid-column-start: 2;
 }
 
 .disclaimer {
