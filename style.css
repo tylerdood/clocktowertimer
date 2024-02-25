@@ -29,7 +29,7 @@ body {
 
 #informationContainer {
   position: absolute;
-  right: 0;
+  right: 10px;
 }
 
 #dialogueBox {
@@ -101,6 +101,10 @@ dd {
   background-attachment: fixed;
 }
 
+.background-night #timerContainer {
+  visibility: hidden;
+}
+
 h1 {
   font-size: 5em;
   color: #d6d6d6;
@@ -128,7 +132,9 @@ button:hover {
   color: rgb(177, 36, 36);
 }
 
-.timerRunning button.restricted {
+.timerRunning button.restricted,
+.background-night #recallButton,
+.background-night #timerControls button {
   color: rgb(147, 147, 147);
   cursor: default;
   -webkit-transform: scale(1);
