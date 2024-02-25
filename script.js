@@ -36,8 +36,8 @@ let keybindings = {
   timeminus:  ['Down', 'ArrowDown', 'Left', 'ArrowLeft', '-'],
   recall:     'R',
   nextphase:  ['N', 'Enter'],
-  morning:    'F1',
-  evening:    'F2',
+  dawn:       'F1',
+  dusk:       'F2',
   night:      'F3',
   nextday:    'F4',
   toggleinfo: 'Q',
@@ -51,7 +51,7 @@ function findKey(search, map) {
   for (const key in map) {
     if (typeof map[key] === 'string' && map[key] === search ||
         typeof map[key] === 'object' && map[key].includes(search)) {
-        return key;
+      return key;
     }
   }
   return null;
@@ -142,18 +142,21 @@ function parseKeydown(e) {
     default:
       console.debug(`No Action for key: ${e.key} (${e.keyCode})`)
   }
-  if(action != null) {
+  if (action != null) {
     e.preventDefault();
   }
 }
+
 document.addEventListener('keydown', parseKeydown);
 
 function isDawn() {
   return phase == DAWN;
 }
+
 function isDusk() {
   return phase == DUSK;
 }
+
 function isNight() {
   return phase == NIGHT;
 }
@@ -474,6 +477,7 @@ function showInfo() {
   dialogueBox.classList.remove("hidden");
   dialogueBox.style.display = "block";
 }
+
 document.getElementById("infoIcon").addEventListener("click", showInfo);
 
 function exitInfo() {
@@ -481,6 +485,7 @@ function exitInfo() {
   dialogueBox.classList.add("hidden");
   dialogueBox.style.display = "none";
 }
+
 document.getElementById("closeButton").addEventListener("click", exitInfo);
 
 function updateToggleButtonText() {
