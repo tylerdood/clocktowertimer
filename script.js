@@ -20,7 +20,9 @@ let defaultTime = 180;
 let timeRemaining = defaultTime;
 let currentDay = 1;
 let phase = 2;
-const DAWN = 0, DUSK = 1, NIGHT = 2;
+const DAWN = 0,
+  DUSK = 1,
+  NIGHT = 2;
 let timeValues = {
   dawn: [600, 480, 420, 420, 360, 360, 300, 300, 240, 180],
   dusk: [180, 150, 150, 135, 135, 120, 120, 90, 75, 60],
@@ -29,28 +31,29 @@ let stepSize = 15;
 let volume = [50, 30, 80];
 let timeOfDayText = document.getElementById("timeOfDayText");
 let keybindings = {
-  startstop:  [' ', 'Spacebar'],
-  reset:      'Backspace',
-  timer:      'Z',
-  timeplus:   ['Up', 'ArrowUp', 'Right', 'ArrowRight', '+'],
-  timeminus:  ['Down', 'ArrowDown', 'Left', 'ArrowLeft', '-'],
-  recall:     'R',
-  nextphase:  ['N', 'Enter'],
-  dawn:       'F1',
-  dusk:       'F2',
-  night:      'F3',
-  nextday:    'F4',
-  toggleinfo: 'Q',
-  mute:       'D',
-  fullscreen: 'F',
-}
+  startstop: [" ", "Spacebar"],
+  reset: "Backspace",
+  timer: "Z",
+  timeplus: ["Up", "ArrowUp", "Right", "ArrowRight", "+"],
+  timeminus: ["Down", "ArrowDown", "Left", "ArrowLeft", "-"],
+  recall: "R",
+  nextphase: ["N", "Enter"],
+  dawn: "F1",
+  dusk: "F2",
+  night: "F3",
+  nextday: "F4",
+  toggleinfo: "Q",
+  mute: "D",
+  fullscreen: "F",
+};
 
 function findKey(search, map) {
-  if (search.length == 1)
-    search = search.toUpperCase();
+  if (search.length == 1) search = search.toUpperCase();
   for (const key in map) {
-    if (typeof map[key] === 'string' && map[key] === search ||
-        typeof map[key] === 'object' && map[key].includes(search)) {
+    if (
+      (typeof map[key] === "string" && map[key] === search) ||
+      (typeof map[key] === "object" && map[key].includes(search))
+    ) {
       return key;
     }
   }
@@ -60,53 +63,53 @@ function findKey(search, map) {
 function parseKeydown(e) {
   let action = findKey(e.key, keybindings);
   switch (action) {
-    case 'startstop':
+    case "startstop":
       startStopTimer();
       break;
-    case 'reset':
-      resetTimer()
+    case "reset":
+      resetTimer();
       break;
-    case 'timer':
+    case "timer":
       editTimer();
       break;
-    case 'timeplus':
+    case "timeplus":
       incrementTimer();
       break;
-    case 'timeminus':
+    case "timeminus":
       decrementTimer();
       break;
-    case 'recall':
+    case "recall":
       recall();
       break;
-    case 'nextphase':
+    case "nextphase":
       if (!isDusk()) {
         toggleTimeOfDay();
       } else {
         incrementDay();
       }
       break;
-    case 'dawn':
+    case "dawn":
       if (!isTimerRunning) {
         phase = NIGHT;
         toggleTimeOfDay();
       }
       break;
-    case 'dusk':
+    case "dusk":
       if (!isTimerRunning) {
         phase = DAWN;
         toggleTimeOfDay();
       }
       break;
-    case 'night':
+    case "night":
       if (!isTimerRunning) {
         phase = DUSK;
         toggleTimeOfDay();
       }
       break;
-    case 'nextday':
+    case "nextday":
       incrementDay();
       break;
-    case 'toggleinfo':
+    case "toggleinfo":
       const dialogueBox = document.getElementById("dialogueBox");
       if (dialogueBox.classList.contains("hidden")) {
         showInfo();
@@ -114,40 +117,46 @@ function parseKeydown(e) {
         exitInfo();
       }
       break;
-    case 'mute':
+    case "mute":
       mute();
       break;
-    case 'fullscreen':
-      if (document.fullscreenElement || /* Standard syntax */
-          document.webkitFullscreenElement || /* Safari and Opera syntax */
-          document.msFullscreenElement /* IE11 syntax */) {
+    case "fullscreen":
+      if (
+        document.fullscreenElement /* Standard syntax */ ||
+        document.webkitFullscreenElement /* Safari and Opera syntax */ ||
+        document.msFullscreenElement /* IE11 syntax */
+      ) {
         if (document.exitFullscreen) {
           document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) { /* Safari */
+        } else if (document.webkitExitFullscreen) {
+          /* Safari */
           document.webkitExitFullscreen();
-        } else if (document.msExitFullscreen) { /* IE11 */
+        } else if (document.msExitFullscreen) {
+          /* IE11 */
           document.msExitFullscreen();
         }
       } else {
         const elem = document.documentElement;
         if (elem.requestFullscreen) {
           elem.requestFullscreen();
-        } else if (elem.webkitRequestFullscreen) { /* Safari */
+        } else if (elem.webkitRequestFullscreen) {
+          /* Safari */
           elem.webkitRequestFullscreen();
-        } else if (elem.msRequestFullscreen) { /* IE11 */
+        } else if (elem.msRequestFullscreen) {
+          /* IE11 */
           elem.msRequestFullscreen();
         }
       }
       break;
     default:
-      console.debug(`No Action for key: ${e.key} (${e.keyCode})`)
+      console.debug(`No Action for key: ${e.key} (${e.keyCode})`);
   }
   if (action != null) {
     e.preventDefault();
   }
 }
 
-document.addEventListener('keydown', parseKeydown);
+document.addEventListener("keydown", parseKeydown);
 
 function isDawn() {
   return phase == DAWN;
@@ -215,9 +224,7 @@ function applyConfig(config) {
         `no config applied: ${invalidElement} in volume is of an invalid format (or not between 0 and 100)`
       );
     } else {
-      console.log(
-        `config applied: "volume":${JSON.stringify(config.volume)}`
-      );
+      console.log(`config applied: "volume":${JSON.stringify(config.volume)}`);
       volume = config.volume;
     }
   }
@@ -295,6 +302,13 @@ function playDuskSound() {
   }
 }
 
+function playNightSound() {
+  if (!isMuted) {
+    const sound = document.getElementById("nightSound");
+    sound.play();
+  }
+}
+
 function playSound() {
   if (!isMuted) {
     const sound = document.getElementById("endTimer");
@@ -306,7 +320,11 @@ function updateBackground() {
   const body = document.body; // or the main container element
 
   // Remove classes to start fresh
-  body.classList.remove("background-dawn", "background-dusk", "background-night");
+  body.classList.remove(
+    "background-dawn",
+    "background-dusk",
+    "background-night"
+  );
 
   // Add the appropriate class based on the phase (Dawn, Dusk or Night)
   switch (phase) {
@@ -431,18 +449,17 @@ function mute() {
 
 muteButton.addEventListener("click", mute);
 
-
 function recall() {
   if (!isNight()) {
     if (isTimerRunning) {
-      startStopTimer()
+      startStopTimer();
     }
     playSound();
   }
   recallButton.blur();
 }
 
-recallButton.addEventListener("click", recall)
+recallButton.addEventListener("click", recall);
 
 function toggleTimeOfDay() {
   if (!isTimerRunning) {
@@ -460,6 +477,7 @@ function toggleTimeOfDay() {
         playDuskSound();
         break;
       case NIGHT:
+        playNightSound();
         break;
     }
     if (useSpotify()) {
@@ -470,7 +488,6 @@ function toggleTimeOfDay() {
 }
 
 toggleTimeOfDayButton.addEventListener("click", toggleTimeOfDay);
-
 
 function showInfo() {
   const dialogueBox = document.getElementById("dialogueBox");
@@ -492,12 +509,16 @@ function updateToggleButtonText() {
   toggleTimeOfDayButton.innerHTML = isDawn()
     ? '<i class="fas fa-sun"></i>'
     : isDusk()
-      ? '<i class="fas fa-moon"></i>'
-      : '<i class="fas fa-eye-slash"></i>';
+    ? '<i class="fas fa-moon"></i>'
+    : '<i class="fas fa-eye-slash"></i>';
 }
 
 function updateSpanText() {
-  timeOfDayText.innerText = isDawn() ? "Dawn Of Day" : isDusk() ? "Dusk Of Day" : "Night";
+  timeOfDayText.innerText = isDawn()
+    ? "Day"
+    : isDusk()
+    ? "End of Day"
+    : "Night";
 }
 
 const config = {};

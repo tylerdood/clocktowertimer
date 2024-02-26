@@ -46,7 +46,8 @@ body {
   display: none;
 }
 
-p, dl {
+p,
+dl {
   font-size: 0.2em;
   color: rgb(61, 61, 61);
   text-align: left;
@@ -86,15 +87,20 @@ dd {
 }
 
 .background-dusk {
-  background-image: url("images/village-dusk-4x.webp");
+  background-image: url("images/village-end-of-day.webp");
 }
 
 .background-dawn {
-  background-image: url("images/village-dawn-4x.webp");
+  background-image: url("images/village-day.webp");
+}
+
+.background-night {
+  background-image: url("images/village-dusk-4x.webp");
 }
 
 .background-dawn,
-.background-dusk {
+.background-dusk,
+.background-night {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
