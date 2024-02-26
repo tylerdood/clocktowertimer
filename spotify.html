@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Connect Clocktower Timer to Spotify API</title>
+</head>
+<body>
+<h1>Connect Clocktowertimer to Spotify API</h1>
+<p>You can connect Clocktowertimer to the Spotify API. In doing so, Clocktowertimer will automatically adjust the
+    playback volume of the currently active device on Spotify.
+</p>
+<ul>
+    <li>At Dawn the volume is 50%.</li>
+    <li>At Dusk the volume is 30%.</li>
+    <li>At Night the volume is 80%.</li>
+</ul>
+<p>These values may also be configured using URL-parameters:</p>
+<pre style="margin-left:2em;">https://clocktowertimer.com?volume=[50,30,80]</pre>
+
+<h2>Requirements</h2>
+<p>Please pay attention to the following requirements:</p>
+<ul>
+    <li>The API only works for users who have Spotify Premium.</li>
+    <li>As Clocktowertimer is under steady development this feature is not yet finished. Therefore, you have to generate
+        your own Spotify-App in the Developer-Center. Or send your name and email address registered with Spotify to
+        <a href="mailto:clocktower-spotify@dennisschuerholz.de?Subject=Clocktowertimer Spotify Request">clocktower-spotify@dennisschuerholz.de</a>.
+    </li>
+</ul>
+
+<h2>Create a Spotify App</h2>
+<p>This part is equivalent to
+    <a href="https://developer.spotify.com/documentation/web-api/tutorials/getting-started#create-an-app"
+       target="_blank">https://developer.spotify.com/documentation/web-api/tutorials/getting-started#create-an-app</a>.
+</p>
+<ul>
+    <li>Create an app in the <a href="https://developer.spotify.com/dashboard" atrget="_blank">Developer Dashboard</a>
+        (login and click on <em>Create an app</em>).
+    </li>
+    <li>App Name: <em>Your own choice</em></li>
+    <li>App Description: <em>Your own choice</em></li>
+    <li>Redirect URI: https://clocktowertimer.com/spotify.html</li>
+    <li>Which API: Web API</li>
+</ul>
+<p>Afterwards copy your apps Client ID from the app's settings page and enter it here:
+    <input type="text" id="clientId" maxlength="32" style="width:40ex;" value=""/>
+</p>
+<p>
+    <em>The Client ID will only work with Spotify Accounts approved by the Spotify app's developer.
+        If you insert the default Client ID <span style="background-color:#ddd;padding:1px 5px;border-radius:5px;">'9c288c96571e470db82a242089fb9cf6'</span>
+        (or leave the field empty) you have to contact Dennis Schürholz as stated above. If Spotify approves
+        Clocktowertimer as a Spotify webapp this step will no longer be required.</em>
+</p>
+
+<h2>Authenticate User</h2>
+<p>Click the following button to authenticate to Spotify. You will be redirected to Spotify.
+    <button onclick="requireAuth()">Authenticate to Spotify</button>
+</p>
+
+<h2 id="finish">Finished</h2>
+<p>After authentication you're ready to go. You may now start your favourite playlist on Spotify and Clocktowertimer
+    will control the volume for you. This page can be closed.</p>
+
+<p>You can also test the API using this buttons:
+    <button onclick="spotifyTogglePlay()">Toggle Play/Pause</button>
+    <button onclick="spotifyVolume(80)">Volume at Night (80%)</button>
+    <button onclick="spotifyVolume(50)">Volume at Dawn (50%)</button>
+    <button onclick="spotifyVolume(30)">Volume at Dusk (30%)</button>
+</p>
+</body>
+<script src="spotify.auth.js"></script>
+<script src="spotify.js"></script>
+</html>

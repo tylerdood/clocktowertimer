@@ -19,12 +19,14 @@ let isTimerRunning = false;
 let defaultTime = 180;
 let timeRemaining = defaultTime;
 let currentDay = 1;
-let isDawn = true;
+let phase = 2;
+const DAWN = 0, DUSK = 1, NIGHT = 2;
 let timeValues = {
   dawn: [600, 480, 420, 420, 360, 360, 300, 300, 240, 180],
   dusk: [180, 150, 150, 135, 135, 120, 120, 90, 75, 60],
 };
 let stepSize = 15;
+let volume = [50, 30, 80];
 let timeOfDayText = document.getElementById("timeOfDayText");
 let keybindings = {
   startstop:  [' ', 'Spacebar'],
@@ -34,8 +36,8 @@ let keybindings = {
   timeminus:  ['Down', 'ArrowDown', 'Left', 'ArrowLeft', '-'],
   recall:     'R',
   nextphase:  ['N', 'Enter'],
-  morning:    'F1',
-  evening:    'F2',
+  dawn:       'F1',
+  dusk:       'F2',
   night:      'F3',
   nextday:    'F4',
   toggleinfo: 'Q',
@@ -49,7 +51,7 @@ function findKey(search, map) {
   for (const key in map) {
     if (typeof map[key] === 'string' && map[key] === search ||
         typeof map[key] === 'object' && map[key].includes(search)) {
-        return key;
+      return key;
     }
   }
   return null;
@@ -77,24 +79,29 @@ function parseKeydown(e) {
       recall();
       break;
     case 'nextphase':
-      if (isDawn) {
+      if (!isDusk()) {
         toggleTimeOfDay();
       } else {
         incrementDay();
       }
       break;
-    case 'morning':
-      if(!isDawn) {
+    case 'dawn':
+      if (!isTimerRunning) {
+        phase = NIGHT;
         toggleTimeOfDay();
       }
       break;
-    case 'evening':
-      if(isDawn) {
+    case 'dusk':
+      if (!isTimerRunning) {
+        phase = DAWN;
         toggleTimeOfDay();
       }
       break;
     case 'night':
-      console.log('Night mode not yet implemented')
+      if (!isTimerRunning) {
+        phase = DUSK;
+        toggleTimeOfDay();
+      }
       break;
     case 'nextday':
       incrementDay();
@@ -135,11 +142,24 @@ function parseKeydown(e) {
     default:
       console.debug(`No Action for key: ${e.key} (${e.keyCode})`)
   }
-  if(action != null) {
+  if (action != null) {
     e.preventDefault();
   }
 }
+
 document.addEventListener('keydown', parseKeydown);
+
+function isDawn() {
+  return phase == DAWN;
+}
+
+function isDusk() {
+  return phase == DUSK;
+}
+
+function isNight() {
+  return phase == NIGHT;
+}
 
 function applyConfig(config) {
   if (config.timeValues) {
@@ -178,8 +198,27 @@ function applyConfig(config) {
     if (isNaN(config.stepSize) || config.stepSize <= 0) {
       console.log("no config applied: stepSize is NaN (or <= 0)");
     } else {
-      console.log(`config applied: stepSize=${config.stepSize}`);
+      console.log(`config applied: "stepSize":${config.stepSize}`);
       stepSize = config.stepSize;
+    }
+  }
+  if (config.volume) {
+    let invalidElement = false;
+    config.volume.map((elem) => {
+      if (isNaN(elem) || elem < 0 || elem > 100) {
+        invalidElement = String(elem);
+      }
+      return elem;
+    });
+    if (invalidElement) {
+      console.log(
+        `no config applied: ${invalidElement} in volume is of an invalid format (or not between 0 and 100)`
+      );
+    } else {
+      console.log(
+        `config applied: "volume":${JSON.stringify(config.volume)}`
+      );
+      volume = config.volume;
     }
   }
 }
@@ -188,7 +227,7 @@ function getCurrentConfigUrl() {
   return encodeURI(
     `${window.location.href.split("?")[0]}?timeValues=${JSON.stringify(
       timeValues
-    )}&stepSize=${stepSize}`
+    )}&stepSize=${stepSize}&volume=${JSON.stringify(volume)}`
   );
 }
 
@@ -266,19 +305,25 @@ function playSound() {
 function updateBackground() {
   const body = document.body; // or the main container element
 
-  // Remove both classes to start fresh
-  body.classList.remove("background-dawn", "background-dusk");
+  // Remove classes to start fresh
+  body.classList.remove("background-dawn", "background-dusk", "background-night");
 
-  // Add the appropriate class based on whether it's Dawn or Dusk
-  if (isDawn) {
-    body.classList.add("background-dawn");
-  } else {
-    body.classList.add("background-dusk");
+  // Add the appropriate class based on the phase (Dawn, Dusk or Night)
+  switch (phase) {
+    case DAWN:
+      body.classList.add("background-dawn");
+      break;
+    case DUSK:
+      body.classList.add("background-dusk");
+      break;
+    case NIGHT:
+      body.classList.add("background-night");
+      break;
   }
 }
 
 function updateDefaultTime() {
-  let newTime = isDawn
+  let newTime = isDawn()
     ? timeValues.dawn[Math.min(currentDay, timeValues.dawn.length) - 1]
     : timeValues.dusk[Math.min(currentDay, timeValues.dusk.length) - 1];
 
@@ -290,7 +335,7 @@ function updateDefaultTime() {
 }
 
 function startStopTimer() {
-  if (!isTimerRunning) {
+  if (!isTimerRunning && !isNight()) {
     timer();
     isTimerRunning = true;
     body.classList.add("timerRunning");
@@ -303,29 +348,32 @@ function startStopTimer() {
   }
   startStopButton.blur();
 }
+
 startStopButton.addEventListener("click", startStopTimer);
 
 function resetTimer() {
-  if (!isTimerRunning) {
+  if (!isTimerRunning && !isNight()) {
     timeRemaining = defaultTime;
     displayTimeLeft(timeRemaining);
   }
   resetButton.blur();
 }
+
 resetButton.addEventListener("click", resetTimer);
 
 function incrementTimer() {
-  if (!isTimerRunning) {
+  if (!isTimerRunning && !isNight()) {
     defaultTime = Math.min(defaultTime + stepSize, 3599);
     timeRemaining = defaultTime;
     displayTimeLeft(timeRemaining);
   }
   incrementTimeButton.blur();
 }
+
 incrementTimeButton.addEventListener("click", incrementTimer);
 
 function editTimer() {
-  if (!isTimerRunning) {
+  if (!isTimerRunning && !isNight()) {
     const userTime = prompt(
       "New Time:\nPossible formats: 7.5, 7:30, 450s\nPossible range: 1 second - 59:99"
     );
@@ -344,31 +392,30 @@ function editTimer() {
   }
   editTimeButton.blur();
 }
+
 editTimeButton.addEventListener("click", editTimer);
 
 function decrementTimer() {
-  if (!isTimerRunning) {
+  if (!isTimerRunning && !isNight()) {
     defaultTime = Math.max(defaultTime - stepSize, 0);
     timeRemaining = defaultTime;
     displayTimeLeft(timeRemaining);
   }
   decrementTimeButton.blur();
 }
+
 decrementTimeButton.addEventListener("click", decrementTimer);
 
 function incrementDay() {
   if (!isTimerRunning) {
     currentDay += 1;
     dayValue.textContent = currentDay;
-    isDawn = true;
-    updateToggleButtonText();
-    updateBackground();
-    updateDefaultTime();
-    playDawnSound();
-    updateSpanText();
+    phase = DUSK;
+    toggleTimeOfDay();
   }
   incrementDayButton.blur();
 }
+
 incrementDayButton.addEventListener("click", incrementDay);
 
 function mute() {
@@ -381,34 +428,48 @@ function mute() {
   }
   muteButton.blur();
 }
+
 muteButton.addEventListener("click", mute);
 
 
 function recall() {
-  if (isTimerRunning) {
-    startStopTimer()
+  if (!isNight()) {
+    if (isTimerRunning) {
+      startStopTimer()
+    }
+    playSound();
   }
-  playSound();
   recallButton.blur();
 }
+
 recallButton.addEventListener("click", recall)
 
 function toggleTimeOfDay() {
   if (!isTimerRunning) {
-    isDawn = !isDawn;
+    phase = (phase + 1) % 3;
     updateToggleButtonText();
     updateBackground();
     updateDefaultTime();
     updateSpanText();
-    if (isDawn) {
-      playDawnSound();
-    } else {
-      playDuskSound();
+
+    switch (phase) {
+      case DAWN:
+        playDawnSound();
+        break;
+      case DUSK:
+        playDuskSound();
+        break;
+      case NIGHT:
+        break;
+    }
+    if (useSpotify()) {
+      spotifyVolume(volume[phase]);
     }
   }
   toggleTimeOfDayButton.blur();
 }
-toggleTimeOfDayButton.addEventListener("click", toggleTimeOfDay );
+
+toggleTimeOfDayButton.addEventListener("click", toggleTimeOfDay);
 
 
 function showInfo() {
@@ -416,6 +477,7 @@ function showInfo() {
   dialogueBox.classList.remove("hidden");
   dialogueBox.style.display = "block";
 }
+
 document.getElementById("infoIcon").addEventListener("click", showInfo);
 
 function exitInfo() {
@@ -423,16 +485,19 @@ function exitInfo() {
   dialogueBox.classList.add("hidden");
   dialogueBox.style.display = "none";
 }
+
 document.getElementById("closeButton").addEventListener("click", exitInfo);
 
 function updateToggleButtonText() {
-  toggleTimeOfDayButton.innerHTML = isDawn
+  toggleTimeOfDayButton.innerHTML = isDawn()
     ? '<i class="fas fa-sun"></i>'
-    : '<i class="fas fa-moon"></i>';
+    : isDusk()
+      ? '<i class="fas fa-moon"></i>'
+      : '<i class="fas fa-eye-slash"></i>';
 }
 
 function updateSpanText() {
-  timeOfDayText.innerText = isDawn ? "Dawn" : "Dusk";
+  timeOfDayText.innerText = isDawn() ? "Dawn Of Day" : isDusk() ? "Dusk Of Day" : "Night";
 }
 
 const config = {};
@@ -446,3 +511,4 @@ console.log(getCurrentConfigUrl());
 updateToggleButtonText();
 updateBackground();
 updateDefaultTime();
+updateSpanText();
