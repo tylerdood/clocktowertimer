@@ -8,7 +8,6 @@ const decrementTimeButton = document.getElementById("decrementTime");
 const recallButton = document.getElementById("recallButton");
 const toggleTimeOfDayButton = document.getElementById("toggleTimeOfDayButton");
 const dayValue = document.getElementById("dayValue");
-const incrementDayButton = document.getElementById("incrementDay");
 const body = document.body;
 const muteButton = document.getElementById("muteButton");
 
@@ -82,32 +81,7 @@ function parseKeydown(e) {
       recall();
       break;
     case "nextphase":
-      if (!isDusk()) {
-        toggleTimeOfDay();
-      } else {
-        incrementDay();
-      }
-      break;
-    case "dawn":
-      if (!isTimerRunning) {
-        phase = NIGHT;
-        toggleTimeOfDay();
-      }
-      break;
-    case "dusk":
-      if (!isTimerRunning) {
-        phase = DAWN;
-        toggleTimeOfDay();
-      }
-      break;
-    case "night":
-      if (!isTimerRunning) {
-        phase = DUSK;
-        toggleTimeOfDay();
-      }
-      break;
-    case "nextday":
-      incrementDay();
+      advanceTime();
       break;
     case "toggleinfo":
       const dialogueBox = document.getElementById("dialogueBox");
@@ -424,18 +398,6 @@ function decrementTimer() {
 
 decrementTimeButton.addEventListener("click", decrementTimer);
 
-function incrementDay() {
-  if (!isTimerRunning) {
-    currentDay += 1;
-    dayValue.textContent = currentDay;
-    phase = DUSK;
-    toggleTimeOfDay();
-  }
-  incrementDayButton.blur();
-}
-
-incrementDayButton.addEventListener("click", incrementDay);
-
 function mute() {
   isMuted = !isMuted;
   const icon = muteButton.querySelector("i");
@@ -449,45 +411,57 @@ function mute() {
 
 muteButton.addEventListener("click", mute);
 
+function setTimerToZero() {
+  timeRemaining = 0;
+  displayTimeLeft(timeRemaining);
+}
+
 function recall() {
   if (!isNight()) {
     if (isTimerRunning) {
       startStopTimer();
     }
     playSound();
+    setTimerToZero();
   }
   recallButton.blur();
 }
 
 recallButton.addEventListener("click", recall);
 
-function toggleTimeOfDay() {
-  if (!isTimerRunning) {
-    phase = (phase + 1) % 3;
-    updateToggleButtonText();
-    updateBackground();
-    updateDefaultTime();
-    updateSpanText();
+function advanceTime() {
+  phase = (phase + 1) % 3;
 
-    switch (phase) {
-      case DAWN:
-        playDawnSound();
-        break;
-      case DUSK:
-        playDuskSound();
-        break;
-      case NIGHT:
-        playNightSound();
-        break;
-    }
-    if (useSpotify()) {
-      spotifyVolume(volume[phase]);
-    }
+  if (phase === NIGHT) {
+    currentDay = (currentDay % 15) + 1;
   }
+
+  updateToggleButtonText();
+  updateBackground();
+  updateDefaultTime();
+  updateSpanText();
+  dayValue.textContent = currentDay;
+
+  switch (phase) {
+    case DAWN:
+      playDawnSound();
+      break;
+    case DUSK:
+      playDuskSound();
+      break;
+    case NIGHT:
+      playNightSound();
+      break;
+  }
+
+  if (useSpotify()) {
+    spotifyVolume(volume[phase]);
+  }
+
   toggleTimeOfDayButton.blur();
 }
 
-toggleTimeOfDayButton.addEventListener("click", toggleTimeOfDay);
+toggleTimeOfDayButton.addEventListener("click", advanceTime);
 
 function showInfo() {
   const dialogueBox = document.getElementById("dialogueBox");
@@ -507,10 +481,10 @@ document.getElementById("closeButton").addEventListener("click", exitInfo);
 
 function updateToggleButtonText() {
   toggleTimeOfDayButton.innerHTML = isDawn()
-    ? '<i class="fas fa-sun"></i>'
+    ? "<span>End the Day</span>"
     : isDusk()
-    ? '<i class="fas fa-moon"></i>'
-    : '<i class="fas fa-eye-slash"></i>';
+    ? "<span>Go to Sleep</span>"
+    : "<span>Wake Up</span>";
 }
 
 function updateSpanText() {
