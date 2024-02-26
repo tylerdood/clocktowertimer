@@ -24,17 +24,7 @@
 
     <div id="container">
       <div id="mainButtonsContainer">
-        <div id="timeOfDayToggle">
-          <button id="recallButton">
-            <i class="fas fa-bell"></i>
-          </button>
-          <button id="toggleTimeOfDayButton" class="restricted">
-            <i class="fas fa-sun"></i>
-          </button>
-          <button id="incrementDay" class="restricted">
-            <i class="fas fa-calendar-plus"></i>
-          </button>
-        </div>
+        <div id="timeOfDayToggle"></div>
         <div id="informationContainer">
           <button id="muteButton">
             <i class="fas fa-volume-up"></i>
@@ -60,12 +50,11 @@
               allowing to you start, stop, reset, edit, and quick adjust the
               current time. You can mute all sounds with the "sound" icon. To
               recall the town immediately (stopping the timer) you can press the
-              bell icon. To switch between dawn, dusk and night (discussion &
-              nomination phases), press the sun/moon/eye icon. You can move to
-              the next day by pressing the calendar icon. Switching to dusk
-              (nomination phase) will automatically shorten the timer. The timer
-              will also be shortened when advancing the days (to account for
-              fewer alive people as the game progresses). Hope you enjoy!
+              Recall Townsfolk button. You can advance to the next phase by
+              pressing the "Wake Up" button. Switching to dusk (nomination
+              phase) will automatically shorten the timer. The timer will also
+              be shortened when advancing the days (to account for fewer alive
+              people as the game progresses). Hope you enjoy!
             </p>
             <p>You may also control this app using keyboard-shortcuts:</p>
             <dl>
@@ -88,15 +77,13 @@
               <dt><span class="key">R</span></dt>
               <dd>Immediate recall town</dd>
               <dt><span class="key">N</span>/<span class="key">Enter</span></dt>
-              <dd>Move to next phase (night/dawn/dusk/next night)</dd>
+              <dd>Move to next phase (night/dawn/dusk/next day)</dd>
               <dt>
                 <span class="key">F1</span>, <span class="key">F2</span>,
                 <span class="key">F3</span>
               </dt>
               <dd>Goto current day's dawn/dusk/night</dd>
               <dt><span class="key">F4</span></dt>
-              <dd>Goto next day's dawn</dd>
-              <dt><span class="key">D</span></dt>
               <dd>Toggle Mute</dd>
               <dt><span class="key">F</span></dt>
               <dd>Toggle Fullscreen</dd>
@@ -125,6 +112,9 @@
         <h1 id="timeDisplay">03:00</h1>
       </div>
       <div id="timerControls">
+        <button id="recallButton">
+          <span>Recall Townsfolk</span>
+        </button>
         <button id="startStopButton"><i class="fas fa-play"></i></button>
         <button id="resetButton" class="restricted">
           <i class="fas fa-sync-alt"></i>
@@ -137,6 +127,9 @@
         </button>
         <button id="decrementTime" class="restricted">
           <i class="fas fa-arrow-down"></i>
+        </button>
+        <button id="toggleTimeOfDayButton" class="restricted">
+          <span>Advance to Day</span>
         </button>
       </div>
     </div>

@@ -17,8 +17,13 @@ body {
   width: 100vw;
 }
 
+#toggleTimeOfDayButton {
+  min-width: 150px;
+  text-align: center;
+}
+
 #trackerContainer {
-  margin-top: 120px;
+  margin-top: 0.25em;
 }
 
 #timeOfDayToggle {
@@ -127,7 +132,7 @@ button {
   border-radius: 5px;
   font-size: 0.3em;
   cursor: pointer;
-  font-family: "Almendra", "Helvetica Neue";
+  font-family: "Times New Roman", Times, serif;
   transition: transform 0.3s ease;
 }
 
@@ -140,7 +145,11 @@ button:hover {
 
 .timerRunning button.restricted,
 .background-night #recallButton,
-.background-night #timerControls button {
+.background-night #startStopButton,
+.background-night #resetButton,
+.background-night #editTime,
+.background-night #incrementTime,
+.background-night #decrementTime {
   color: rgb(147, 147, 147);
   cursor: default;
   -webkit-transform: scale(1);
@@ -152,6 +161,8 @@ button:hover {
   display: flex;
   justify-content: center;
   position: relative;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 #timerControls {
