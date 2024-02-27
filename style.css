@@ -91,20 +91,20 @@ dd {
   display: none;
 }
 
-.background-dusk {
+.background-endOfDay {
   background-image: url("images/village-end-of-day.webp");
 }
 
-.background-dawn {
+.background-day {
   background-image: url("images/village-day.webp");
 }
 
 .background-night {
-  background-image: url("images/village-dusk-4x.webp");
+  background-image: url("images/village-night.webp");
 }
 
-.background-dawn,
-.background-dusk,
+.background-day,
+.background-endOfDay,
 .background-night {
   background-size: cover;
   background-position: center;

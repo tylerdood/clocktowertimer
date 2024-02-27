@@ -19,12 +19,12 @@ let defaultTime = 180;
 let timeRemaining = defaultTime;
 let currentDay = 1;
 let phase = 2;
-const DAWN = 0,
-  DUSK = 1,
+const DAY = 0,
+  ENDOFDAY = 1,
   NIGHT = 2;
 let timeValues = {
-  dawn: [600, 480, 420, 420, 360, 360, 300, 300, 240, 180],
-  dusk: [180, 150, 150, 135, 135, 120, 120, 90, 75, 60],
+  day: [600, 480, 420, 420, 360, 360, 300, 300, 240, 180],
+  endOfDay: [180, 150, 150, 135, 135, 120, 120, 90, 75, 60],
 };
 let stepSize = 15;
 let volume = [50, 30, 80];
@@ -37,8 +37,8 @@ let keybindings = {
   timeminus: ["Down", "ArrowDown", "Left", "ArrowLeft", "-"],
   recall: "R",
   nextphase: ["N", "Enter"],
-  dawn: "F1",
-  dusk: "F2",
+  day: "F1",
+  endOfDay: "F2",
   night: "F3",
   nextday: "F4",
   toggleinfo: "Q",
@@ -132,12 +132,12 @@ function parseKeydown(e) {
 
 document.addEventListener("keydown", parseKeydown);
 
-function isDawn() {
-  return phase == DAWN;
+function isDay() {
+  return phase == DAY;
 }
 
-function isDusk() {
-  return phase == DUSK;
+function isEndOfDay() {
+  return phase == ENDOFDAY;
 }
 
 function isNight() {
@@ -146,8 +146,10 @@ function isNight() {
 
 function applyConfig(config) {
   if (config.timeValues) {
-    if (!("dawn" in config.timeValues && "dusk" in config.timeValues)) {
-      console.log("no config applied: missing key in timeValues (dawn, dusk)");
+    if (!("day" in config.timeValues && "endOfDay" in config.timeValues)) {
+      console.log(
+        "no config applied: missing key in timeValues (day, endOfDay)"
+      );
     } else {
       let invalidElement = false;
       for (const key in config.timeValues) {
@@ -262,16 +264,16 @@ function timer() {
   }, 1000);
 }
 
-function playDawnSound() {
+function playDaySound() {
   if (!isMuted) {
-    const sound = document.getElementById("dawnSound");
+    const sound = document.getElementById("daySound");
     sound.play();
   }
 }
 
-function playDuskSound() {
+function playEndOfDaySound() {
   if (!isMuted) {
-    const sound = document.getElementById("duskSound");
+    const sound = document.getElementById("endOfDaySound");
     sound.play();
   }
 }
@@ -295,18 +297,18 @@ function updateBackground() {
 
   // Remove classes to start fresh
   body.classList.remove(
-    "background-dawn",
-    "background-dusk",
+    "background-day",
+    "background-endOfDay",
     "background-night"
   );
 
-  // Add the appropriate class based on the phase (Dawn, Dusk or Night)
+  // Add the appropriate class based on the phase (Day, End of Day or Night)
   switch (phase) {
-    case DAWN:
-      body.classList.add("background-dawn");
+    case DAY:
+      body.classList.add("background-day");
       break;
-    case DUSK:
-      body.classList.add("background-dusk");
+    case ENDOFDAY:
+      body.classList.add("background-endOfDay");
       break;
     case NIGHT:
       body.classList.add("background-night");
@@ -315,9 +317,9 @@ function updateBackground() {
 }
 
 function updateDefaultTime() {
-  let newTime = isDawn()
-    ? timeValues.dawn[Math.min(currentDay, timeValues.dawn.length) - 1]
-    : timeValues.dusk[Math.min(currentDay, timeValues.dusk.length) - 1];
+  let newTime = isDay()
+    ? timeValues.day[Math.min(currentDay, timeValues.day.length) - 1]
+    : timeValues.endOfDay[Math.min(currentDay, timeValues.endOfDay.length) - 1];
 
   if (!isTimerRunning) {
     defaultTime = newTime;
@@ -443,11 +445,11 @@ function advanceTime() {
   dayValue.textContent = currentDay;
 
   switch (phase) {
-    case DAWN:
-      playDawnSound();
+    case DAY:
+      playDaySound();
       break;
-    case DUSK:
-      playDuskSound();
+    case ENDOFDAY:
+      playEndOfDaySound();
       break;
     case NIGHT:
       playNightSound();
@@ -480,17 +482,17 @@ function exitInfo() {
 document.getElementById("closeButton").addEventListener("click", exitInfo);
 
 function updateToggleButtonText() {
-  toggleTimeOfDayButton.innerHTML = isDawn()
+  toggleTimeOfDayButton.innerHTML = isDay()
     ? "<span>End the Day</span>"
-    : isDusk()
+    : isEndOfDay()
     ? "<span>Go to Sleep</span>"
     : "<span>Wake Up</span>";
 }
 
 function updateSpanText() {
-  timeOfDayText.innerText = isDawn()
+  timeOfDayText.innerText = isDay()
     ? "Day"
-    : isDusk()
+    : isEndOfDay()
     ? "End of Day"
     : "Night";
 }

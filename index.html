@@ -18,9 +18,13 @@
   </head>
   <body>
     <audio id="endTimer" src="sounds/bell-fast.wav" preload="auto"></audio>
-    <audio id="dawnSound" src="sounds/bird-chip.wav" preload="auto"></audio>
+    <audio id="daySound" src="sounds/bird-chip.wav" preload="auto"></audio>
     <audio id="nightSound" src="sounds/owl.wav" preload="auto"></audio>
-    <audio id="duskSound" src="sounds/flying-raven.wav" preload="auto"></audio>
+    <audio
+      id="endOfDaySound"
+      src="sounds/flying-raven.wav"
+      preload="auto"
+    ></audio>
 
     <div id="container">
       <div id="mainButtonsContainer">
@@ -51,7 +55,7 @@
               current time. You can mute all sounds with the "sound" icon. To
               recall the town immediately (stopping the timer) you can press the
               Recall Townsfolk button. You can advance to the next phase by
-              pressing the "Wake Up" button. Switching to dusk (nomination
+              pressing the "Wake Up" button. Switching to end of day (nomination
               phase) will automatically shorten the timer. The timer will also
               be shortened when advancing the days (to account for fewer alive
               people as the game progresses). Hope you enjoy!
@@ -77,12 +81,12 @@
               <dt><span class="key">R</span></dt>
               <dd>Immediate recall town</dd>
               <dt><span class="key">N</span>/<span class="key">Enter</span></dt>
-              <dd>Move to next phase (night/dawn/dusk/next day)</dd>
+              <dd>Move to next phase (night/day/end of day/next day)</dd>
               <dt>
                 <span class="key">F1</span>, <span class="key">F2</span>,
                 <span class="key">F3</span>
               </dt>
-              <dd>Goto current day's dawn/dusk/night</dd>
+              <dd>Goto current day's day/end of day/night</dd>
               <dt><span class="key">F4</span></dt>
               <dd>Toggle Mute</dd>
               <dt><span class="key">F</span></dt>
