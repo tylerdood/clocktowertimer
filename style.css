@@ -26,12 +26,6 @@ body {
   margin-top: 0.25em;
 }
 
-#timeOfDayToggle {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
 #informationContainer {
   position: absolute;
   right: 10px;
