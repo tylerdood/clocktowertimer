@@ -1,5 +1,5 @@
 function useSpotify() {
-  return Boolean(localStorage.getItem('spotify_access_token'));
+  return localStorage.getItem('spotify_access_token') && localStorage.getItem('spotify_access_token') !== 'undefined';
 }
 
 async function callSpotify(endpoint, method = 'PUT') {
