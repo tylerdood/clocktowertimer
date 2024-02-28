@@ -37,6 +37,11 @@ let keybindings = {
   timeminus: ["Down", "ArrowDown", "Left", "ArrowLeft", "-"],
   recall: "R",
   nextphase: ["N", "Enter"],
+  previousphase: "P",
+  day: "F1",
+  endOfDay: "F2",
+  night: "F3",
+  nextday: "F4",
   toggleinfo: "Q",
   mute: "D",
   fullscreen: "F",
@@ -77,6 +82,14 @@ function parseKeydown(e) {
       recall();
       break;
     case "nextphase":
+      advanceTime();
+      break;
+    case "previousphase":
+      if (currentDay == 1 && isNight()) break;
+      if (!isEndOfDay()) {
+        currentDay = currentDay - 1;
+      }
+      phase++;
       advanceTime();
       break;
     case "toggleinfo":
