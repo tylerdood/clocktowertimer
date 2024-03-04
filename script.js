@@ -11,6 +11,56 @@ const dayValue = document.getElementById("dayValue");
 const body = document.body;
 const muteButton = document.getElementById("muteButton");
 
+let startingPlayerCount = parseInt(
+  prompt("Please enter a number between 5 and 15:")
+);
+const dayTotalNumbers = startingPlayerCount - startingPlayerCount / 5;
+const dayStartValue = startingPlayerCount * 0.6 + 3;
+const dayEndValue = 3;
+const nightTotalNumbers = startingPlayerCount - startingPlayerCount / 5;
+const nightStartValue = 4;
+const nightEndValue = 1;
+
+function roundToNearestQuarter(n) {
+  return Math.round(n * 4) / 4;
+}
+
+function generateExponentialDecay(startValue, endValue, totalNumbers) {
+  let values = [];
+  let b = -Math.log(endValue / startValue);
+  let step = 1 / (totalNumbers - 1);
+
+  for (let i = 0; i < totalNumbers; i++) {
+    let x = i * step;
+    let y = startValue * Math.exp(-b * x);
+    if (y < endValue) {
+      y = endValue;
+    }
+    values.push(roundToNearestQuarter(y));
+  }
+
+  return values;
+}
+
+let dayDecayValues = generateExponentialDecay(
+  dayStartValue,
+  dayEndValue,
+  dayTotalNumbers
+);
+
+let nightDecayValues = generateExponentialDecay(
+  nightStartValue,
+  nightEndValue,
+  nightTotalNumbers
+);
+
+function convertToSeconds(values) {
+  return values.map((value) => value * 60);
+}
+
+const dayDecayValuesSeconds = convertToSeconds(dayDecayValues);
+const nightDecayValuesSeconds = convertToSeconds(nightDecayValues);
+
 // State variables
 let isMuted = false;
 let countdown;
@@ -23,8 +73,8 @@ const DAY = 0,
   ENDOFDAY = 1,
   NIGHT = 2;
 let timeValues = {
-  day: [600, 480, 420, 420, 360, 360, 300, 300, 240, 180],
-  endOfDay: [180, 150, 150, 135, 135, 120, 120, 90, 75, 60],
+  day: dayDecayValuesSeconds,
+  endOfDay: nightDecayValuesSeconds,
 };
 let stepSize = 15;
 let volume = [50, 30, 80];
