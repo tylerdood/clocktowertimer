@@ -10,6 +10,76 @@ const toggleTimeOfDayButton = document.getElementById("toggleTimeOfDayButton");
 const dayValue = document.getElementById("dayValue");
 const body = document.body;
 const muteButton = document.getElementById("muteButton");
+let timeValues = {}; // Initialize `timeValues` at a higher scope
+
+function updateTimeValues(playerCount) {
+  const startingPlayerCount = playerCount;
+  const dayTotalNumbers = startingPlayerCount - startingPlayerCount / 5;
+  const dayStartValue = startingPlayerCount * 0.6 + 3;
+  const dayEndValue = 3;
+  const nightTotalNumbers = startingPlayerCount - startingPlayerCount / 5;
+  const nightStartValue = 4;
+  const nightEndValue = 1;
+
+  function roundToNearestQuarter(n) {
+    return Math.round(n * 4) / 4;
+  }
+
+  function generateExponentialDecay(startValue, endValue, totalNumbers) {
+    let values = [];
+    let b = -Math.log(endValue / startValue);
+    let step = 1 / (totalNumbers - 1);
+
+    for (let i = 0; i < totalNumbers; i++) {
+      let x = i * step;
+      let y = startValue * Math.exp(-b * x);
+      if (y < endValue) {
+        y = endValue;
+      }
+      values.push(roundToNearestQuarter(y));
+    }
+
+    return values;
+  }
+
+  let dayDecayValues = generateExponentialDecay(
+    dayStartValue,
+    dayEndValue,
+    dayTotalNumbers
+  );
+  let nightDecayValues = generateExponentialDecay(
+    nightStartValue,
+    nightEndValue,
+    nightTotalNumbers
+  );
+
+  function convertToSeconds(values) {
+    return values.map((value) => value * 60);
+  }
+
+  const dayDecayValuesSeconds = convertToSeconds(dayDecayValues);
+  const nightDecayValuesSeconds = convertToSeconds(nightDecayValues);
+
+  timeValues = {
+    day: dayDecayValuesSeconds,
+    endOfDay: nightDecayValuesSeconds,
+  };
+}
+
+updateTimeValues(10);
+
+document.getElementById("updateButton").addEventListener("click", function () {
+  let inputCount = parseInt(
+    prompt(
+      "Please enter a number between 5 and 15: (this will determine the default timer length)"
+    )
+  );
+  if (inputCount >= 5 && inputCount <= 15) {
+    updateTimeValues(inputCount);
+  } else {
+    alert("Please enter a valid number between 5 and 15.");
+  }
+});
 
 // State variables
 let isMuted = false;
@@ -22,10 +92,6 @@ let phase = 2;
 const DAY = 0,
   ENDOFDAY = 1,
   NIGHT = 2;
-let timeValues = {
-  day: [600, 480, 420, 420, 360, 360, 300, 300, 240, 180],
-  endOfDay: [180, 150, 150, 135, 135, 120, 120, 90, 75, 60],
-};
 let stepSize = 15;
 let volume = [50, 30, 80];
 let timeOfDayText = document.getElementById("timeOfDayText");
