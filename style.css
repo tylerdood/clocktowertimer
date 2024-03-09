@@ -10,6 +10,24 @@ body {
   font-size: 4em;
 }
 
+.characterImage {
+  width: 50px;
+}
+
+#characters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; 
+
+}
+
+.character-counts {
+  font-size: 35px;
+  color:white
+}
+
+
 #mainButtonsContainer {
   display: flex;
   justify-content: space-between;
