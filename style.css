@@ -1,7 +1,7 @@
 body {
   text-align: center;
   background-color: #1a1a1a;
-  color: #d6d6d6;
+  color: #ffffff;
   display: flex;
   font-family: "Almendra", "Helvetica Neue";
   font-size: 4em;
@@ -13,14 +13,13 @@ img {
 
 h1 {
   font-size: 5em;
-  color: #d6d6d6;
   margin: 0;
   font-family: "Xanh Mono", serif;
 }
 
 button {
   background-color: transparent;
-  color: #d6d6d6;
+  color: #ffffff;
   border: none;
   padding: 10px;
   border-radius: 5px;
@@ -143,7 +142,6 @@ flex: 1;
 
 .character-counts {
   font-size: 35px;
-  color:white
 }
 
 .disclaimer {
