@@ -32,12 +32,12 @@ document.getElementById("decreaseHeart").addEventListener("click", function () {
   decrease("heartNumber");
 });
 
-document.getElementById("increaseMail").addEventListener("click", function () {
-  increase("mailNumber");
+document.getElementById("increaseVote").addEventListener("click", function () {
+  increase("voteNumber");
 });
 
-document.getElementById("decreaseMail").addEventListener("click", function () {
-  decrease("mailNumber");
+document.getElementById("decreaseVote").addEventListener("click", function () {
+  decrease("voteNumber");
 });
 
 function updateTimeValues(playerCount) {
@@ -136,7 +136,7 @@ document.getElementById("updateButton").addEventListener("click", function () {
     updateCharacterAmounts(inputCount);
     document.getElementById("heartNumber").innerText =
       inputCount + travelorCount;
-    document.getElementById("mailNumber").innerText =
+    document.getElementById("voteNumber").innerText =
       inputCount + travelorCount;
   } else {
     alert("Please enter a valid number between 5 and 15.");
