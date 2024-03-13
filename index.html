@@ -28,10 +28,21 @@
     ></audio>
 
     <div id="container">
-      <div id="mainButtonsContainer">
-        <div id="informationContainer">
+      <div id="mainTop">
+        <div id="editButton" class="mainDiv">
+          <button id="recallButton">
+            <span>Recall Townsfolk</span>
+          </button>
+          <button id="toggleTimeOfDayButton" class="restricted">
+            <span>Advance to Day</span>
+          </button>
+        </div>
+        <div id="trackerContainer" class="mainDiv">
+          <span id="timeOfDayText">Day</span>
+          <span id="dayValue">1</span>
+        </div>
+        <div id="informationContainer" class="mainDiv">
           <button id="updateButton">Enter Player Count</button>
-
           <button id="muteButton">
             <i class="fas fa-volume-up"></i>
           </button>
@@ -112,17 +123,32 @@
           </div>
         </div>
       </div>
-      <div id="trackerContainer">
-        <span id="timeOfDayText">Day</span>
-        <span id="dayValue">1</span>
+      <div id="startingCharacters" class="bleh">
+        <img
+          src="images/townsfolk.png"
+          class="characterImage"
+          alt="Image Description"
+        />
+        <span id="townsfolkAmount">0</span> <span>/</span>
+        <span id="outsiderAmount">0</span>
+        <img
+          src="images/evil.png"
+          class="characterImage"
+          alt="Image Description"
+        />
+        <span id="minionAmount">0</span> <span>/</span>
+        <span id="demonAmount">0</span>
+        <img
+          src="images/travelors.png"
+          class="characterImage"
+          alt="Image Description"
+        />
+        <span id="travelerAmount">0</span>
       </div>
       <div id="timerContainer">
         <h1 id="timeDisplay">03:00</h1>
       </div>
       <div id="timerControls">
-        <button id="recallButton">
-          <span>Recall Townsfolk</span>
-        </button>
         <button id="startStopButton"><i class="fas fa-play"></i></button>
         <button id="resetButton" class="restricted">
           <i class="fas fa-sync-alt"></i>
@@ -136,22 +162,24 @@
         <button id="decrementTime" class="restricted">
           <i class="fas fa-arrow-down"></i>
         </button>
-        <button id="toggleTimeOfDayButton" class="restricted">
-          <span>Advance to Day</span>
-        </button>
       </div>
-      <div id="characters">
-        <img src="images/townsfolk.png" class="characterImage" alt="Image Description">
-        <span id="townsfolkAmount">0</span>        <span>/</span>
-        <span id="outsiderAmount">0</span>
-        <img src="images/evil.png"  class="characterImage" alt="Image Description">
-        <span id="minionAmount">0</span> <span>/</span>
-        <span id="demonAmount">0</span>
-        <img src="images/travelors.png" class="characterImage" alt="Image Description">
-        <span id="travelorAmount">0</span>
+      <div id="characterTracker" class="bleh">
+        <div class="test5">
+          <button id="increaseHeart"><i class="fas fa-arrow-up"></i></button>
+          <button id="decreaseHeart">
+            <i class="fas fa-arrow-down"></i>
+          </button>
+        </div>
+        <span id="heartNumber">0</span>
+        <img src="images/heart.png" class="test" alt="Image Description" />
+        <div class="test5">
+          <button id="increaseMail"><i class="fas fa-arrow-up"></i></button>
+          <button id="decreaseMail"><i class="fas fa-arrow-down"></i></button>
+        </div>
+        <span id="mailNumber">0</span>
+        <img src="images/box.png" class="test2" alt="Image Description" />
       </div>
     </div>
-
 
     <script src="spotify.js"></script>
     <script src="script.js"></script>

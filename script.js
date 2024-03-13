@@ -12,6 +12,34 @@ const body = document.body;
 const muteButton = document.getElementById("muteButton");
 let timeValues = {}; // Initialize `timeValues` at a higher scope
 
+function increase(id) {
+  const element = document.getElementById(id);
+  let newValue = parseInt(element.innerText) + 1;
+  element.innerText = newValue <= 20 ? newValue : 20; // Limit the maximum value to 20
+}
+
+function decrease(id) {
+  const element = document.getElementById(id);
+  let newValue = parseInt(element.innerText) - 1;
+  element.innerText = newValue >= 0 ? newValue : 0; // Prevent negative numbers
+}
+
+document.getElementById("increaseHeart").addEventListener("click", function () {
+  increase("heartNumber");
+});
+
+document.getElementById("decreaseHeart").addEventListener("click", function () {
+  decrease("heartNumber");
+});
+
+document.getElementById("increaseMail").addEventListener("click", function () {
+  increase("mailNumber");
+});
+
+document.getElementById("decreaseMail").addEventListener("click", function () {
+  decrease("mailNumber");
+});
+
 function updateTimeValues(playerCount) {
   const startingPlayerCount = playerCount;
   const dayTotalNumbers = startingPlayerCount - startingPlayerCount / 5;
@@ -80,17 +108,20 @@ function updateCharacterAmounts(userInput) {
     12: [7, 2, 2, 1],
     13: [9, 0, 3, 1],
     14: [9, 1, 3, 1],
-    15: [9, 2, 3, 1]
+    15: [9, 2, 3, 1],
   };
-  
+
   const numbersArray = characterAmounts[userInput];
-  
-  document.getElementById('townsfolkAmount').textContent = numbersArray[0];
-  document.getElementById('outsiderAmount').textContent = numbersArray[1];
-  document.getElementById('minionAmount').textContent = numbersArray[2];
-  document.getElementById('demonAmount').textContent = numbersArray[3];
+
+  document.getElementById("townsfolkAmount").textContent = numbersArray[0];
+  document.getElementById("outsiderAmount").textContent = numbersArray[1];
+  document.getElementById("minionAmount").textContent = numbersArray[2];
+  document.getElementById("demonAmount").textContent = numbersArray[3];
 }
 
+function updateTravelerAmount(userInput) {
+  document.getElementById("travelerAmount").textContent = userInput;
+}
 
 document.getElementById("updateButton").addEventListener("click", function () {
   let inputCount = parseInt(
@@ -98,9 +129,15 @@ document.getElementById("updateButton").addEventListener("click", function () {
       "Please enter a number between 5 and 15: (this will determine the default timer length)"
     )
   );
+  let travelorCount = parseInt(prompt("How many travelers are in your game?"));
+  updateTravelerAmount(travelorCount);
   if (inputCount >= 5 && inputCount <= 15) {
     updateTimeValues(inputCount);
-  updateCharacterAmounts(inputCount);
+    updateCharacterAmounts(inputCount);
+    document.getElementById("heartNumber").innerText =
+      inputCount + travelorCount;
+    document.getElementById("mailNumber").innerText =
+      inputCount + travelorCount;
   } else {
     alert("Please enter a valid number between 5 and 15.");
   }
