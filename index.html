@@ -28,8 +28,8 @@
     ></audio>
 
     <div id="container">
-      <div id="mainTop">
-        <div id="editButton" class="mainDiv">
+      <div id="appControls">
+        <div>
           <button id="recallButton">
             <span>Recall Townsfolk</span>
           </button>
@@ -37,11 +37,11 @@
             <span>Advance to Day</span>
           </button>
         </div>
-        <div id="trackerContainer" class="mainDiv">
+        <div>
           <span id="timeOfDayText">Day</span>
           <span id="dayValue">1</span>
         </div>
-        <div id="informationContainer" class="mainDiv">
+        <div>
           <button id="updateButton">Enter Player Count</button>
           <button id="muteButton">
             <i class="fas fa-volume-up"></i>
@@ -123,26 +123,14 @@
           </div>
         </div>
       </div>
-      <div id="startingCharacters" class="bleh">
-        <img
-          src="images/townsfolk.png"
-          class="characterImage"
-          alt="Image Description"
-        />
+      <div>
+        <img src="images/townsfolk.png" />
         <span id="townsfolkAmount">0</span> <span>/</span>
         <span id="outsiderAmount">0</span>
-        <img
-          src="images/evil.png"
-          class="characterImage"
-          alt="Image Description"
-        />
+        <img src="images/evil.png" />
         <span id="minionAmount">0</span> <span>/</span>
         <span id="demonAmount">0</span>
-        <img
-          src="images/travelors.png"
-          class="characterImage"
-          alt="Image Description"
-        />
+        <img src="images/travelors.png" />
         <span id="travelerAmount">0</span>
       </div>
       <div id="timerContainer">
@@ -163,21 +151,21 @@
           <i class="fas fa-arrow-down"></i>
         </button>
       </div>
-      <div id="characterTracker" class="bleh">
-        <div class="test5">
+      <div id="characterTracker">
+        <div>
           <button id="increaseHeart"><i class="fas fa-arrow-up"></i></button>
           <button id="decreaseHeart">
             <i class="fas fa-arrow-down"></i>
           </button>
         </div>
         <span id="heartNumber">0</span>
-        <img src="images/heart.png" class="test" alt="Image Description" />
-        <div class="test5">
-          <button id="increaseMail"><i class="fas fa-arrow-up"></i></button>
-          <button id="decreaseMail"><i class="fas fa-arrow-down"></i></button>
+        <img src="images/heart.png" />
+        <div>
+          <button id="increaseVote"><i class="fas fa-arrow-up"></i></button>
+          <button id="decreaseVote"><i class="fas fa-arrow-down"></i></button>
         </div>
-        <span id="mailNumber">0</span>
-        <img src="images/box.png" class="test2" alt="Image Description" />
+        <span id="voteNumber">0</span>
+        <img src="images/box.png" />
       </div>
     </div>
 

@@ -7,64 +7,34 @@ body {
   font-size: 4em;
 }
 
-.characterImage {
+img {
   width: 50px;
 }
 
-.test {
-  width:50px;
-  margin-right:80px;
-}
-.test2 {
-  height:50px;
-}
-
-.bleh {
-  flex:1;
+h1 {
+  font-size: 5em;
+  color: #d6d6d6;
+  margin: 0;
+  font-family: "Xanh Mono", serif;
 }
 
-#characterTracker {
-  display: flex;
-  justify-content: center;
-  gap:10px;
-  margin-top:30px;
-}
-
-.test5 {
-  display:flex;
-  flex-direction: column;
-  margin-top:25px;
-}
-
-#characterTracker img {
-  margin-top:20px;
-  margin-bottom:10px
-}
-
-#characterTracker button {
-  padding:0px;
-}
-
-.character-counts {
-  font-size: 35px;
-  color:white
-}
-
-#toggleTimeOfDayButton {
-  min-width: 150px;
-}
-
-#dialogueBox {
-  position: absolute;
-  z-index: 100;
-  width: 300px; /* Adjust width as needed */
-  background-color: rgb(244, 243, 243);
-  border: 1px solid #9c9c9c;
+button {
+  background-color: transparent;
+  color: #d6d6d6;
+  border: none;
   padding: 10px;
   border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  top: 30px;
-  display: none;
+  font-size: 0.3em;
+  cursor: pointer;
+  font-family: "Times New Roman", Times, serif;
+  transition: transform 0.3s ease;
+}
+
+button:hover {
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+  color: rgb(177, 36, 36);
 }
 
 p,
@@ -95,6 +65,85 @@ dt .key {
 
 dd {
   grid-column-start: 2;
+}
+
+#characterTracker {
+  display: flex;
+  justify-content: center;
+  gap:10px;
+  margin-top:30px;
+}
+
+#characterTracker img:first-of-type {
+  margin-right:80px;
+}
+#characterTracker img:nth-of-type(2) {
+  height:50px;
+}
+
+#characterTracker div {
+  display:flex;
+  flex-direction: column;
+  margin-top:25px;
+}
+
+#characterTracker img {
+  margin-top:20px;
+  margin-bottom:10px
+}
+
+#characterTracker button {
+  padding:0px;
+}
+
+#toggleTimeOfDayButton {
+  min-width: 150px;
+}
+
+#dialogueBox {
+  position: absolute;
+  z-index: 100;
+  width: 300px; /* Adjust width as needed */
+  background-color: rgb(244, 243, 243);
+  border: 1px solid #9c9c9c;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  top: 30px;
+  display: none;
+}
+
+#timerContainer {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+#timerControls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+}
+
+#container {
+  width: 100%;
+}
+
+#appControls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom:0.3em;
+}
+
+#appControls div {
+flex: 1;
+}
+
+.character-counts {
+  font-size: 35px;
+  color:white
 }
 
 .disclaimer {
@@ -132,32 +181,6 @@ dd {
   visibility: hidden;
 }
 
-h1 {
-  font-size: 5em;
-  color: #d6d6d6;
-  margin: 0;
-  font-family: "Xanh Mono", serif;
-}
-
-button {
-  background-color: transparent;
-  color: #d6d6d6;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 0.3em;
-  cursor: pointer;
-  font-family: "Times New Roman", Times, serif;
-  transition: transform 0.3s ease;
-}
-
-button:hover {
-  -webkit-transform: scale(1.2);
-  -ms-transform: scale(1.2);
-  transform: scale(1.2);
-  color: rgb(177, 36, 36);
-}
-
 .timerRunning button.restricted,
 .background-night #recallButton,
 .background-night #startStopButton,
@@ -170,34 +193,6 @@ button:hover {
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
-}
-
-#timerContainer {
-  display: flex;
-  justify-content: center;
-  position: relative;
-}
-
-#timerControls {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-
-}
-
-#container {
-  width: 100%;
-}
-
-#mainTop {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom:0.3em;
-}
-
-.mainDiv {
-  flex: 1;
 }
 
 @media screen and (max-width: 600px) {
