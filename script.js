@@ -43,10 +43,10 @@ document.getElementById("decreaseVote").addEventListener("click", function () {
 function updateTimeValues(playerCount) {
   const startingPlayerCount = playerCount;
   const dayTotalNumbers = startingPlayerCount - startingPlayerCount / 5;
-  const dayStartValue = startingPlayerCount * 0.6 + 3;
-  const dayEndValue = 3;
+  const dayStartValue = startingPlayerCount * 0.4 + 2;
+  const dayEndValue = 2;
   const nightTotalNumbers = startingPlayerCount - startingPlayerCount / 5;
-  const nightStartValue = 4;
+  const nightStartValue = startingPlayerCount * 0.1 + 1;
   const nightEndValue = 1;
 
   function roundToNearestQuarter(n) {
