@@ -4,7 +4,7 @@ body {
   color: #ffffff;
   display: flex;
   font-family: "Almendra", "Helvetica Neue";
-  font-size: 4em;
+  font-size: 4rem;
 }
 
 img {
@@ -53,7 +53,7 @@ dt {
   grid-column-start: 1;
 }
 
-dt .key {
+.key {
   background-color: #000;
   color: #fff;
   padding: 1px 5px;
@@ -76,6 +76,7 @@ dd {
 #characterTracker img:first-of-type {
   margin-right:80px;
 }
+
 #characterTracker img:nth-of-type(2) {
   height:50px;
 }
@@ -92,7 +93,7 @@ dd {
 }
 
 #characterTracker button {
-  padding:0px;
+  padding:0;
 }
 
 #toggleTimeOfDayButton {
@@ -107,9 +108,8 @@ dd {
   border: 1px solid #9c9c9c;
   padding: 10px;
   border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   top: 30px;
-  display: none;
 }
 
 #timerContainer {
@@ -123,7 +123,6 @@ dd {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-
 }
 
 #container {
@@ -137,7 +136,7 @@ dd {
 }
 
 #appControls div {
-flex: 1;
+  flex: 1;
 }
 
 .character-counts {
@@ -150,8 +149,12 @@ flex: 1;
   font-size: 0.15em;
 }
 
+.noDisplay {
+  display: none !important;
+}
+
 .hidden {
-  display: none;
+  visibility: hidden !important;
 }
 
 .background-endOfDay {
@@ -207,4 +210,101 @@ flex: 1;
   #toggleTimeOfDayButton {
     font-size: 1em;
   }
+}
+
+dialog::backdrop {
+  background-color: #ffffff88;
+}
+
+dialog {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 20px;
+  border-radius: 50px;
+  font-size: 1.5rem;
+  overflow-y: auto;
+}
+
+dialog h1 {
+  font-size: 2em;
+}
+
+dialog a, dialog a:visited {
+  color: #ffffff;
+}
+
+dialog p {
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+
+dialog a:hover {
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  scale: 1.2;
+  color: rgb(177, 36, 36);
+}
+
+dialog .autoupdate input {
+  background-color: #9c9c9c;
+}
+
+.gameRunning dialog input.pregame {
+  background-color: rgb(177, 36, 36);
+}
+
+.abort {
+  display: none;
+}
+
+.gameRunning .abort {
+  display: unset;
+}
+
+dialog fieldset input {
+  width: 75px;
+  margin: 0.5em 1em 0.5em 0.5em;
+  padding: 0.25em;
+  font-size: 1.2rem;
+  text-align: center;
+  border: none;
+  border-radius: 0.5em;
+}
+
+dialog fieldset input[type=checkbox] {
+  width: auto;
+}
+
+dialog fieldset label {
+  margin-left: 1em;
+}
+
+#settingsTimerPreview table {
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid white;
+  border-radius: 0.5em;
+  padding: 0.25em;
+}
+
+#settingsTimerPreview table td, #settingsTimerPreview table th {
+  padding: 0 0.25em;
+}
+
+#settingsDayN {
+  margin-left: 2em;
+}
+
+dialog button {
+  font-size: 1.2em;
+}
+
+dialog .key {
+  color: #000000;
+  background-color: #ffffff;
+  font-size: 1em;
+}
+
+dialog .key.active {
+  background-color: rgb(177, 36, 36);
 }

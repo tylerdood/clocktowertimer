@@ -37,7 +37,7 @@ async function requestUserAuth() {
   const codeVerifier = generateRandomString(64);
   const hashed = await sha256(codeVerifier)
   const codeChallenge = base64encode(hashed);
-  localStorage.setItem('code_verifier', codeVerifier);
+  localStorage.setItem('spotify_code_verifier', codeVerifier);
 
   const params = {
     response_type: 'code',
@@ -53,7 +53,7 @@ async function requestUserAuth() {
 }
 
 async function getAccessToken(code) {
-  let codeVerifier = localStorage.getItem('code_verifier');
+  let codeVerifier = localStorage.getItem('spotify_code_verifier');
   const url = new URL("https://accounts.spotify.com/api/token")
 
   const payload = {

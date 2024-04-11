@@ -15,6 +15,9 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
     <link rel="stylesheet" href="style.css" />
+    <link rel="preload" as="image" href="images/village-end-of-day.webp" />
+    <link rel="preload" as="image" href="images/village-day.webp" />
+    <link rel="preload" as="image" href="images/village-night.webp" />
     <link rel="icon" type="image/x-icon" href="images/favicon.png" />
   </head>
   <body>
@@ -42,13 +45,15 @@
           <span id="dayValue">1</span>
         </div>
         <div>
-          <button id="updateButton">Enter Player Count</button>
+          <button id="settingsButton">
+            <i class="fas fa-cog"></i>
+          </button>
           <button id="muteButton">
             <i class="fas fa-volume-up"></i>
           </button>
           <!--<a href="spotify.html" target="_blank"><button class="fab fa-spotify"></button></a>-->
           <button id="infoIcon" class="fas fa-info-circle"></button>
-          <div id="dialogueBox" class="hidden">
+          <div id="dialogueBox" class="noDisplay">
             <span
               id="closeButton"
               style="
@@ -57,6 +62,7 @@
                 font-size: 20px;
                 font-weight: bold;
                 padding: 0 10px;
+                color: rgb(61, 61, 61);
               "
               >&times;</span
             >
@@ -73,46 +79,7 @@
               be shortened when advancing the days (to account for fewer alive
               people as the game progresses). Hope you enjoy!
             </p>
-            <p>You may also control this app using keyboard-shortcuts:</p>
-            <dl>
-              <dt><span class="key">Space</span></dt>
-              <dd>Start or stop the timer</dd>
-              <dt><span class="key">Backspace</span></dt>
-              <dd>Reset the timer</dd>
-              <dt><span class="key">Z</span></dt>
-              <dd>Edit the timer</dd>
-              <dt>
-                <span class="key">Up</span>/<span class="key">Right</span>/<span
-                  class="key"
-                  >+</span
-                >,
-                <br />
-                <span class="key">Down</span>/<span class="key">Left</span
-                >/<span class="key">-</span>
-              </dt>
-              <dd>Quick adjust the timer</dd>
-              <dt><span class="key">R</span></dt>
-              <dd>Immediate recall town</dd>
-              <dt><span class="key">N</span>/<span class="key">Enter</span></dt>
-              <dd>Move to next phase (night/day/end of day/night)</dd>
-              <dt><span class="key">P</span></dt>
-              <dd>Move back the previous phase (night/end of day/day/night)</dd>
-              <dt>
-                <span class="key">F1</span>, <span class="key">F2</span>,
-                <span class="key">F3</span>
-              </dt>
-              <dd>Goto current day's day/end of day/night</dd>
-              <dt><span class="key">F4</span></dt>
-              <dd>Toggle Mute</dd>
-              <dt><span class="key">F</span></dt>
-              <dd>Toggle Fullscreen</dd>
-              <dt><span class="key">Q</span></dt>
-              <dd>Toggle this dialogue</dd>
-            </dl>
-            <p>
-              To use the experimental Spotify integration visit
-              <a href="/spotify.html" target="_blank">/spotify.html</a>.
-            </p>
+            <p>You may also control this app using configurable keyboard-shortcuts.</p>
             <p>-</p>
             <p class="disclaimer">
               Disclaimer: Clocktowertimer is an open source project and is not
@@ -123,7 +90,7 @@
           </div>
         </div>
       </div>
-      <div>
+      <div id="roleDistributionContainer">
         <img src="images/townsfolk.png" />
         <span id="townsfolkAmount">0</span> <span>/</span>
         <span id="outsiderAmount">0</span>
@@ -168,7 +135,125 @@
         <img src="images/box.png" />
       </div>
     </div>
+    <dialog id="settings">
+      <form method="dialog">
+        <h1>Settings</h1>
+        <fieldset name="gamestate">
+          <legend>Gamestate</legend>
+          <label for="playerCountInput">Starting Player Count</label>
+          <input type="number" id="playerCountInput" class="pregame" min="5" max="15" step="1" value=""/>
+          <label for="linkedTimerInput">Linked Timer</label>
+          <input type="checkbox" id="linkedTimerInput" class="pregame" />
+          <label for="travellerCountInput">Traveller Count</label>
+          <input type="number" id="travellerCountInput" class="" min="0" max="5" step="1" value=""/>
+          <div id="settingsEditTimer">
+            <span>Day 1</span>
+            <label for="day1TimerInput"><i class="fa fa-comments"></i></label>
+            <input type="text" id="day1TimerInput" class="pregame" />
+            <label for="endofday1TimerInput"><i class="fa fa-skull"></i></label>
+            <input type="text" id="endofday1TimerInput" class="pregame" />
+            <span id="settingsDayN">Day N</span>
+            <label for="dayNTimerInput"><i class="fa fa-comments"></i></label>
+            <input type="text" id="dayNTimerInput" class="pregame" />
+            <label for="endofdayNTimerInput"><i class="fa fa-skull"></i></label>
+            <input type="text" id="endofdayNTimerInput" class="pregame" />
+          </div>
+          <div id="settingsTimerPreview"></div>
+        </fieldset>
+        <fieldset name="features">
+          <legend>Features</legend>
+          <label for="featureSpotify">Spotify</label>
+          <input type="checkbox" id="featureSpotify" />
+          <label for="featureRoles">Role Distribution</label>
+          <input type="checkbox" id="featureRoles" />
+          <label for="featureVotes">Alive/Votes</label>
+          <input type="checkbox" id="featureVotes" />
+        </fieldset>
+        <fieldset name="spotify">
+          <legend>Spotify</legend>
+          <a href="spotify.html" target="_blank">Connect Clocktowertimer to Spotify API</a>
+          <br>
+          <span>Adjust Volume:</span>
+          <label for="nightVolumeInput"><i class="fa fa-moon"></i></label>
+          <input type="number" id="nightVolumeInput" min="0" max="100" step="1" value="" />
+          <label for="dawnVolumeInput"><i class="fa fa-comments"></i></label>
+          <input type="number" id="dawnVolumeInput" min="0" max="100" step="1" value="" />
+          <label for="duskVolumeInput"><i class="fa fa-skull"></i></label>
+          <input type="number" id="duskVolumeInput" min="0" max="100" step="1" value="" />
+          <div>
+            <span>Test:</span>
+            <button onclick="spotifyTogglePlay(true);return false;">Toggle Play/Pause</button>
+            <br>
+            <button onclick="spotifyVolume(document.getElementById('nightVolumeInput').value, true);return false;">Volume at Night</button>
+            <button onclick="spotifyVolume(document.getElementById('dawnVolumeInput').value, true);return false;">Volume at Dawn</button>
+            <button onclick="spotifyVolume(document.getElementById('duskVolumeInput').value, true);return false;">Volume at Dusk</button>
+          </div>
+        </fieldset>
+        <fieldset name="timer">
+          <legend>Timer</legend>
+          <label for="stepSizeInput">Step width for +/-</label>
+          <input type="number" id="stepSizeInput" min="0" max="120" step="1" value="" />
+        </fieldset>
+        <fieldset name="keybindings">
+          <legend>Keybindings</legend>
+          <label for="timerstart">Start/Stop Timer</label>
+          <button id="timerstart" class="key"></button>
+          <label for="recall">Recall Town</label>
+          <button id="recall" class="key"></button>
+          <br>
+          <label for="phasenext">Next Phase</label>
+          <button id="phasenext" class="key"></button>
+          <button id="phasenextalt" class="key"></button>
+          <label for="phaseprev">Previous Phase</label>
+          <button id="phaseprev" class="key"></button>
+          <br>
+          <label for="timerreset">Reset Timer</label>
+          <button id="timerreset" class="key"></button>
+          <label for="timeredit">Edit Timer</label>
+          <button id="timeredit" class="key"></button>
+          <br>
+          <label for="timerplus">Increase Timer</label>
+          <button id="timerplus" class="key"></button>
+          <button id="timerplusalt" class="key"></button>
+          <button id="timerplusalt2" class="key"></button>
+          <br>
+          <label for="timerminus">Decrease Timer</label>
+          <button id="timerminus" class="key"></button>
+          <button id="timerminusalt" class="key"></button>
+          <button id="timerminusalt2" class="key"></button>
+          <br>
+          <label for="togglemute">Toggle Mute</label>
+          <button id="togglemute" class="key"></button>
+          <label for="togglefullscreen">Toggle Fullscreen</label>
+          <button id="togglefullscreen" class="key"></button>
+          <label for="toggleinfo">Toggle Info</label>
+          <button id="toggleinfo" class="key"></button>
+          <label for="togglesettings">Open Settings</label>
+          <button id="togglesettings" class="key"></button>
+        </fieldset>
+        <button type="submit" value="abort" class="abort">Abort Settings</button>
+        <button type="submit" value="save">Save Settings</button>
+      </form>
+    </dialog>
+    <dialog id="timerEditDialog">
+      <form method="dialog">
+        <label for="timerEditInput">Timer Value</label>
+        <br>
+        <input type="text" id="timerEditInput" autofocus>
+        <br>
+        <button value="confirm">Set Timer</button>
+      </form>
+    </dialog>
+    <dialog id="messageDialog">
+      <form method="dialog">
+        <h1></h1>
+        <p></p>
+        <button type=submit" value="confirm">OK</button>
+      </form>
+    </dialog>
 
+    <script src="helper.js"></script>
+    <script src="settings.js"></script>
     <script src="spotify.js"></script>
     <script src="script.js"></script>
   </body>
