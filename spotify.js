@@ -1,5 +1,5 @@
 function useSpotify() {
-  return localStorage.getItem('spotify_access_token') && localStorage.getItem('spotify_access_token') !== 'undefined';
+  return getBooleanSetting('settings_feature_spotify') && getSetting('spotify_access_token', false);
 }
 
 async function callSpotify(endpoint, method = 'PUT') {
@@ -13,7 +13,8 @@ async function callSpotify(endpoint, method = 'PUT') {
   return response;
 }
 
-async function spotifyTogglePlay() {
+async function spotifyTogglePlay(force = false) {
+  if (!force && !useSpotify()) return;
   const response = await (await callSpotify('/me/player', 'GET')).json();
   if (response.is_playing) {
     await callSpotify('/me/player/pause');
@@ -22,7 +23,8 @@ async function spotifyTogglePlay() {
   }
 }
 
-function spotifyVolume(volume) {
+function spotifyVolume(volume, force = false) {
+  if (!force && !useSpotify()) return;
   callSpotify(`/me/player/volume?volume_percent=${volume}`);
 }
 
