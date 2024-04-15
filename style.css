@@ -222,7 +222,7 @@ dialog {
   padding: 20px;
   border-radius: 50px;
   font-size: 1.5rem;
-  overflow-y: auto;
+  max-height: calc(100% - 3em);
 }
 
 dialog h1 {
@@ -307,4 +307,15 @@ dialog .key {
 
 dialog .key.active {
   background-color: rgb(177, 36, 36);
+}
+
+#settings {
+  height: auto;
+}
+
+#settings-inner {
+  max-height: calc(100% - 3.5em);
+  overflow: auto;
+  height: auto;
+  margin-top: 0.5em;
 }
