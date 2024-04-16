@@ -37,16 +37,18 @@
     <div id="container">
       <div id="settingsContainer">
         <div id="settings2">
-          <button id="settingsButton" style="padding-left: 25px">
+          <button
+            id="settingsButton"
+            style="padding-left: 25px"
+            title="Settings"
+          >
             <i class="fas fa-cog"></i>
-          </button>
-          <button id="muteButton">
-            <i class="fas fa-volume-up"></i>
           </button>
           <!--<a href="spotify.html" target="_blank"><button class="fab fa-spotify"></button></a>-->
           <button
             id="infoIcon"
             class="fas fa-info-circle"
+            title="Information"
             style="padding-right: 25px"
           ></button>
           <div id="dialogueBox" class="noDisplay">
@@ -88,9 +90,6 @@
             </p>
           </div>
         </div>
-        <div id="settingsInformationText">
-          <span class="informationText">Adjust</span>
-        </div>
       </div>
       <div id="timeOfDayContainer">
         <span id="timeOfDayText">Day</span>
@@ -115,38 +114,88 @@
       </div>
       <div id="timerControlsContainer">
         <div id="informationTextContainer">
-          <span class="informationText">Manage</span>
-          <span class="informationText">Timer</span>
-          <span class="informationText">Counters</span>
+          <span class="informationText">Adjust</span>
+          <span class="informationText">Timer controls</span>
+          <span class="informationText">Trackers</span>
         </div>
         <div id="timerControls">
-          <button id="recallButton" style="padding-left: 25px">
+          <button
+            id="recallButton"
+            style="padding-left: 25px"
+            class="icon-tooltip"
+            title="Recall townsfolk"
+          >
             <i class="fas fa-bell"></i>
           </button>
-          <button id="toggleTimeOfDayButton" class="restricted">
+          <button id="muteButton" title="Mute / Unmute">
+            <i class="fas fa-volume-up"></i>
+          </button>
+          <button
+            id="toggleTimeOfDayButton"
+            class="restricted"
+            class="icon-tooltip"
+            title="Advance to next phase"
+            style="min-width: 45px"
+          >
             <span>Advance to Day</span>
           </button>
           <span class="dividers"></span>
-          <button id="startStopButton">
+          <button
+            id="startStopButton"
+            class="icon-tooltip"
+            title="Start / Stop"
+          >
             <i class="fas fa-play"></i>
           </button>
-          <button id="resetButton" class="restricted">
+          <button
+            id="resetButton"
+            class="restricted"
+            class="icon-tooltip"
+            title="Reset timer"
+          >
             <i class="fas fa-sync-alt"></i>
           </button>
-          <button id="editTime" class="restricted">
+          <button
+            id="editTime"
+            class="restricted"
+            class="icon-tooltip"
+            title="Edit timer"
+          >
             <i class="fas fa-keyboard"></i>
           </button>
-          <button id="incrementTime" class="restricted">
+          <button
+            id="incrementTime"
+            class="restricted"
+            class="icon-tooltip"
+            title="Increment timer"
+          >
             <i class="fas fa-arrow-up"></i>
           </button>
-          <button id="decrementTime" class="restricted">
+          <button
+            id="decrementTime"
+            class="restricted"
+            class="icon-tooltip"
+            title="Decrement timer"
+          >
             <i class="fas fa-arrow-down"></i>
           </button>
           <span class="dividers"></span>
-          <button id="decreaseHeart">
+          <button
+            id="increaseHeart"
+            class="icon-tooltip"
+            title="Player resurrected"
+          >
+            <i class="fas fa-heart"></i>
+          </button>
+          <button id="decreaseHeart" class="icon-tooltip" title="Player died">
             <i class="fas fa-skull"></i>
           </button>
-          <button id="decreaseVote" style="padding-right: 25px">
+          <button
+            id="decreaseVote"
+            style="padding-right: 25px; min-width: 60px"
+            class="icon-tooltip"
+            title="Dead player voted"
+          >
             <i class="fas fa-check-square"></i>
           </button>
         </div>
@@ -202,7 +251,7 @@
             <legend>Features</legend>
             <label for="featureSpotify">Spotify</label>
             <input type="checkbox" id="featureSpotify" />
-            <label for="featureRoles">Role Distribution</label>
+            <label for="featureRoles">Roles & Trackers</label>
             <input type="checkbox" id="featureRoles" />
           </fieldset>
           <fieldset name="spotify">

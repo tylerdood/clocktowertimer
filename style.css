@@ -49,7 +49,7 @@ button {
   border-bottom-left-radius: 25px;
   margin: 0;
   top: 0px;
-  height: 70px;
+  height: 45px;
 }
 
 #timerControlsContainer {
@@ -64,7 +64,7 @@ button {
 
 #informationTextContainer {
   display: flex;
-  gap: 125px;
+  gap: 130px;
   justify-content: space-between;
   margin-top: 0px;
 }
@@ -89,6 +89,10 @@ button {
 
 #timeOfDayContainer {
   margin-top: 100px;
+}
+
+.icon-tooltip .tooltiptext {
+  color: red;
 }
 
 button:hover {

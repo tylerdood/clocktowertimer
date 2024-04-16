@@ -18,8 +18,18 @@ function decrease(id) {
   element.innerText = newValue >= 0 ? newValue : 0; // Prevent negative numbers
 }
 
+function increase(id) {
+  const element = document.getElementById(id);
+  let newValue = parseInt(element.innerText) + 1;
+  element.innerText = newValue <= 20 ? newValue : 20; // Limit the maximum value to 20
+}
+
 document.getElementById("decreaseHeart").addEventListener("click", function () {
   decrease("heartNumber");
+});
+
+document.getElementById("increaseHeart").addEventListener("click", function () {
+  increase("heartNumber"), increase("voteNumber");
 });
 
 document.getElementById("decreaseVote").addEventListener("click", function () {
