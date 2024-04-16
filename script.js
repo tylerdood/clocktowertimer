@@ -10,7 +10,7 @@ const toggleTimeOfDayButton = document.getElementById("toggleTimeOfDayButton");
 const dayValue = document.getElementById("dayValue");
 const body = document.body;
 const muteButton = document.getElementById("muteButton");
-let timeValues = {day: [], endOfDay: []}; // Initialize `timeValues` at a higher scope
+let timeValues = { day: [], endOfDay: [] }; // Initialize `timeValues` at a higher scope
 
 function increase(id) {
   const element = document.getElementById(id);
@@ -54,7 +54,7 @@ const DAY = 0,
 let timeOfDayText = document.getElementById("timeOfDayText");
 
 function parseKeydown(e) {
-  if (document.querySelector('dialog[open]') != null) return;
+  if (document.querySelector("dialog[open]") != null) return;
   let action = findKey(e.key, keybindings);
   switch (action) {
     case "startstop":
@@ -145,27 +145,30 @@ function isNight() {
 }
 
 function openSettings() {
-  const settings = document.querySelector('#settings');
-  settings.returnValue = 'none';
+  const settings = document.querySelector("#settings");
+  settings.returnValue = "none";
   settings.showModal();
 }
 
-document.getElementById('settingsButton').addEventListener('click', openSettings);
+document
+  .getElementById("settingsButton")
+  .addEventListener("click", openSettings);
 openSettings();
 
-document.querySelector('#settings').addEventListener('cancel', (e) => {
-  if (document.querySelector('#settings').returnValue === 'none') e.preventDefault();
+document.querySelector("#settings").addEventListener("cancel", (e) => {
+  if (document.querySelector("#settings").returnValue === "none")
+    e.preventDefault();
 });
 
-document.querySelector('#settings').addEventListener('close', (e) => {
-  if (document.querySelector('#settings').returnValue === 'save') {
-    if (!body.classList.contains('gameRunning')) {
-      body.classList.add('gameRunning');
+document.querySelector("#settings").addEventListener("close", (e) => {
+  if (document.querySelector("#settings").returnValue === "save") {
+    if (!body.classList.contains("gameRunning")) {
+      body.classList.add("gameRunning");
     }
     saveSettings();
   }
   loadSettings();
-  document.querySelector('#settingsButton').blur();
+  document.querySelector("#settingsButton").blur();
 });
 
 function displayTimeLeft(seconds) {
@@ -295,33 +298,35 @@ incrementTimeButton.addEventListener("click", incrementTimer);
 
 function editTimer() {
   if (!isTimerRunning && !isNight()) {
-    document.querySelector('#timerEditDialog').returnValue = 'none';
-    document.querySelector('#timerEditDialog').showModal();
+    document.querySelector("#timerEditDialog").returnValue = "none";
+    document.querySelector("#timerEditDialog").showModal();
   }
 }
 
 editTimeButton.addEventListener("click", editTimer);
 
-document.querySelector('#timerEditDialog').addEventListener('close', (e) => {
-  const dialog = document.querySelector('#timerEditDialog');
-  const userTime = dialog.querySelector('input').value;
-  dialog.querySelector('input').value = '';
+document.querySelector("#timerEditDialog").addEventListener("close", (e) => {
+  const dialog = document.querySelector("#timerEditDialog");
+  const userTime = dialog.querySelector("input").value;
+  dialog.querySelector("input").value = "";
   editTimeButton.blur();
-  if (dialog.returnValue === 'none') return;
-  if (userTime !== '') {
-      const parsedTime = parseTime(userTime);
-      if (parsedTime <= 0 || parsedTime > 3599) {
-        const message = document.querySelector('#messageDialog');
-        message.querySelector('h1').innerText = 'Invalid Timer Value';
-        message.querySelector('p').innerHTML = `Invalid input '${userTime}'<br>Possible formats: 7.5, 7:30, 450s<br>Possible range: 1 second - 59:59`;
-        message.showModal();
-        return;
-      } else {
-        defaultTime = parsedTime;
-        timeRemaining = defaultTime;
-        displayTimeLeft(timeRemaining);
-      }
+  if (dialog.returnValue === "none") return;
+  if (userTime !== "") {
+    const parsedTime = parseTime(userTime);
+    if (parsedTime <= 0 || parsedTime > 3599) {
+      const message = document.querySelector("#messageDialog");
+      message.querySelector("h1").innerText = "Invalid Timer Value";
+      message.querySelector(
+        "p"
+      ).innerHTML = `Invalid input '${userTime}'<br>Possible formats: 7.5, 7:30, 450s<br>Possible range: 1 second - 59:59`;
+      message.showModal();
+      return;
+    } else {
+      defaultTime = parsedTime;
+      timeRemaining = defaultTime;
+      displayTimeLeft(timeRemaining);
     }
+  }
 });
 
 function decrementTimer() {
@@ -407,11 +412,11 @@ function toggleInfo() {
   } else {
     dialogueBox.classList.add("noDisplay");
   }
-  document.querySelector('#infoIcon').blur();
+  document.querySelector("#infoIcon").blur();
 }
 
-document.querySelector('#infoIcon').addEventListener('click', toggleInfo);
-document.querySelector('#closeButton').addEventListener('click', toggleInfo);
+document.querySelector("#infoIcon").addEventListener("click", toggleInfo);
+document.querySelector("#closeButton").addEventListener("click", toggleInfo);
 
 function updateToggleButtonText() {
   toggleTimeOfDayButton.innerHTML = isDay()

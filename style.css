@@ -69,31 +69,31 @@ dd {
 #characterTracker {
   display: flex;
   justify-content: center;
-  gap:10px;
-  margin-top:30px;
+  gap: 10px;
+  margin-top: 30px;
 }
 
 #characterTracker img:first-of-type {
-  margin-right:80px;
+  margin-right: 80px;
 }
 
 #characterTracker img:nth-of-type(2) {
-  height:50px;
+  height: 50px;
 }
 
 #characterTracker div {
-  display:flex;
+  display: flex;
   flex-direction: column;
-  margin-top:25px;
+  margin-top: 25px;
 }
 
 #characterTracker img {
-  margin-top:20px;
-  margin-bottom:10px
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 #characterTracker button {
-  padding:0;
+  padding: 0;
 }
 
 #toggleTimeOfDayButton {
@@ -132,7 +132,7 @@ dd {
 #appControls {
   display: flex;
   justify-content: space-between;
-  margin-bottom:0.3em;
+  margin-bottom: 0.3em;
 }
 
 #appControls div {
@@ -229,7 +229,8 @@ dialog h1 {
   font-size: 2em;
 }
 
-dialog a, dialog a:visited {
+dialog a,
+dialog a:visited {
   color: #ffffff;
 }
 
@@ -271,7 +272,7 @@ dialog fieldset input {
   border-radius: 0.5em;
 }
 
-dialog fieldset input[type=checkbox] {
+dialog fieldset input[type="checkbox"] {
   width: auto;
 }
 
@@ -287,7 +288,8 @@ dialog fieldset label {
   padding: 0.25em;
 }
 
-#settingsTimerPreview table td, #settingsTimerPreview table th {
+#settingsTimerPreview table td,
+#settingsTimerPreview table th {
   padding: 0 0.25em;
 }
 
