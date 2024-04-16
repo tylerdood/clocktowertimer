@@ -1,7 +1,6 @@
 body {
   text-align: center;
-  background-color: #1a1a1a;
-  color: #ffffff;
+  color: rgba(245, 245, 245, 0.905);
   display: flex;
   font-family: "Almendra", "Helvetica Neue";
   font-size: 4rem;
@@ -19,21 +18,97 @@ h1 {
 
 button {
   background-color: transparent;
-  color: #ffffff;
   border: none;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 0.3em;
+  font-size: 0.25em;
+  color: rgba(245, 245, 245, 0.97);
   cursor: pointer;
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Almendra", "Helvetica Neue";
   transition: transform 0.3s ease;
+  padding: 10px 12px 30px 12px;
+  height: 30px;
+}
+
+#settings button:hover {
+  color: rgb(177, 36, 36);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+#timerControls button,
+#settingsContainer button {
+  color: #c1a171;
+}
+
+.dividers {
+  padding: 0px 12px;
+  height: 2px;
+  position: relative;
+  bottom: 5px;
+}
+
+#settingsContainer,
+#timerControlsContainer {
+  background-color: rgba(20, 20, 20, 0.807);
+  flex-direction: column;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+#timerControlsContainer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+  bottom: 0px;
+  height: 85px;
+}
+
+#informationTextContainer {
+  display: flex;
+  gap: 125px;
+  justify-content: space-between;
+  margin-top: 0px;
+}
+
+#settingsContainer {
+  display: inline-flex;
+  flex-direction: row;
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  margin: 0;
+  top: 0px;
+  height: 45px;
+}
+
+#settingsInformationText {
+  display: flex;
+  justify-content: center;
+}
+
+#timerControls {
+  display: inline-flex;
+}
+
+.informationText {
+  font-size: 0.18em;
+  color: #bcbcbc;
+}
+
+#timeOfDayContainer {
+  margin-top: 100px;
+}
+
+.icon-tooltip .tooltiptext {
+  color: red;
 }
 
 button:hover {
   -webkit-transform: scale(1.2);
   -ms-transform: scale(1.2);
   transform: scale(1.2);
-  color: rgb(177, 36, 36);
 }
 
 p,
@@ -66,45 +141,11 @@ dd {
   grid-column-start: 2;
 }
 
-#characterTracker {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 30px;
-}
-
-#characterTracker img:first-of-type {
-  margin-right: 80px;
-}
-
-#characterTracker img:nth-of-type(2) {
-  height: 50px;
-}
-
-#characterTracker div {
-  display: flex;
-  flex-direction: column;
-  margin-top: 25px;
-}
-
-#characterTracker img {
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-#characterTracker button {
-  padding: 0;
-}
-
-#toggleTimeOfDayButton {
-  min-width: 150px;
-}
-
 #dialogueBox {
   position: absolute;
   z-index: 100;
   width: 300px; /* Adjust width as needed */
-  background-color: rgb(244, 243, 243);
+  background-color: rgb(20, 20, 20);
   border: 1px solid #9c9c9c;
   padding: 10px;
   border-radius: 5px;
@@ -118,25 +159,8 @@ dd {
   position: relative;
 }
 
-#timerControls {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-
 #container {
   width: 100%;
-}
-
-#appControls {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.3em;
-}
-
-#appControls div {
-  flex: 1;
 }
 
 .character-counts {
@@ -158,15 +182,15 @@ dd {
 }
 
 .background-endOfDay {
-  background-image: url("images/village-end-of-day.webp");
+  background-image: url("images/village-end-of-day-new-blur.jpg");
 }
 
 .background-day {
-  background-image: url("images/village-day.webp");
+  background-image: url("images/village-day-new-blur.jpg");
 }
 
 .background-night {
-  background-image: url("images/village-night.webp");
+  background-image: url("images/village-night-new-blur.jpg");
 }
 
 .background-day,
@@ -189,7 +213,7 @@ dd {
 .background-night #editTime,
 .background-night #incrementTime,
 .background-night #decrementTime {
-  color: rgb(147, 147, 147);
+  color: rgb(111, 110, 110);
   cursor: default;
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
@@ -217,8 +241,8 @@ dialog::backdrop {
 }
 
 dialog {
-  background-color: #000000;
-  color: #ffffff;
+  background-color: rgb(30, 30, 30);
+  color: rgba(245, 245, 245, 0.97);
   padding: 20px;
   border-radius: 50px;
   font-size: 1.5rem;

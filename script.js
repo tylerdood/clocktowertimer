@@ -12,28 +12,24 @@ const body = document.body;
 const muteButton = document.getElementById("muteButton");
 let timeValues = { day: [], endOfDay: [] }; // Initialize `timeValues` at a higher scope
 
-function increase(id) {
-  const element = document.getElementById(id);
-  let newValue = parseInt(element.innerText) + 1;
-  element.innerText = newValue <= 20 ? newValue : 20; // Limit the maximum value to 20
-}
-
 function decrease(id) {
   const element = document.getElementById(id);
   let newValue = parseInt(element.innerText) - 1;
   element.innerText = newValue >= 0 ? newValue : 0; // Prevent negative numbers
 }
 
-document.getElementById("increaseHeart").addEventListener("click", function () {
-  increase("heartNumber");
-});
+function increase(id) {
+  const element = document.getElementById(id);
+  let newValue = parseInt(element.innerText) + 1;
+  element.innerText = newValue <= 20 ? newValue : 20; // Limit the maximum value to 20
+}
 
 document.getElementById("decreaseHeart").addEventListener("click", function () {
   decrease("heartNumber");
 });
 
-document.getElementById("increaseVote").addEventListener("click", function () {
-  increase("voteNumber");
+document.getElementById("increaseHeart").addEventListener("click", function () {
+  increase("heartNumber"), increase("voteNumber");
 });
 
 document.getElementById("decreaseVote").addEventListener("click", function () {
@@ -420,10 +416,10 @@ document.querySelector("#closeButton").addEventListener("click", toggleInfo);
 
 function updateToggleButtonText() {
   toggleTimeOfDayButton.innerHTML = isDay()
-    ? "<span>End the Day</span>"
+    ? "<i class='fas fa-cloud'></i></i>"
     : isEndOfDay()
-    ? "<span>Go to Sleep</span>"
-    : "<span>Wake Up</span>";
+    ? "<i class='fas fa-moon'></i>"
+    : "<i class='fas fa-sun'></i>";
 }
 
 function updateSpanText() {
