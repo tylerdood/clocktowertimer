@@ -420,10 +420,10 @@ document.querySelector("#closeButton").addEventListener("click", toggleInfo);
 
 function updateToggleButtonText() {
   toggleTimeOfDayButton.innerHTML = isDay()
-    ? "<span>End the Day</span>"
+    ? "<i class='fas fa-cloud'></i></i>"
     : isEndOfDay()
-    ? "<span>Go to Sleep</span>"
-    : "<span>Wake Up</span>";
+    ? "<i class='fas fa-moon'></i>"
+    : "<i class='fas fa-sun'></i>";
 }
 
 function updateSpanText() {

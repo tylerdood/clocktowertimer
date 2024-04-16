@@ -37,14 +37,6 @@
     <div id="container">
       <div id="appControls">
         <div>
-          <button id="recallButton">
-            <span>Recall Townsfolk</span>
-          </button>
-          <button id="toggleTimeOfDayButton" class="restricted">
-            <span>Advance to Day</span>
-          </button>
-        </div>
-        <div>
           <span id="timeOfDayText">Day</span>
           <span id="dayValue">1</span>
         </div>
@@ -106,11 +98,21 @@
         <span id="demonAmount">0</span>
         <img src="images/travelors.png" />
         <span id="travelerAmount">0</span>
+        <img src="images/heart.png" />
+        <span id="heartNumber">0</span>
+        <img src="images/box.png" />
+        <span id="voteNumber">0</span>
       </div>
       <div id="timerContainer">
         <h1 id="timeDisplay">03:00</h1>
       </div>
       <div id="timerControls">
+        <button id="recallButton">
+          <i class="fas fa-bell"></i>
+        </button>
+        <button id="toggleTimeOfDayButton" class="restricted">
+          <span>Advance to Day</span>
+        </button>
         <button id="startStopButton"><i class="fas fa-play"></i></button>
         <button id="resetButton" class="restricted">
           <i class="fas fa-sync-alt"></i>
@@ -124,23 +126,18 @@
         <button id="decrementTime" class="restricted">
           <i class="fas fa-arrow-down"></i>
         </button>
+        <button id="increaseHeart"><i class="fas fa-heart"></i></button>
+        <button id="decreaseHeart">
+          <i class="fas fa-skull"></i>
+        </button>
+        <button id="increaseVote">
+          <i class="fas fa-box"></i>
+        </button>
+        <button id="decreaseVote">
+          <i class="fas fa-check-square"></i>
+        </button>
       </div>
-      <div id="characterTracker">
-        <div>
-          <button id="increaseHeart"><i class="fas fa-arrow-up"></i></button>
-          <button id="decreaseHeart">
-            <i class="fas fa-arrow-down"></i>
-          </button>
-        </div>
-        <span id="heartNumber">0</span>
-        <img src="images/heart.png" />
-        <div>
-          <button id="increaseVote"><i class="fas fa-arrow-up"></i></button>
-          <button id="decreaseVote"><i class="fas fa-arrow-down"></i></button>
-        </div>
-        <span id="voteNumber">0</span>
-        <img src="images/box.png" />
-      </div>
+      <div id="characterTracker"></div>
     </div>
     <dialog id="settings">
       <h1>Settings</h1>
