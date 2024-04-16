@@ -1,7 +1,6 @@
 body {
   text-align: center;
-  background-color: #1a1a1a;
-  color: #ffffff;
+  color: rgba(236, 236, 236, 0.971);
   display: flex;
   font-family: "Almendra", "Helvetica Neue";
   font-size: 4rem;
@@ -19,21 +18,58 @@ h1 {
 
 button {
   background-color: transparent;
-  color: #ffffff;
+  color: #a48c68;
   border: none;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 0.3em;
+  font-size: 0.22em;
   cursor: pointer;
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Almendra", "Helvetica Neue";
   transition: transform 0.3s ease;
+}
+
+.test5 button {
+  padding: 12px;
+}
+
+#timerControls button {
+  padding: 15px;
+}
+.test5 {
+  background-color: rgba(20, 20, 20, 0.807);
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  display: inline-flex;
+  margin: 0;
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+#timerControls {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(20, 20, 20, 0.891);
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  height: 60px;
+}
+
+.test6 {
+  margin-top: 50px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
 }
 
 button:hover {
   -webkit-transform: scale(1.2);
   -ms-transform: scale(1.2);
   transform: scale(1.2);
-  color: rgb(177, 36, 36);
 }
 
 p,
@@ -66,45 +102,11 @@ dd {
   grid-column-start: 2;
 }
 
-#characterTracker {
-  display: flex;
-  justify-content: center;
-  gap:10px;
-  margin-top:30px;
-}
-
-#characterTracker img:first-of-type {
-  margin-right:80px;
-}
-
-#characterTracker img:nth-of-type(2) {
-  height:50px;
-}
-
-#characterTracker div {
-  display:flex;
-  flex-direction: column;
-  margin-top:25px;
-}
-
-#characterTracker img {
-  margin-top:20px;
-  margin-bottom:10px
-}
-
-#characterTracker button {
-  padding:0;
-}
-
-#toggleTimeOfDayButton {
-  min-width: 150px;
-}
-
 #dialogueBox {
   position: absolute;
   z-index: 100;
   width: 300px; /* Adjust width as needed */
-  background-color: rgb(244, 243, 243);
+  background-color: rgb(20, 20, 20);
   border: 1px solid #9c9c9c;
   padding: 10px;
   border-radius: 5px;
@@ -118,25 +120,8 @@ dd {
   position: relative;
 }
 
-#timerControls {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-
 #container {
   width: 100%;
-}
-
-#appControls {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom:0.3em;
-}
-
-#appControls div {
-  flex: 1;
 }
 
 .character-counts {
@@ -158,15 +143,15 @@ dd {
 }
 
 .background-endOfDay {
-  background-image: url("images/village-end-of-day.webp");
+  background-image: url("images/village-end-of-day-new-blur.jpg");
 }
 
 .background-day {
-  background-image: url("images/village-day.webp");
+  background-image: url("images/village-day-new-blur.jpg");
 }
 
 .background-night {
-  background-image: url("images/village-night.webp");
+  background-image: url("images/village-night-new-blur.jpg");
 }
 
 .background-day,
@@ -229,7 +214,8 @@ dialog h1 {
   font-size: 2em;
 }
 
-dialog a, dialog a:visited {
+dialog a,
+dialog a:visited {
   color: #ffffff;
 }
 
@@ -271,7 +257,7 @@ dialog fieldset input {
   border-radius: 0.5em;
 }
 
-dialog fieldset input[type=checkbox] {
+dialog fieldset input[type="checkbox"] {
   width: auto;
 }
 
@@ -287,7 +273,8 @@ dialog fieldset label {
   padding: 0.25em;
 }
 
-#settingsTimerPreview table td, #settingsTimerPreview table th {
+#settingsTimerPreview table td,
+#settingsTimerPreview table th {
   padding: 0 0.25em;
 }
 

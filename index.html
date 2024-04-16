@@ -15,9 +15,13 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
     <link rel="stylesheet" href="style.css" />
-    <link rel="preload" as="image" href="images/village-end-of-day.webp" />
-    <link rel="preload" as="image" href="images/village-day.webp" />
-    <link rel="preload" as="image" href="images/village-night.webp" />
+    <link
+      rel="preload"
+      as="image"
+      href="images/village-end-of-day-new-blur.jpg"
+    />
+    <link rel="preload" as="image" href="images/village-day-new-blur.jpg" />
+    <link rel="preload" as="image" href="images/village-night-new-blur.jpg" />
     <link rel="icon" type="image/x-icon" href="images/favicon.png" />
   </head>
   <body>
@@ -31,64 +35,63 @@
     ></audio>
 
     <div id="container">
-      <div id="appControls">
-        <div>
-          <button id="recallButton">
-            <span>Recall Townsfolk</span>
-          </button>
-          <button id="toggleTimeOfDayButton" class="restricted">
-            <span>Advance to Day</span>
-          </button>
+      <div class="test5">
+        <button id="settingsButton" style="padding-left: 25px">
+          <i class="fas fa-cog"></i>
+        </button>
+        <button id="muteButton">
+          <i class="fas fa-volume-up"></i>
+        </button>
+        <!--<a href="spotify.html" target="_blank"><button class="fab fa-spotify"></button></a>-->
+        <button
+          id="infoIcon"
+          class="fas fa-info-circle"
+          style="padding-right: 25px"
+        ></button>
+        <div id="dialogueBox" class="noDisplay">
+          <span
+            id="closeButton"
+            style="
+              cursor: pointer;
+              float: right;
+              font-size: 20px;
+              font-weight: bold;
+              padding: 0 10px;
+              color: rgb(61, 61, 61);
+            "
+            >&times;</span
+          >
+          <p>
+            About: This is a timer that can be used to track the discussion and
+            nomination phases for the social deduction game Blood on the
+            Clocktower. The timer controls can be found at the bottom, allowing
+            to you start, stop, reset, edit, and quick adjust the current time.
+            You can mute all sounds with the "sound" icon. To recall the town
+            immediately (stopping the timer) you can press the Recall Townsfolk
+            button. You can advance to the next phase by pressing the "Wake Up"
+            button. Switching to end of day (nomination phase) will
+            automatically shorten the timer. The timer will also be shortened
+            when advancing the days (to account for fewer alive people as the
+            game progresses). Hope you enjoy!
+          </p>
+          <p>
+            You may also control this app using configurable keyboard-shortcuts.
+          </p>
+          <p>-</p>
+          <p class="disclaimer">
+            Disclaimer: Clocktowertimer is an open source project and is not
+            affiliated with The Pandemonium Institute. Feel free to contribute
+            on
+            <a href="https://github.com/tydood/clocktowertimer">Github.</a>
+          </p>
         </div>
-        <div>
-          <span id="timeOfDayText">Day</span>
-          <span id="dayValue">1</span>
-        </div>
-        <div>
-          <button id="settingsButton">
-            <i class="fas fa-cog"></i>
-          </button>
-          <button id="muteButton">
-            <i class="fas fa-volume-up"></i>
-          </button>
-          <!--<a href="spotify.html" target="_blank"><button class="fab fa-spotify"></button></a>-->
-          <button id="infoIcon" class="fas fa-info-circle"></button>
-          <div id="dialogueBox" class="noDisplay">
-            <span
-              id="closeButton"
-              style="
-                cursor: pointer;
-                float: right;
-                font-size: 20px;
-                font-weight: bold;
-                padding: 0 10px;
-                color: rgb(61, 61, 61);
-              "
-              >&times;</span
-            >
-            <p>
-              About: This is a timer that can be used to track the discussion
-              and nomination phases for the social deduction game Blood on the
-              Clocktower. The timer controls can be found at the bottom,
-              allowing to you start, stop, reset, edit, and quick adjust the
-              current time. You can mute all sounds with the "sound" icon. To
-              recall the town immediately (stopping the timer) you can press the
-              Recall Townsfolk button. You can advance to the next phase by
-              pressing the "Wake Up" button. Switching to end of day (nomination
-              phase) will automatically shorten the timer. The timer will also
-              be shortened when advancing the days (to account for fewer alive
-              people as the game progresses). Hope you enjoy!
-            </p>
-            <p>You may also control this app using configurable keyboard-shortcuts.</p>
-            <p>-</p>
-            <p class="disclaimer">
-              Disclaimer: Clocktowertimer is an open source project and is not
-              affiliated with The Pandemonium Institute. Feel free to contribute
-              on
-              <a href="https://github.com/tydood/clocktowertimer">Github.</a>
-            </p>
-          </div>
-        </div>
+      </div>
+      <div class="test6">
+        <span id="timeOfDayText">Day</span>
+        <span id="dayValue">1</span>
+      </div>
+      <div id="timerContainer">
+        <h1 id="timeDisplay">03:00</h1>
       </div>
       <div id="roleDistributionContainer">
         <img src="images/townsfolk.png" />
@@ -99,12 +102,21 @@
         <span id="demonAmount">0</span>
         <img src="images/travelors.png" />
         <span id="travelerAmount">0</span>
-      </div>
-      <div id="timerContainer">
-        <h1 id="timeDisplay">03:00</h1>
+        <img src="images/heart.png" />
+        <span id="heartNumber">0</span>
+        <img src="images/box.png" />
+        <span id="voteNumber">0</span>
       </div>
       <div id="timerControls">
-        <button id="startStopButton"><i class="fas fa-play"></i></button>
+        <button id="recallButton" style="padding-left: 25px">
+          <i class="fas fa-bell"></i>
+        </button>
+        <button id="toggleTimeOfDayButton" class="restricted">
+          <span>Advance to Day</span>
+        </button>
+        <button id="startStopButton">
+          <i class="fas fa-play"></i>
+        </button>
         <button id="resetButton" class="restricted">
           <i class="fas fa-sync-alt"></i>
         </button>
@@ -117,22 +129,13 @@
         <button id="decrementTime" class="restricted">
           <i class="fas fa-arrow-down"></i>
         </button>
-      </div>
-      <div id="characterTracker">
-        <div>
-          <button id="increaseHeart"><i class="fas fa-arrow-up"></i></button>
-          <button id="decreaseHeart">
-            <i class="fas fa-arrow-down"></i>
-          </button>
-        </div>
-        <span id="heartNumber">0</span>
-        <img src="images/heart.png" />
-        <div>
-          <button id="increaseVote"><i class="fas fa-arrow-up"></i></button>
-          <button id="decreaseVote"><i class="fas fa-arrow-down"></i></button>
-        </div>
-        <span id="voteNumber">0</span>
-        <img src="images/box.png" />
+
+        <button id="decreaseHeart">
+          <i class="fas fa-arrow-down"></i>
+        </button>
+        <button id="decreaseVote" style="padding-right: 25px">
+          <i class="fas fa-arrow-down"></i>
+        </button>
       </div>
     </div>
     <dialog id="settings">
@@ -142,21 +145,41 @@
           <fieldset name="gamestate">
             <legend>Gamestate</legend>
             <label for="playerCountInput">Starting Player Count</label>
-            <input type="number" id="playerCountInput" class="pregame" min="5" max="15" step="1" value=""/>
+            <input
+              type="number"
+              id="playerCountInput"
+              class="pregame"
+              min="5"
+              max="15"
+              step="1"
+              value=""
+            />
             <label for="linkedTimerInput">Linked Timer</label>
             <input type="checkbox" id="linkedTimerInput" class="pregame" />
             <label for="travellerCountInput">Traveller Count</label>
-            <input type="number" id="travellerCountInput" class="" min="0" max="5" step="1" value=""/>
+            <input
+              type="number"
+              id="travellerCountInput"
+              class=""
+              min="0"
+              max="5"
+              step="1"
+              value=""
+            />
             <div id="settingsEditTimer">
               <span>Day 1</span>
               <label for="day1TimerInput"><i class="fa fa-comments"></i></label>
               <input type="text" id="day1TimerInput" class="pregame" />
-              <label for="endofday1TimerInput"><i class="fa fa-skull"></i></label>
+              <label for="endofday1TimerInput"
+                ><i class="fa fa-skull"></i
+              ></label>
               <input type="text" id="endofday1TimerInput" class="pregame" />
               <span id="settingsDayN">Day N</span>
               <label for="dayNTimerInput"><i class="fa fa-comments"></i></label>
               <input type="text" id="dayNTimerInput" class="pregame" />
-              <label for="endofdayNTimerInput"><i class="fa fa-skull"></i></label>
+              <label for="endofdayNTimerInput"
+                ><i class="fa fa-skull"></i
+              ></label>
               <input type="text" id="endofdayNTimerInput" class="pregame" />
             </div>
             <div id="settingsTimerPreview"></div>
@@ -172,28 +195,72 @@
           </fieldset>
           <fieldset name="spotify">
             <legend>Spotify</legend>
-            <a href="spotify.html" target="_blank">Connect Clocktowertimer to Spotify API</a>
-            <br>
+            <a href="spotify.html" target="_blank"
+              >Connect Clocktowertimer to Spotify API</a
+            >
+            <br />
             <span>Adjust Volume:</span>
             <label for="nightVolumeInput"><i class="fa fa-moon"></i></label>
-            <input type="number" id="nightVolumeInput" min="0" max="100" step="1" value="" />
+            <input
+              type="number"
+              id="nightVolumeInput"
+              min="0"
+              max="100"
+              step="1"
+              value=""
+            />
             <label for="dawnVolumeInput"><i class="fa fa-comments"></i></label>
-            <input type="number" id="dawnVolumeInput" min="0" max="100" step="1" value="" />
+            <input
+              type="number"
+              id="dawnVolumeInput"
+              min="0"
+              max="100"
+              step="1"
+              value=""
+            />
             <label for="duskVolumeInput"><i class="fa fa-skull"></i></label>
-            <input type="number" id="duskVolumeInput" min="0" max="100" step="1" value="" />
+            <input
+              type="number"
+              id="duskVolumeInput"
+              min="0"
+              max="100"
+              step="1"
+              value=""
+            />
             <div>
               <span>Test:</span>
-              <button onclick="spotifyTogglePlay(true);return false;">Toggle Play/Pause</button>
-              <br>
-              <button onclick="spotifyVolume(document.getElementById('nightVolumeInput').value, true);return false;">Volume at Night</button>
-              <button onclick="spotifyVolume(document.getElementById('dawnVolumeInput').value, true);return false;">Volume at Dawn</button>
-              <button onclick="spotifyVolume(document.getElementById('duskVolumeInput').value, true);return false;">Volume at Dusk</button>
+              <button onclick="spotifyTogglePlay(true);return false;">
+                Toggle Play/Pause
+              </button>
+              <br />
+              <button
+                onclick="spotifyVolume(document.getElementById('nightVolumeInput').value, true);return false;"
+              >
+                Volume at Night
+              </button>
+              <button
+                onclick="spotifyVolume(document.getElementById('dawnVolumeInput').value, true);return false;"
+              >
+                Volume at Dawn
+              </button>
+              <button
+                onclick="spotifyVolume(document.getElementById('duskVolumeInput').value, true);return false;"
+              >
+                Volume at Dusk
+              </button>
             </div>
           </fieldset>
           <fieldset name="timer">
             <legend>Timer</legend>
             <label for="stepSizeInput">Step width for +/-</label>
-            <input type="number" id="stepSizeInput" min="0" max="120" step="1" value="" />
+            <input
+              type="number"
+              id="stepSizeInput"
+              min="0"
+              max="120"
+              step="1"
+              value=""
+            />
           </fieldset>
           <fieldset name="keybindings">
             <legend>Keybindings</legend>
@@ -201,28 +268,28 @@
             <button id="timerstart" class="key"></button>
             <label for="recall">Recall Town</label>
             <button id="recall" class="key"></button>
-            <br>
+            <br />
             <label for="phasenext">Next Phase</label>
             <button id="phasenext" class="key"></button>
             <button id="phasenextalt" class="key"></button>
             <label for="phaseprev">Previous Phase</label>
             <button id="phaseprev" class="key"></button>
-            <br>
+            <br />
             <label for="timerreset">Reset Timer</label>
             <button id="timerreset" class="key"></button>
             <label for="timeredit">Edit Timer</label>
             <button id="timeredit" class="key"></button>
-            <br>
+            <br />
             <label for="timerplus">Increase Timer</label>
             <button id="timerplus" class="key"></button>
             <button id="timerplusalt" class="key"></button>
             <button id="timerplusalt2" class="key"></button>
-            <br>
+            <br />
             <label for="timerminus">Decrease Timer</label>
             <button id="timerminus" class="key"></button>
             <button id="timerminusalt" class="key"></button>
             <button id="timerminusalt2" class="key"></button>
-            <br>
+            <br />
             <label for="togglemute">Toggle Mute</label>
             <button id="togglemute" class="key"></button>
             <label for="togglefullscreen">Toggle Fullscreen</label>
@@ -232,7 +299,9 @@
             <label for="togglesettings">Open Settings</label>
             <button id="togglesettings" class="key"></button>
           </fieldset>
-          <button type="submit" value="abort" class="abort">Abort Settings</button>
+          <button type="submit" value="abort" class="abort">
+            Abort Settings
+          </button>
           <button type="submit" value="save">Save Settings</button>
         </form>
       </div>
@@ -240,9 +309,9 @@
     <dialog id="timerEditDialog">
       <form method="dialog">
         <label for="timerEditInput">Timer Value</label>
-        <br>
-        <input type="text" id="timerEditInput" autofocus>
-        <br>
+        <br />
+        <input type="text" id="timerEditInput" autofocus />
+        <br />
         <button value="confirm">Set Timer</button>
       </form>
     </dialog>
@@ -250,7 +319,7 @@
       <form method="dialog">
         <h1></h1>
         <p></p>
-        <button type=submit" value="confirm">OK</button>
+        <button type="submit" value="confirm">OK</button>
       </form>
     </dialog>
 

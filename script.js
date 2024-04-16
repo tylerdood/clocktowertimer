@@ -10,13 +10,7 @@ const toggleTimeOfDayButton = document.getElementById("toggleTimeOfDayButton");
 const dayValue = document.getElementById("dayValue");
 const body = document.body;
 const muteButton = document.getElementById("muteButton");
-let timeValues = {day: [], endOfDay: []}; // Initialize `timeValues` at a higher scope
-
-function increase(id) {
-  const element = document.getElementById(id);
-  let newValue = parseInt(element.innerText) + 1;
-  element.innerText = newValue <= 20 ? newValue : 20; // Limit the maximum value to 20
-}
+let timeValues = { day: [], endOfDay: [] }; // Initialize `timeValues` at a higher scope
 
 function decrease(id) {
   const element = document.getElementById(id);
@@ -24,16 +18,8 @@ function decrease(id) {
   element.innerText = newValue >= 0 ? newValue : 0; // Prevent negative numbers
 }
 
-document.getElementById("increaseHeart").addEventListener("click", function () {
-  increase("heartNumber");
-});
-
 document.getElementById("decreaseHeart").addEventListener("click", function () {
   decrease("heartNumber");
-});
-
-document.getElementById("increaseVote").addEventListener("click", function () {
-  increase("voteNumber");
 });
 
 document.getElementById("decreaseVote").addEventListener("click", function () {
@@ -54,7 +40,7 @@ const DAY = 0,
 let timeOfDayText = document.getElementById("timeOfDayText");
 
 function parseKeydown(e) {
-  if (document.querySelector('dialog[open]') != null) return;
+  if (document.querySelector("dialog[open]") != null) return;
   let action = findKey(e.key, keybindings);
   switch (action) {
     case "startstop":
@@ -145,27 +131,30 @@ function isNight() {
 }
 
 function openSettings() {
-  const settings = document.querySelector('#settings');
-  settings.returnValue = 'none';
+  const settings = document.querySelector("#settings");
+  settings.returnValue = "none";
   settings.showModal();
 }
 
-document.getElementById('settingsButton').addEventListener('click', openSettings);
+document
+  .getElementById("settingsButton")
+  .addEventListener("click", openSettings);
 openSettings();
 
-document.querySelector('#settings').addEventListener('cancel', (e) => {
-  if (document.querySelector('#settings').returnValue === 'none') e.preventDefault();
+document.querySelector("#settings").addEventListener("cancel", (e) => {
+  if (document.querySelector("#settings").returnValue === "none")
+    e.preventDefault();
 });
 
-document.querySelector('#settings').addEventListener('close', (e) => {
-  if (document.querySelector('#settings').returnValue === 'save') {
-    if (!body.classList.contains('gameRunning')) {
-      body.classList.add('gameRunning');
+document.querySelector("#settings").addEventListener("close", (e) => {
+  if (document.querySelector("#settings").returnValue === "save") {
+    if (!body.classList.contains("gameRunning")) {
+      body.classList.add("gameRunning");
     }
     saveSettings();
   }
   loadSettings();
-  document.querySelector('#settingsButton').blur();
+  document.querySelector("#settingsButton").blur();
 });
 
 function displayTimeLeft(seconds) {
@@ -295,33 +284,35 @@ incrementTimeButton.addEventListener("click", incrementTimer);
 
 function editTimer() {
   if (!isTimerRunning && !isNight()) {
-    document.querySelector('#timerEditDialog').returnValue = 'none';
-    document.querySelector('#timerEditDialog').showModal();
+    document.querySelector("#timerEditDialog").returnValue = "none";
+    document.querySelector("#timerEditDialog").showModal();
   }
 }
 
 editTimeButton.addEventListener("click", editTimer);
 
-document.querySelector('#timerEditDialog').addEventListener('close', (e) => {
-  const dialog = document.querySelector('#timerEditDialog');
-  const userTime = dialog.querySelector('input').value;
-  dialog.querySelector('input').value = '';
+document.querySelector("#timerEditDialog").addEventListener("close", (e) => {
+  const dialog = document.querySelector("#timerEditDialog");
+  const userTime = dialog.querySelector("input").value;
+  dialog.querySelector("input").value = "";
   editTimeButton.blur();
-  if (dialog.returnValue === 'none') return;
-  if (userTime !== '') {
-      const parsedTime = parseTime(userTime);
-      if (parsedTime <= 0 || parsedTime > 3599) {
-        const message = document.querySelector('#messageDialog');
-        message.querySelector('h1').innerText = 'Invalid Timer Value';
-        message.querySelector('p').innerHTML = `Invalid input '${userTime}'<br>Possible formats: 7.5, 7:30, 450s<br>Possible range: 1 second - 59:59`;
-        message.showModal();
-        return;
-      } else {
-        defaultTime = parsedTime;
-        timeRemaining = defaultTime;
-        displayTimeLeft(timeRemaining);
-      }
+  if (dialog.returnValue === "none") return;
+  if (userTime !== "") {
+    const parsedTime = parseTime(userTime);
+    if (parsedTime <= 0 || parsedTime > 3599) {
+      const message = document.querySelector("#messageDialog");
+      message.querySelector("h1").innerText = "Invalid Timer Value";
+      message.querySelector(
+        "p"
+      ).innerHTML = `Invalid input '${userTime}'<br>Possible formats: 7.5, 7:30, 450s<br>Possible range: 1 second - 59:59`;
+      message.showModal();
+      return;
+    } else {
+      defaultTime = parsedTime;
+      timeRemaining = defaultTime;
+      displayTimeLeft(timeRemaining);
     }
+  }
 });
 
 function decrementTimer() {
@@ -407,18 +398,18 @@ function toggleInfo() {
   } else {
     dialogueBox.classList.add("noDisplay");
   }
-  document.querySelector('#infoIcon').blur();
+  document.querySelector("#infoIcon").blur();
 }
 
-document.querySelector('#infoIcon').addEventListener('click', toggleInfo);
-document.querySelector('#closeButton').addEventListener('click', toggleInfo);
+document.querySelector("#infoIcon").addEventListener("click", toggleInfo);
+document.querySelector("#closeButton").addEventListener("click", toggleInfo);
 
 function updateToggleButtonText() {
   toggleTimeOfDayButton.innerHTML = isDay()
-    ? "<span>End the Day</span>"
+    ? "<i class='fas fa-cloud'></i></i>"
     : isEndOfDay()
-    ? "<span>Go to Sleep</span>"
-    : "<span>Wake Up</span>";
+    ? "<i class='fas fa-moon'></i>"
+    : "<i class='fas fa-sun'></i>";
 }
 
 function updateSpanText() {
