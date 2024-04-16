@@ -20,50 +20,75 @@ button {
   background-color: transparent;
   color: #a48c68;
   border: none;
-  font-size: 0.22em;
+  font-size: 0.25em;
   cursor: pointer;
   font-family: "Almendra", "Helvetica Neue";
   transition: transform 0.3s ease;
+  padding: 10px 12px 30px 12px;
+  height: 30px;
 }
 
-.test5 button {
-  padding: 12px;
+.dividers {
+  padding: 0px 12px;
+  height: 2px;
+  position: relative;
+  bottom: 5px;
 }
 
-#timerControls button {
-  padding: 15px;
-}
-.test5 {
+#settingsContainer,
+#timerControlsContainer {
   background-color: rgba(20, 20, 20, 0.807);
-  border-bottom-right-radius: 15px;
-  border-bottom-left-radius: 15px;
-  display: inline-flex;
-  margin: 0;
+  flex-direction: column;
   position: absolute;
-  top: 0px;
   left: 50%;
   transform: translate(-50%, 0%);
+}
+
+#settingsContainer {
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  margin: 0;
+  top: 0px;
+  height: 70px;
+}
+
+#timerControlsContainer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+  bottom: 0px;
+  height: 85px;
+}
+
+#informationTextContainer {
+  display: flex;
+  gap: 125px;
+  justify-content: space-between;
+  margin-top: 0px;
+}
+
+#settings2 {
+  display: flex;
+}
+
+#settingsInformationText {
+  display: flex;
+  justify-content: center;
 }
 
 #timerControls {
   display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(20, 20, 20, 0.891);
-  border-top-right-radius: 25px;
-  border-top-left-radius: 25px;
-  position: absolute;
-  bottom: 0px;
-  left: 50%;
-  transform: translate(-50%, 0%);
-  height: 60px;
 }
 
-.test6 {
-  margin-top: 50px;
-  margin-bottom: 0px;
-  padding-bottom: 0px;
+.informationText {
+  font-size: 0.18em;
+  color: #bcbcbc;
+}
+
+#timeOfDayContainer {
+  margin-top: 100px;
 }
 
 button:hover {
