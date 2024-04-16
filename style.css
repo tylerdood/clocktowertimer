@@ -1,6 +1,6 @@
 body {
   text-align: center;
-  color: rgba(236, 236, 236, 0.971);
+  color: rgba(245, 245, 245, 0.905);
   display: flex;
   font-family: "Almendra", "Helvetica Neue";
   font-size: 4rem;
@@ -18,14 +18,26 @@ h1 {
 
 button {
   background-color: transparent;
-  color: #a48c68;
   border: none;
   font-size: 0.25em;
+  color: rgba(245, 245, 245, 0.97);
   cursor: pointer;
   font-family: "Almendra", "Helvetica Neue";
   transition: transform 0.3s ease;
   padding: 10px 12px 30px 12px;
   height: 30px;
+}
+
+#settings button:hover {
+  color: rgb(177, 36, 36);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+#timerControls button,
+#settingsContainer button {
+  color: #c1a171;
 }
 
 .dividers {
@@ -44,14 +56,6 @@ button {
   transform: translate(-50%, 0%);
 }
 
-#settingsContainer {
-  border-bottom-right-radius: 25px;
-  border-bottom-left-radius: 25px;
-  margin: 0;
-  top: 0px;
-  height: 45px;
-}
-
 #timerControlsContainer {
   display: inline-flex;
   align-items: center;
@@ -64,13 +68,19 @@ button {
 
 #informationTextContainer {
   display: flex;
-  gap: 130px;
+  gap: 125px;
   justify-content: space-between;
   margin-top: 0px;
 }
 
-#settings2 {
-  display: flex;
+#settingsContainer {
+  display: inline-flex;
+  flex-direction: row;
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  margin: 0;
+  top: 0px;
+  height: 45px;
 }
 
 #settingsInformationText {
@@ -203,7 +213,7 @@ dd {
 .background-night #editTime,
 .background-night #incrementTime,
 .background-night #decrementTime {
-  color: rgb(147, 147, 147);
+  color: rgb(111, 110, 110);
   cursor: default;
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
@@ -231,8 +241,8 @@ dialog::backdrop {
 }
 
 dialog {
-  background-color: #000000;
-  color: #ffffff;
+  background-color: rgb(30, 30, 30);
+  color: rgba(245, 245, 245, 0.97);
   padding: 20px;
   border-radius: 50px;
   font-size: 1.5rem;

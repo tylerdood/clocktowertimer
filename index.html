@@ -36,59 +36,52 @@
 
     <div id="container">
       <div id="settingsContainer">
-        <div id="settings2">
-          <button
-            id="settingsButton"
-            style="padding-left: 25px"
-            title="Settings"
+        <button id="settingsButton" style="padding-left: 25px" title="Settings">
+          <i class="fas fa-cog"></i>
+        </button>
+        <!--<a href="spotify.html" target="_blank"><button class="fab fa-spotify"></button></a>-->
+        <button
+          id="infoIcon"
+          class="fas fa-info-circle"
+          title="Information"
+          style="padding-right: 25px"
+        ></button>
+        <div id="dialogueBox" class="noDisplay">
+          <span
+            id="closeButton"
+            style="
+              cursor: pointer;
+              float: right;
+              font-size: 20px;
+              font-weight: bold;
+              padding: 0 10px;
+              color: rgb(61, 61, 61);
+            "
+            >&times;</span
           >
-            <i class="fas fa-cog"></i>
-          </button>
-          <!--<a href="spotify.html" target="_blank"><button class="fab fa-spotify"></button></a>-->
-          <button
-            id="infoIcon"
-            class="fas fa-info-circle"
-            title="Information"
-            style="padding-right: 25px"
-          ></button>
-          <div id="dialogueBox" class="noDisplay">
-            <span
-              id="closeButton"
-              style="
-                cursor: pointer;
-                float: right;
-                font-size: 20px;
-                font-weight: bold;
-                padding: 0 10px;
-                color: rgb(61, 61, 61);
-              "
-              >&times;</span
-            >
-            <p>
-              About: This is a timer that can be used to track the discussion
-              and nomination phases for the social deduction game Blood on the
-              Clocktower. The timer controls can be found at the bottom,
-              allowing to you start, stop, reset, edit, and quick adjust the
-              current time. You can mute all sounds with the "sound" icon. To
-              recall the town immediately (stopping the timer) you can press the
-              Recall Townsfolk button. You can advance to the next phase by
-              pressing the "Wake Up" button. Switching to end of day (nomination
-              phase) will automatically shorten the timer. The timer will also
-              be shortened when advancing the days (to account for fewer alive
-              people as the game progresses). Hope you enjoy!
-            </p>
-            <p>
-              You may also control this app using configurable
-              keyboard-shortcuts.
-            </p>
-            <p>-</p>
-            <p class="disclaimer">
-              Disclaimer: Clocktowertimer is an open source project and is not
-              affiliated with The Pandemonium Institute. Feel free to contribute
-              on
-              <a href="https://github.com/tydood/clocktowertimer">Github.</a>
-            </p>
-          </div>
+          <p>
+            About: This is a timer that can be used to track the discussion and
+            nomination phases for the social deduction game Blood on the
+            Clocktower. The timer controls can be found at the bottom, allowing
+            to you start, stop, reset, edit, and quick adjust the current time.
+            You can mute all sounds with the "sound" icon. To recall the town
+            immediately (stopping the timer) you can press the Recall Townsfolk
+            button. You can advance to the next phase by pressing the "Wake Up"
+            button. Switching to end of day (nomination phase) will
+            automatically shorten the timer. The timer will also be shortened
+            when advancing the days (to account for fewer alive people as the
+            game progresses). Hope you enjoy!
+          </p>
+          <p>
+            You may also control this app using configurable keyboard-shortcuts.
+          </p>
+          <p>-</p>
+          <p class="disclaimer">
+            Disclaimer: Clocktowertimer is an open source project and is not
+            affiliated with The Pandemonium Institute. Feel free to contribute
+            on
+            <a href="https://github.com/tydood/clocktowertimer">Github.</a>
+          </p>
         </div>
       </div>
       <div id="timeOfDayContainer">
@@ -114,9 +107,11 @@
       </div>
       <div id="timerControlsContainer">
         <div id="informationTextContainer">
-          <span class="informationText">Adjust</span>
+          <span class="informationText">Management</span>
           <span class="informationText">Timer controls</span>
-          <span class="informationText">Trackers</span>
+          <span class="informationText"
+            >Trackers&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+          >
         </div>
         <div id="timerControls">
           <button
@@ -127,7 +122,7 @@
           >
             <i class="fas fa-bell"></i>
           </button>
-          <button id="muteButton" title="Mute / Unmute">
+          <button id="muteButton" title="Mute / Unmute" style="min-width: 45px">
             <i class="fas fa-volume-up"></i>
           </button>
           <button
