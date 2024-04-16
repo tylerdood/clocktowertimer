@@ -158,15 +158,15 @@ dd {
 }
 
 .background-endOfDay {
-  background-image: url("images/village-end-of-day.webp");
+  background-image: url("images/village-end-of-day-new-blur.jpg");
 }
 
 .background-day {
-  background-image: url("images/village-day.webp");
+  background-image: url("images/village-day-new-blur.jpg");
 }
 
 .background-night {
-  background-image: url("images/village-night.webp");
+  background-image: url("images/village-night-new-blur.jpg");
 }
 
 .background-day,
