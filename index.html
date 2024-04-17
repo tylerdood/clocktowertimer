@@ -92,18 +92,32 @@
         <h1 id="timeDisplay">03:00</h1>
       </div>
       <div id="roleDistributionContainer">
-        <img src="images/townsfolk.png" />
-        <span id="townsfolkAmount">0</span> <span>/</span>
-        <span id="outsiderAmount">0</span>
-        <img src="images/evil.png" />
-        <span id="minionAmount">0</span> <span>/</span>
-        <span id="demonAmount">0</span>
-        <img src="images/travelors.png" />
-        <span id="travelerAmount">0</span>
-        <img src="images/heart.png" />
-        <span id="heartNumber">0</span>
-        <img src="images/box.png" />
-        <span id="voteNumber">0</span>
+        <div id="townsfolkContainer" class="trackerType">
+          <img src="images/townsfolk.png" />
+          <span
+            ><span id="townsfolkAmount">0</span> <span>/</span>
+            <span id="outsiderAmount">0</span></span
+          >
+        </div>
+        <div id="evilContainer" class="trackerType">
+          <img src="images/evil.png" />
+          <span
+            ><span id="minionAmount">0</span> <span>/</span>
+            <span id="demonAmount">0</span></span
+          >
+        </div>
+        <div id="travelorContainer" class="trackerType">
+          <img src="images/travelors.png" />
+          <span id="travelerAmount">0</span>
+        </div>
+        <div id="livesContainer" class="trackerType">
+          <img src="images/heart.png" />
+          <span id="heartNumber">0</span>
+        </div>
+        <div id="votesContainer" class="trackerType">
+          <img src="images/box.png" style="height: 50px" />
+          <span id="voteNumber">0</span>
+        </div>
       </div>
       <div id="timerControlsContainer">
         <div id="informationTextContainer">

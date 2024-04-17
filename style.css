@@ -73,6 +73,10 @@ button {
   margin-top: 0px;
 }
 
+#roleDistributionContainer span {
+  line-height: 55px;
+}
+
 #settingsContainer {
   display: inline-flex;
   flex-direction: row;
@@ -90,6 +94,19 @@ button {
 
 #timerControls {
   display: inline-flex;
+}
+
+#roleDistributionContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.trackerType {
+  display: flex;
+  flex-direction: column;
+  width: 140px;
+  align-items: center;
 }
 
 .informationText {
