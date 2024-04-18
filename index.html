@@ -36,15 +36,13 @@
 
     <div id="container">
       <div id="settingsContainer">
-        <button id="settingsButton" style="padding-left: 25px" title="Settings">
+        <button id="settingsButton" title="Settings">
           <i class="fas fa-cog"></i>
         </button>
-        <!--<a href="spotify.html" target="_blank"><button class="fab fa-spotify"></button></a>-->
         <button
           id="infoIcon"
           class="fas fa-info-circle"
           title="Information"
-          style="padding-right: 25px"
         ></button>
         <div id="dialogueBox" class="noDisplay">
           <span
@@ -80,7 +78,7 @@
             Disclaimer: Clocktowertimer is an open source project and is not
             affiliated with The Pandemonium Institute. Feel free to contribute
             on
-            <a href="https://github.com/tydood/clocktowertimer">Github.</a>
+            <a href="https://github.com/tydood/clocktowertimer">Github</a>.
           </p>
         </div>
       </div>
@@ -120,17 +118,12 @@
         </div>
       </div>
       <div id="timerControlsContainer">
-        <div id="informationTextContainer">
-          <span class="informationText">Management</span>
-          <span class="informationText">Timer controls</span>
-          <span class="informationText"
-            >Trackers&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
-          >
-        </div>
-        <div id="timerControls">
+        <span class="informationText">Management</span>
+        <span class="informationText">Timer controls</span>
+        <span class="informationText">Trackers</span>
+        <div>
           <button
             id="recallButton"
-            style="padding-left: 25px"
             class="icon-tooltip"
             title="Recall townsfolk"
           >
@@ -146,9 +139,10 @@
             title="Advance to next phase"
             style="min-width: 45px"
           >
-            <span>Advance to Day</span>
+            <i class="fas fa-sun"></i>
           </button>
-          <span class="dividers"></span>
+        </div>
+        <div>
           <button
             id="startStopButton"
             class="icon-tooltip"
@@ -188,7 +182,8 @@
           >
             <i class="fas fa-arrow-down"></i>
           </button>
-          <span class="dividers"></span>
+        </div>
+        <div>
           <button
             id="increaseHeart"
             class="icon-tooltip"
@@ -201,7 +196,6 @@
           </button>
           <button
             id="decreaseVote"
-            style="padding-right: 25px; min-width: 60px"
             class="icon-tooltip"
             title="Dead player voted"
           >

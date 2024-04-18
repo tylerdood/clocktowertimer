@@ -35,16 +35,9 @@ button {
   transform: scale(1);
 }
 
-#timerControls button,
+#timerControlsContainer button,
 #settingsContainer button {
   color: #c1a171;
-}
-
-.dividers {
-  padding: 0px 12px;
-  height: 2px;
-  position: relative;
-  bottom: 5px;
 }
 
 #settingsContainer,
@@ -54,23 +47,29 @@ button {
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0%);
+  padding: 0 15px;
 }
 
 #timerControlsContainer {
-  display: inline-flex;
+  display: inline-grid;
+  grid-template-columns: auto auto auto;
+  grid-column-gap: 25px;
   align-items: center;
   justify-content: center;
   border-top-right-radius: 25px;
   border-top-left-radius: 25px;
   bottom: 0px;
-  height: 85px;
+  padding-top: 15px;
+  padding-bottom: 5px;
+  line-height: 0.25em;
 }
 
-#informationTextContainer {
-  display: flex;
-  gap: 125px;
-  justify-content: space-between;
-  margin-top: 0px;
+.grid-2-columns {
+  grid-template-columns: auto auto !important;
+}
+
+#timerControlsContainer > div {
+  display: inline-flex;
 }
 
 #roleDistributionContainer span {
@@ -85,15 +84,6 @@ button {
   margin: 0;
   top: 0px;
   height: 45px;
-}
-
-#settingsInformationText {
-  display: flex;
-  justify-content: center;
-}
-
-#timerControls {
-  display: inline-flex;
 }
 
 #roleDistributionContainer {
@@ -128,23 +118,6 @@ button:hover {
   transform: scale(1.2);
 }
 
-p,
-dl {
-  font-size: 0.2em;
-  color: rgb(61, 61, 61);
-  text-align: left;
-}
-
-dl {
-  display: grid;
-  grid-template-columns: max-content auto;
-  grid-row-gap: 2px;
-}
-
-dt {
-  grid-column-start: 1;
-}
-
 .key {
   background-color: #000;
   color: #fff;
@@ -154,26 +127,24 @@ dt {
   display: inline-block;
 }
 
-dd {
-  grid-column-start: 2;
-}
-
 #dialogueBox {
   position: absolute;
   z-index: 100;
   width: 300px; /* Adjust width as needed */
-  background-color: rgb(20, 20, 20);
-  border: 1px solid #9c9c9c;
-  padding: 10px;
-  border-radius: 5px;
+  background-color: rgba(20, 20, 20, 0.807);
+  color: #bcbcbc;
+  text-align: left;
+  font-size: 0.2em;
+  padding: 0 15px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  top: 30px;
+  left: 115px;
 }
 
 #timerContainer {
   display: flex;
   justify-content: center;
-  position: relative;
 }
 
 #container {
@@ -187,7 +158,10 @@ dd {
 .disclaimer {
   font-family: "Times New Roman", Times, serif;
   font-style: italic;
-  font-size: 0.15em;
+}
+
+a, a:visited {
+  color: #c1a171;
 }
 
 .noDisplay {
