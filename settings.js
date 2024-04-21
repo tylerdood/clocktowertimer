@@ -7,6 +7,10 @@ let keybindings = {
   recall: "R",
   nextphase: ["N", "Enter"],
   previousphase: "P",
+  aliveplus: "Z",
+  aliveminus: "X",
+  voteplus: "C",
+  voteminus: "V",
   toggleinfo: "I",
   mute: "D",
   fullscreen: "F",
@@ -130,6 +134,14 @@ function loadSettings() {
   keybindings["previousphase"] = document.getElementById(
     "phaseprev"
   ).innerHTML = getSetting("settings_key_phaseprev", "P");
+  keybindings["aliveplus"] = document.getElementById("aliveplus").innerHTML =
+    getSetting("settings_key_aliveplus", "Z");
+  keybindings["aliveminus"] = document.getElementById("aliveminus").innerHTML =
+    getSetting("settings_key_aliveminus", "X");
+  keybindings["voteplus"] = document.getElementById("voteplus").innerHTML =
+    getSetting("settings_key_voteplus", "C");
+  keybindings["voteminus"] = document.getElementById("voteminus").innerHTML =
+    getSetting("settings_key_voteminus", "V");
   keybindings["reset"] = document.getElementById("timerreset").innerHTML =
     getSetting("settings_key_timerreset", "Backspace");
   keybindings["timer"] = document.getElementById("timeredit").innerHTML =
@@ -269,6 +281,22 @@ function saveSettings() {
     document.getElementById("phaseprev").innerHTML
   );
   setSetting(
+    "settings_key_aliveplus",
+    document.getElementById("aliveplus").innerHTML
+  );
+  setSetting(
+    "settings_key_aliveminus",
+    document.getElementById("aliveminus").innerHTML
+  );
+  setSetting(
+    "settings_key_voteplus",
+    document.getElementById("voteplus").innerHTML
+  );
+  setSetting(
+    "settings_key_voteminus",
+    document.getElementById("voteminus").innerHTML
+  );
+  setSetting(
     "settings_key_timerreset",
     document.getElementById("timerreset").innerHTML
   );
@@ -349,13 +377,30 @@ document
   });
 
 function settingsFeatureSpotifyTimer() {
-  let fsSpotify = document.querySelector('fieldset[name="spotify"]');
+  const fsSpotify = document.querySelector('fieldset[name="spotify"]');
   if (document.getElementById("featureSpotify").checked) {
     fsSpotify.classList.remove("noDisplay");
   } else {
     fsSpotify.classList.add("noDisplay");
   }
 }
+
+document
+  .getElementById("featureSpotify")
+  .addEventListener("change", settingsFeatureSpotifyTimer);
+
+function settingsFeatureRolesTrackers() {
+  const trackerkeys = document.getElementById('trackerkeys');
+  if (document.getElementById("featureRoles").checked) {
+    trackerkeys.classList.remove("noDisplay");
+  } else {
+    trackerkeys.classList.add("noDisplay");
+  }
+}
+
+document
+  .getElementById("featureRoles")
+  .addEventListener("change", settingsFeatureRolesTrackers);
 
 function settingsUpdateTimeValues() {
   const timerValues = calcTimerStartEndValues(
@@ -384,9 +429,6 @@ document
   .getElementById("playerCountInput")
   .addEventListener("change", settingsUpdateTimeValues);
 
-document
-  .getElementById("featureSpotify")
-  .addEventListener("change", settingsFeatureSpotifyTimer);
 function settingsUpdateTimer(save = false) {
   const totalNumbers = calcTimerStartEndValues(
     document.getElementById("playerCountInput").value
