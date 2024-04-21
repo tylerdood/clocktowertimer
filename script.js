@@ -82,6 +82,18 @@ function parseKeydown(e) {
       phase++;
       advanceTime();
       break;
+    case "aliveplus":
+      increase("heartNumber");
+      break;
+    case "aliveminus":
+      decrease("heartNumber");
+      break;
+    case "voteplus":
+      increase("voteNumber");
+      break;
+    case "voteminus":
+      decrease("voteNumber");
+      break;
     case "toggleinfo":
       toggleInfo();
       break;
