@@ -43,31 +43,35 @@
         <h1 id="timeDisplay">03:00</h1>
       </div>
       <div id="roleDistributionContainer">
-        <div id="townsfolkContainer" class="trackerType">
-          <img src="images/townsfolk.png" />
-          <span
-            ><span id="townsfolkAmount">0</span> <span>/</span>
-            <span id="outsiderAmount">0</span></span
-          >
+        <div id="roleDistribution">
+          <div id="townsfolkContainer" class="trackerType">
+            <img src="images/townsfolk.png" />
+            <span
+              ><span id="townsfolkAmount">0</span> <span>/</span>
+              <span id="outsiderAmount">0</span></span
+            >
+          </div>
+          <div id="evilContainer" class="trackerType">
+            <img src="images/evil.png" />
+            <span
+              ><span id="minionAmount">0</span> <span>/</span>
+              <span id="demonAmount">0</span></span
+            >
+          </div>
+          <div id="travelorContainer" class="trackerType">
+            <img src="images/travelors.png" />
+            <span id="travelerAmount">0</span>
+          </div>
         </div>
-        <div id="evilContainer" class="trackerType">
-          <img src="images/evil.png" />
-          <span
-            ><span id="minionAmount">0</span> <span>/</span>
-            <span id="demonAmount">0</span></span
-          >
-        </div>
-        <div id="travelorContainer" class="trackerType">
-          <img src="images/travelors.png" />
-          <span id="travelerAmount">0</span>
-        </div>
-        <div id="livesContainer" class="trackerType" class="hiddenTracker">
-          <img src="images/heart.png" />
-          <span id="heartNumber">0</span>
-        </div>
-        <div id="votesContainer" class="trackerType" class="hiddenTracker">
-          <img src="images/box.png" style="height: 50px" />
-          <span id="voteNumber">0</span>
+        <div id="trackerContainer">
+          <div id="livesContainer" class="trackerType" class="hiddenTracker">
+            <img src="images/heart.png" />
+            <span id="heartNumber">0</span>
+          </div>
+          <div id="votesContainer" class="trackerType" class="hiddenTracker">
+            <img src="images/box.png" style="height: 50px" />
+            <span id="voteNumber">0</span>
+          </div>
         </div>
       </div>
       <button id="toggleHideTab"><i class="fa fa-arrow-right"></i></button>
@@ -208,7 +212,7 @@
             <legend>Features</legend>
             <label for="featureSpotify">Spotify</label>
             <input type="checkbox" id="featureSpotify" />
-            <label for="featureRoles">Roles & Trackers</label>
+            <label for="featureRoles">Life & Vote Trackers</label>
             <input type="checkbox" id="featureRoles" />
             <label for="featureRoles">App Audio</label>
             <input type="checkbox" id="gameSounds" checked />

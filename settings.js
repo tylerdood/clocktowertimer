@@ -92,9 +92,8 @@ function loadSettings() {
   const controlElementsSelector =
     "#timerControlsContainer .informationText:last-of-type, #increaseHeart, #decreaseHeart, #decreaseVote, #increaseVote, #trackerDivider";
   if (!featureRoles) {
-    document
-      .getElementById("roleDistributionContainer")
-      .classList.add("hidden");
+    document.getElementById("trackerContainer").classList.add("hidden");
+    document.getElementById("roleDistribution").classList.add("shiftContent");
     document.querySelectorAll(controlElementsSelector).forEach((elem) => {
       elem.classList.add("noDisplay");
     });
@@ -102,9 +101,10 @@ function loadSettings() {
       .getElementById("timerControlsContainer")
       .classList.add("grid-2-columns");
   } else {
+    document.getElementById("trackerContainer").classList.remove("hidden");
     document
-      .getElementById("roleDistributionContainer")
-      .classList.remove("hidden");
+      .getElementById("roleDistribution")
+      .classList.remove("shiftContent");
     document.querySelectorAll(controlElementsSelector).forEach((elem) => {
       elem.classList.remove("noDisplay");
     });
@@ -395,7 +395,7 @@ document
   .addEventListener("change", settingsFeatureSpotifyTimer);
 
 function settingsFeatureRolesTrackers() {
-  const trackerkeys = document.getElementById('trackerkeys');
+  const trackerkeys = document.getElementById("trackerkeys");
   if (document.getElementById("featureRoles").checked) {
     trackerkeys.classList.remove("noDisplay");
   } else {

@@ -3,7 +3,7 @@ body {
   color: rgba(245, 245, 245, 0.905);
   display: flex;
   font-family: "Almendra", "Helvetica Neue";
-  font-size: 4rem;
+  font-size: 4vw;
 }
 
 img {
@@ -11,19 +11,19 @@ img {
 }
 
 h1 {
-  font-size: 5em;
-  margin: 0;
+  font-size: 17vw;
+  margin-top: 5%;
+  margin-bottom: 5%;
   font-family: "Xanh Mono", serif;
 }
 
 button {
   background-color: transparent;
   border: none;
-  font-size: 0.25em;
+  font-size: 20px;
   color: rgba(245, 245, 245, 0.97);
   cursor: pointer;
   font-family: "Almendra", "Helvetica Neue";
-
   padding: 10px 12px 30px 12px;
   height: 30px;
 }
@@ -93,10 +93,17 @@ button {
   justify-content: center;
 }
 
+#roleDistribution,
+#trackerContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .trackerType {
   display: flex;
   flex-direction: column;
-  width: 140px;
+  width: 9vw;
   align-items: center;
 }
 
@@ -106,7 +113,7 @@ button {
 }
 
 #timeOfDayContainer {
-  margin-top: 100px;
+  margin-top: 5%;
 }
 
 .icon-tooltip .tooltiptext {
@@ -166,6 +173,10 @@ a:visited {
 
 .hidden {
   visibility: hidden !important;
+}
+
+.shiftContent {
+  transform: translateX(35%);
 }
 
 .background-endOfDay {
