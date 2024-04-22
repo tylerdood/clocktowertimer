@@ -12,6 +12,21 @@ const body = document.body;
 const muteButton = document.getElementById("muteButton");
 let timeValues = { day: [], endOfDay: [] }; // Initialize `timeValues` at a higher scope
 
+let toggleTabButton = document.getElementById("toggleHideTab");
+let contentDiv = document.getElementById("timerControlsContainer");
+
+toggleTabButton.addEventListener("click", function () {
+  if (contentDiv.style.display === "none") {
+    contentDiv.style.display = "flex";
+    toggleTabButton.classList.remove("hiddenTray");
+    toggleTabButton.innerHTML = "<i class='fa fa-arrow-right'></i>";
+  } else {
+    contentDiv.style.display = "none";
+    toggleTabButton.classList.add("hiddenTray");
+    toggleTabButton.innerHTML = "<i class='fa fa-arrow-left'></i>";
+  }
+});
+
 function decrease(id) {
   const element = document.getElementById(id);
   let newValue = parseInt(element.innerText) - 1;
@@ -29,11 +44,15 @@ document.getElementById("decreaseHeart").addEventListener("click", function () {
 });
 
 document.getElementById("increaseHeart").addEventListener("click", function () {
-  increase("heartNumber"), increase("voteNumber");
+  increase("heartNumber");
 });
 
 document.getElementById("decreaseVote").addEventListener("click", function () {
   decrease("voteNumber");
+});
+
+document.getElementById("increaseVote").addEventListener("click", function () {
+  increase("voteNumber");
 });
 
 // State variables
@@ -336,18 +355,19 @@ function decrementTimer() {
 
 decrementTimeButton.addEventListener("click", decrementTimer);
 
-function toggleMute() {
-  isMuted = !isMuted;
-  const icon = muteButton.querySelector("i");
-  if (isMuted) {
-    icon.className = "fas fa-volume-mute";
-  } else {
-    icon.className = "fas fa-volume-up";
-  }
-  muteButton.blur();
-}
+document.addEventListener("DOMContentLoaded", function () {
+  const gameSoundsCheckbox = document.getElementById("gameSounds");
+  toggleMute(!gameSoundsCheckbox.checked);
 
-muteButton.addEventListener("click", toggleMute);
+  gameSoundsCheckbox.addEventListener("change", function () {
+    toggleMute(!this.checked);
+  });
+});
+
+function toggleMute(shouldMute) {
+  isMuted = shouldMute;
+  document.getElementById("gameSounds").checked = !isMuted;
+}
 
 function setTimerToZero() {
   timeRemaining = 0;
