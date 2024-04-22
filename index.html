@@ -35,53 +35,6 @@
     ></audio>
 
     <div id="container">
-      <div id="settingsContainer">
-        <button id="settingsButton" title="Settings">
-          <i class="fas fa-cog"></i>
-        </button>
-        <button
-          id="infoIcon"
-          class="fas fa-info-circle"
-          title="Information"
-        ></button>
-        <div id="dialogueBox" class="noDisplay">
-          <span
-            id="closeButton"
-            style="
-              cursor: pointer;
-              float: right;
-              font-size: 20px;
-              font-weight: bold;
-              padding: 0 10px;
-              color: rgb(61, 61, 61);
-            "
-            >&times;</span
-          >
-          <p>
-            About: This is a timer that can be used to track the discussion and
-            nomination phases for the social deduction game Blood on the
-            Clocktower. The timer controls can be found at the bottom, allowing
-            to you start, stop, reset, edit, and quick adjust the current time.
-            You can mute all sounds with the "sound" icon. To recall the town
-            immediately (stopping the timer) you can press the Recall Townsfolk
-            button. You can advance to the next phase by pressing the "Wake Up"
-            button. Switching to end of day (nomination phase) will
-            automatically shorten the timer. The timer will also be shortened
-            when advancing the days (to account for fewer alive people as the
-            game progresses). Hope you enjoy!
-          </p>
-          <p>
-            You may also control this app using configurable keyboard-shortcuts.
-          </p>
-          <p>-</p>
-          <p class="disclaimer">
-            Disclaimer: Clocktowertimer is an open source project and is not
-            affiliated with The Pandemonium Institute. Feel free to contribute
-            on
-            <a href="https://github.com/tydood/clocktowertimer">Github</a>.
-          </p>
-        </div>
-      </div>
       <div id="timeOfDayContainer">
         <span id="timeOfDayText">Day</span>
         <span id="dayValue">1</span>
@@ -108,104 +61,105 @@
           <img src="images/travelors.png" />
           <span id="travelerAmount">0</span>
         </div>
-        <div id="livesContainer" class="trackerType">
+        <div id="livesContainer" class="trackerType" class="hiddenTracker">
           <img src="images/heart.png" />
           <span id="heartNumber">0</span>
         </div>
-        <div id="votesContainer" class="trackerType">
+        <div id="votesContainer" class="trackerType" class="hiddenTracker">
           <img src="images/box.png" style="height: 50px" />
           <span id="voteNumber">0</span>
         </div>
       </div>
+      <button id="toggleHideTab"><i class="fa fa-arrow-right"></i></button>
       <div id="timerControlsContainer">
-        <span class="informationText">Management</span>
-        <span class="informationText">Timer controls</span>
-        <span class="informationText">Trackers</span>
-        <div>
-          <button
-            id="recallButton"
-            class="icon-tooltip"
-            title="Recall townsfolk"
-          >
-            <i class="fas fa-bell"></i>
-          </button>
-          <button id="muteButton" title="Mute / Unmute" style="min-width: 45px">
-            <i class="fas fa-volume-up"></i>
-          </button>
-          <button
-            id="toggleTimeOfDayButton"
-            class="restricted"
-            class="icon-tooltip"
-            title="Advance to next phase"
-            style="min-width: 45px"
-          >
-            <i class="fas fa-sun"></i>
-          </button>
-        </div>
-        <div>
-          <button
-            id="startStopButton"
-            class="icon-tooltip"
-            title="Start / Stop"
-          >
-            <i class="fas fa-play"></i>
-          </button>
-          <button
-            id="resetButton"
-            class="restricted"
-            class="icon-tooltip"
-            title="Reset timer"
-          >
-            <i class="fas fa-sync-alt"></i>
-          </button>
-          <button
-            id="editTime"
-            class="restricted"
-            class="icon-tooltip"
-            title="Edit timer"
-          >
-            <i class="fas fa-keyboard"></i>
-          </button>
-          <button
-            id="incrementTime"
-            class="restricted"
-            class="icon-tooltip"
-            title="Increment timer"
-          >
-            <i class="fas fa-arrow-up"></i>
-          </button>
-          <button
-            id="decrementTime"
-            class="restricted"
-            class="icon-tooltip"
-            title="Decrement timer"
-          >
-            <i class="fas fa-arrow-down"></i>
-          </button>
-        </div>
-        <div>
-          <button
-            id="increaseHeart"
-            class="icon-tooltip"
-            title="Player resurrected"
-          >
-            <i class="fas fa-heart"></i>
-          </button>
-          <button id="decreaseHeart" class="icon-tooltip" title="Player died">
-            <i class="fas fa-skull"></i>
-          </button>
-          <button
-            id="decreaseVote"
-            class="icon-tooltip"
-            title="Dead player voted"
-          >
-            <i class="fas fa-check-square"></i>
-          </button>
-        </div>
+        <button id="settingsButton" title="Settings">
+          <i class="fas fa-cog"></i>
+        </button>
+        <span>---</span>
+        <button id="recallButton" title="Recall townsfolk">
+          <i class="fas fa-bell"></i>
+        </button>
+        <button
+          id="toggleTimeOfDayButton"
+          class="restricted"
+          title="Advance to next phase"
+          style="min-width: 45px"
+        >
+          <i class="fas fa-sun"></i>
+        </button>
+        <button id="startStopButton" title="Start / Stop">
+          <i class="fas fa-play"></i>
+        </button>
+        <button id="resetButton" class="restricted" title="Reset timer">
+          <i class="fas fa-sync-alt"></i>
+        </button>
+        <button id="editTime" class="restricted" title="Edit timer">
+          <i class="fas fa-keyboard"></i>
+        </button>
+        <button id="incrementTime" class="restricted" title="Increment timer">
+          <i class="fas fa-arrow-up"></i>
+        </button>
+        <button id="decrementTime" class="restricted" title="Decrement timer">
+          <i class="fas fa-arrow-down"></i>
+        </button>
+        <span id="trackerDivider">---</span>
+        <button id="increaseHeart" title="Player resurrected">
+          <i class="fas fa-heart"></i>
+        </button>
+        <button id="decreaseHeart" title="Player died">
+          <i class="fas fa-skull"></i>
+        </button>
+        <button id="increaseVote" title="Dead player voted">
+          <i class="fas fa-check"></i>
+        </button>
+        <button id="decreaseVote" title="Dead player voted">
+          <i class="fas fa-times"></i>
+        </button>
       </div>
     </div>
     <dialog id="settings">
       <h1>Settings</h1>
+      <button
+        id="infoIcon"
+        class="fas fa-info-circle"
+        title="Information"
+      ></button>
+      <div id="dialogueBox" class="noDisplay">
+        <span
+          id="closeButton"
+          style="
+            cursor: pointer;
+            float: right;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 0 10px;
+            color: rgb(61, 61, 61);
+          "
+          >&times;</span
+        >
+        <p class="informationParagraph">
+          About: This is a timer that can be used to track the discussion and
+          nomination phases for the social deduction game Blood on the
+          Clocktower. The timer controls can be found at the bottom, allowing to
+          you start, stop, reset, edit, and quick adjust the current time. You
+          can mute all sounds with the "sound" icon. To recall the town
+          immediately (stopping the timer) you can press the Recall Townsfolk
+          button. You can advance to the next phase by pressing the "Wake Up"
+          button. Switching to end of day (nomination phase) will automatically
+          shorten the timer. The timer will also be shortened when advancing the
+          days (to account for fewer alive people as the game progresses). Hope
+          you enjoy!
+        </p>
+        <p class="informationParagraph">
+          You may also control this app using configurable keyboard-shortcuts.
+        </p>
+        <p class="informationParagraph">-</p>
+        <p class="disclaimer">
+          Disclaimer: Clocktowertimer is an open source project and is not
+          affiliated with The Pandemonium Institute. Feel free to contribute on
+          <a href="https://github.com/tydood/clocktowertimer">Github</a>.
+        </p>
+      </div>
       <div id="settings-inner">
         <form method="dialog">
           <fieldset name="gamestate">
@@ -256,6 +210,8 @@
             <input type="checkbox" id="featureSpotify" />
             <label for="featureRoles">Roles & Trackers</label>
             <input type="checkbox" id="featureRoles" />
+            <label for="featureRoles">App Audio</label>
+            <input type="checkbox" id="gameSounds" checked />
           </fieldset>
           <fieldset name="spotify">
             <legend>Spotify</legend>

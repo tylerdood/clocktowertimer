@@ -23,7 +23,7 @@ button {
   color: rgba(245, 245, 245, 0.97);
   cursor: pointer;
   font-family: "Almendra", "Helvetica Neue";
-  transition: transform 0.3s ease;
+
   padding: 10px 12px 30px 12px;
   height: 30px;
 }
@@ -35,55 +35,56 @@ button {
   transform: scale(1);
 }
 
-#timerControlsContainer button,
-#settingsContainer button {
+#timerControlsContainer button {
   color: #c1a171;
 }
 
-#settingsContainer,
-#timerControlsContainer {
-  background-color: rgba(20, 20, 20, 0.807);
-  flex-direction: column;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0%);
-  padding: 0 15px;
+#timerControlsContainer span {
+  line-height: 20px;
+  color: #c1a171;
+  font-size: 0.5em;
 }
 
 #timerControlsContainer {
-  display: inline-grid;
-  grid-template-columns: auto auto auto;
-  grid-column-gap: 25px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(20, 20, 20, 0.807);
+  position: absolute;
+  top: 50%;
+  padding: 0 15px;
   align-items: center;
   justify-content: center;
-  border-top-right-radius: 25px;
   border-top-left-radius: 25px;
-  bottom: 0px;
+  border-bottom-left-radius: 25px;
+  right: 0px;
   padding-top: 15px;
   padding-bottom: 5px;
   line-height: 0.25em;
+  transform: translateY(-50%);
+}
+
+#toggleHideTab {
+  position: absolute;
+  right: 80px;
+  top: 50%;
+  color: #c1a171;
+  background-color: rgba(20, 20, 20, 0.807);
+  border-radius: 25px;
+  transform: translateY(-50%);
+}
+
+.hiddenTray {
+  position: absolute !important;
+  right: 10px !important;
+  top: 50% !important;
 }
 
 .grid-2-columns {
   grid-template-columns: auto auto !important;
 }
 
-#timerControlsContainer > div {
-  display: inline-flex;
-}
-
 #roleDistributionContainer span {
   line-height: 55px;
-}
-
-#settingsContainer {
-  display: inline-flex;
-  flex-direction: row;
-  border-bottom-right-radius: 25px;
-  border-bottom-left-radius: 25px;
-  margin: 0;
-  top: 0px;
-  height: 45px;
 }
 
 #roleDistributionContainer {
@@ -112,12 +113,6 @@ button {
   color: red;
 }
 
-button:hover {
-  -webkit-transform: scale(1.2);
-  -ms-transform: scale(1.2);
-  transform: scale(1.2);
-}
-
 .key {
   background-color: #000;
   color: #fff;
@@ -131,10 +126,9 @@ button:hover {
   position: absolute;
   z-index: 100;
   width: 300px; /* Adjust width as needed */
-  background-color: rgba(20, 20, 20, 0.807);
+  background-color: rgb(20, 20, 20);
   color: #bcbcbc;
   text-align: left;
-  font-size: 0.2em;
   padding: 0 15px;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
@@ -158,9 +152,11 @@ button:hover {
 .disclaimer {
   font-family: "Times New Roman", Times, serif;
   font-style: italic;
+  font-size: 0.5em;
 }
 
-a, a:visited {
+a,
+a:visited {
   color: #c1a171;
 }
 
@@ -252,6 +248,10 @@ dialog a:visited {
 dialog p {
   color: #ffffff;
   font-size: 1.5rem;
+}
+
+.informationParagraph {
+  font-size: 0.5em;
 }
 
 dialog a:hover {

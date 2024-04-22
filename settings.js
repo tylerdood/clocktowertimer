@@ -89,23 +89,28 @@ function loadSettings() {
   settingsFeatureSpotifyTimer();
   let featureRoles = (document.getElementById("featureRoles").checked =
     getBooleanSetting("settings_feature_roles", true));
-  const controlElementsSelector = '#timerControlsContainer .informationText:last-of-type, #increaseHeart, #decreaseHeart, #decreaseVote';
+  const controlElementsSelector =
+    "#timerControlsContainer .informationText:last-of-type, #increaseHeart, #decreaseHeart, #decreaseVote, #increaseVote, #trackerDivider";
   if (!featureRoles) {
     document
       .getElementById("roleDistributionContainer")
       .classList.add("hidden");
-    document.querySelectorAll(controlElementsSelector).forEach(elem => {
-      elem.classList.add('noDisplay');
+    document.querySelectorAll(controlElementsSelector).forEach((elem) => {
+      elem.classList.add("noDisplay");
     });
-    document.getElementById('timerControlsContainer').classList.add('grid-2-columns');
+    document
+      .getElementById("timerControlsContainer")
+      .classList.add("grid-2-columns");
   } else {
     document
       .getElementById("roleDistributionContainer")
       .classList.remove("hidden");
-    document.querySelectorAll(controlElementsSelector).forEach(elem => {
-      elem.classList.remove('noDisplay');
+    document.querySelectorAll(controlElementsSelector).forEach((elem) => {
+      elem.classList.remove("noDisplay");
     });
-    document.getElementById('timerControlsContainer').classList.remove('grid-2-columns');
+    document
+      .getElementById("timerControlsContainer")
+      .classList.remove("grid-2-columns");
   }
   volume[2] = document.getElementById("nightVolumeInput").value =
     getNumericSetting("settings_spotify_night", "80");
