@@ -218,22 +218,6 @@ a:visited {
   transform: scale(1);
 }
 
-@media screen and (max-width: 600px) {
-  body {
-    font-size: 1.4em;
-  }
-  h1 {
-    font-size: 5.5em;
-  }
-  button {
-    font-size: 0.17em;
-    padding: 5px 10px;
-  }
-  #toggleTimeOfDayButton {
-    font-size: 1em;
-  }
-}
-
 dialog::backdrop {
   background-color: #ffffff88;
 }
