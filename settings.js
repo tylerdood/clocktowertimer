@@ -92,7 +92,7 @@ function loadSettings() {
   const controlElementsSelector =
     "#timerControlsContainer .informationText:last-of-type, #increaseHeart, #decreaseHeart, #decreaseVote, #increaseVote, #trackerDivider";
   if (!featureRoles) {
-    document.getElementById("trackerContainer").classList.add("hidden");
+    document.getElementById("trackers").classList.add("hidden");
     document.getElementById("roleDistribution").classList.add("shiftContent");
     document.querySelectorAll(controlElementsSelector).forEach((elem) => {
       elem.classList.add("noDisplay");
@@ -101,7 +101,7 @@ function loadSettings() {
       .getElementById("timerControlsContainer")
       .classList.add("grid-2-columns");
   } else {
-    document.getElementById("trackerContainer").classList.remove("hidden");
+    document.getElementById("trackers").classList.remove("hidden");
     document
       .getElementById("roleDistribution")
       .classList.remove("shiftContent");

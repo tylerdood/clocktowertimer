@@ -1,3 +1,4 @@
+/* General styles */
 body {
   text-align: center;
   color: rgba(245, 245, 245, 0.905);
@@ -8,13 +9,6 @@ body {
 
 img {
   width: 50px;
-}
-
-h1 {
-  font-size: 17vw;
-  margin-top: 5%;
-  margin-bottom: 5%;
-  font-family: "Xanh Mono", serif;
 }
 
 button {
@@ -28,23 +22,49 @@ button {
   height: 30px;
 }
 
-#settings button:hover {
-  color: rgb(177, 36, 36);
-  -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
+#container {
+  width: 100%;
 }
 
-#timerControlsContainer button {
-  color: #c1a171;
+/* Phase & day counter styles */
+#timeOfDayContainer {
+  margin-top: 5%;
 }
 
-#timerControlsContainer span {
-  line-height: 20px;
-  color: #c1a171;
-  font-size: 0.5em;
+/* Timer styles */
+#timerContainer {
+  display: flex;
+  justify-content: center;
 }
 
+h1 {
+  font-size: 17vw;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  font-family: "Xanh Mono", serif;
+}
+
+/* All character information styles, including roles & trackers */
+#characterInformationContainer,
+#roleDistribution,
+#trackers {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#characterInformation span {
+  line-height: 55px;
+}
+
+.characterInformation {
+  display: flex;
+  flex-direction: column;
+  width: 9vw;
+  align-items: center;
+}
+
+/* In app buttons and tray */
 #timerControlsContainer {
   display: flex;
   flex-direction: column;
@@ -63,6 +83,16 @@ button {
   transform: translateY(-50%);
 }
 
+#timerControlsContainer button {
+  color: #c1a171;
+}
+
+#timerControlsContainer span {
+  line-height: 20px;
+  color: #c1a171;
+  font-size: 0.5em;
+}
+
 #toggleHideTab {
   position: absolute;
   right: 80px;
@@ -79,54 +109,17 @@ button {
   top: 50% !important;
 }
 
-.grid-2-columns {
-  grid-template-columns: auto auto !important;
+/* Settings page */
+a,
+a:visited {
+  color: #c1a171;
 }
 
-#roleDistributionContainer span {
-  line-height: 55px;
-}
-
-#roleDistributionContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-#roleDistribution,
-#trackerContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.trackerType {
-  display: flex;
-  flex-direction: column;
-  width: 9vw;
-  align-items: center;
-}
-
-.informationText {
-  font-size: 0.18em;
-  color: #bcbcbc;
-}
-
-#timeOfDayContainer {
-  margin-top: 5%;
-}
-
-.icon-tooltip .tooltiptext {
-  color: red;
-}
-
-.key {
-  background-color: #000;
-  color: #fff;
-  padding: 1px 5px;
-  border-radius: 5px;
-  margin: 2px;
-  display: inline-block;
+#settings button:hover {
+  color: rgb(177, 36, 36);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
 }
 
 #dialogueBox {
@@ -143,13 +136,26 @@ button {
   left: 115px;
 }
 
-#timerContainer {
-  display: flex;
-  justify-content: center;
+.grid-2-columns {
+  grid-template-columns: auto auto !important;
 }
 
-#container {
-  width: 100%;
+.informationText {
+  font-size: 0.18em;
+  color: #bcbcbc;
+}
+
+.icon-tooltip .tooltiptext {
+  color: red;
+}
+
+.key {
+  background-color: #000;
+  color: #fff;
+  padding: 1px 5px;
+  border-radius: 5px;
+  margin: 2px;
+  display: inline-block;
 }
 
 .character-counts {
@@ -160,11 +166,6 @@ button {
   font-family: "Times New Roman", Times, serif;
   font-style: italic;
   font-size: 0.5em;
-}
-
-a,
-a:visited {
-  color: #c1a171;
 }
 
 .noDisplay {
