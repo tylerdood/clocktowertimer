@@ -11,7 +11,6 @@ let keybindings = {
   aliveminus: "X",
   voteplus: "C",
   voteminus: "V",
-  toggleinfo: "I",
   mute: "D",
   fullscreen: "F",
   togglesettings: "Q",
@@ -182,8 +181,6 @@ function loadSettings() {
   keybindings["fullscreen"] = document.getElementById(
     "togglefullscreen"
   ).innerHTML = getSetting("settings_key_togglefullscreen", "F");
-  keybindings["toggleinfo"] = document.getElementById("toggleinfo").innerHTML =
-    getSetting("settings_key_toggleinfo", "I");
   keybindings["togglesettings"] = document.getElementById(
     "togglesettings"
   ).innerHTML = getSetting("settings_key_togglesettings", "Q");
@@ -340,10 +337,6 @@ function saveSettings() {
   setSetting(
     "settings_key_togglefullscreen",
     document.getElementById("togglefullscreen").innerHTML
-  );
-  setSetting(
-    "settings_key_toggleinfo",
-    document.getElementById("toggleinfo").innerHTML
   );
   setSetting(
     "settings_key_togglesettings",

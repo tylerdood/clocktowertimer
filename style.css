@@ -130,10 +130,12 @@ a:visited {
   color: #bcbcbc;
   text-align: left;
   padding: 0 15px;
+  border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  left: 115px;
+  right: 40px;
+  top: 40px;
 }
 
 .grid-2-columns {
@@ -234,6 +236,14 @@ dialog {
 
 dialog h1 {
   font-size: 2em;
+  margin: 0;
+}
+
+#infoIcon {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  z-index: 101;
 }
 
 dialog a,
@@ -326,8 +336,12 @@ dialog .key.active {
   height: auto;
 }
 
+#settings form {
+  height: calc(100% - 3em);
+}
+
 #settings-inner {
-  max-height: calc(100% - 3.5em);
+  max-height: calc(100% - 40px);
   overflow: auto;
   height: auto;
   margin-top: 0.5em;
