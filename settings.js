@@ -1,7 +1,7 @@
 let keybindings = {
   startstop: [" ", "Spacebar"],
   reset: "Backspace",
-  timer: "Z",
+  timer: "T",
   timeplus: ["Up", "ArrowUp", "Right", "ArrowRight", "+"],
   timeminus: ["Down", "ArrowDown", "Left", "ArrowLeft", "-"],
   recall: "R",
@@ -21,7 +21,7 @@ let volume = [50, 30, 80];
 
 function getSetting(key, def = null) {
   const setting = localStorage.getItem(key);
-  if (setting == null || setting == "undefined") {
+  if (setting == null || setting == "undefined" || setting == "") {
     return def;
   }
   return setting;
@@ -34,7 +34,7 @@ function getBooleanSetting(key, def = false) {
   return setting === true;
 }
 
-function getNumericSetting(key, def = 0) {
+function getNumericSetting(key, def = "0") {
   const setting = getSetting(key, def);
   return Number(setting);
 }
@@ -150,7 +150,7 @@ function loadSettings() {
   keybindings["reset"] = document.getElementById("timerreset").innerHTML =
     getSetting("settings_key_timerreset", "Backspace");
   keybindings["timer"] = document.getElementById("timeredit").innerHTML =
-    getSetting("settings_key_timeredit", "Z");
+    getSetting("settings_key_timeredit", "T");
   bind1 = document.getElementById("timerplus").innerHTML = getSetting(
     "settings_key_timerplus",
     "ArrowUp"
