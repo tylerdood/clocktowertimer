@@ -444,7 +444,6 @@ function toggleInfo() {
 }
 
 document.querySelector("#infoIcon").addEventListener("click", toggleInfo);
-document.querySelector("#closeButton").addEventListener("click", toggleInfo);
 
 function updateToggleButtonText() {
   toggleTimeOfDayButton.innerHTML = isDay()

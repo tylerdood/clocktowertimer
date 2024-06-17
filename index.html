@@ -129,18 +129,6 @@
         title="Information"
       ></button>
       <div id="dialogueBox" class="noDisplay">
-        <span
-          id="closeButton"
-          style="
-            cursor: pointer;
-            float: right;
-            font-size: 20px;
-            font-weight: bold;
-            padding: 0 10px;
-            color: rgb(61, 61, 61);
-          "
-          >&times;</span
-        >
         <p class="informationParagraph">
           About: This is a timer that can be used to track the discussion and
           nomination phases for the social deduction game Blood on the
@@ -164,8 +152,8 @@
           <a href="https://github.com/tydood/clocktowertimer">Github</a>.
         </p>
       </div>
-      <div id="settings-inner">
-        <form method="dialog">
+      <form method="dialog">
+        <div id="settings-inner">
           <fieldset name="gamestate">
             <legend>Gamestate</legend>
             <label for="playerCountInput">Starting Player Count</label>
@@ -328,17 +316,15 @@
             <button id="togglemute" class="key"></button>
             <label for="togglefullscreen">Toggle Fullscreen</label>
             <button id="togglefullscreen" class="key"></button>
-            <label for="toggleinfo">Toggle Info</label>
-            <button id="toggleinfo" class="key"></button>
             <label for="togglesettings">Open Settings</label>
             <button id="togglesettings" class="key"></button>
           </fieldset>
-          <button type="submit" value="abort" class="abort">
-            Abort Settings
-          </button>
-          <button type="submit" value="save">Save Settings</button>
-        </form>
-      </div>
+        </div>
+        <button type="submit" value="abort" class="abort">
+          Abort Settings
+        </button>
+        <button type="submit" value="save">Save Settings</button>
+      </form>
     </dialog>
     <dialog id="timerEditDialog">
       <form method="dialog">
