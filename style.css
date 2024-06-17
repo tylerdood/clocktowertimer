@@ -265,12 +265,22 @@ dialog .autoupdate input {
   background-color: rgb(177, 36, 36);
 }
 
-.abort {
+.abort,
+fieldset[name="features"],
+fieldset[name="spotify"],
+fieldset[name="timer"],
+fieldset[name="keybindings"] {
   display: none;
 }
 
+.gameRunning fieldset[name="features"],
+.gameRunning fieldset[name="spotify"],
+.gameRunning fieldset[name="timer"],
+.gameRunning fieldset[name="keybindings"] {
+  display: block;
+}
 .gameRunning .abort {
-  display: unset;
+  display: inline-block;
 }
 
 dialog fieldset input {
@@ -320,10 +330,6 @@ dialog .key {
 
 dialog .key.active {
   background-color: rgb(177, 36, 36);
-}
-
-#settings {
-  height: auto;
 }
 
 #settings-inner {
