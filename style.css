@@ -1,5 +1,7 @@
 /* General styles */
 body {
+  margin: 0;
+  height: 100vh;
   text-align: center;
   color: rgba(245, 245, 245, 0.905);
   display: flex;
@@ -215,7 +217,7 @@ a:visited {
 .background-night #incrementTime,
 .background-night #decrementTime {
   color: rgb(111, 110, 110);
-  cursor: default;
+  cursor: inherit;
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
@@ -232,6 +234,7 @@ dialog {
   border-radius: 50px;
   font-size: 1.5rem;
   max-height: calc(100% - 3em);
+  cursor: auto;
 }
 
 dialog h1 {
