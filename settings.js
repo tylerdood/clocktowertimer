@@ -91,8 +91,7 @@ function loadSettings() {
   const controlElementsSelector =
     "#timerControlsContainer .informationText:last-of-type, #increaseHeart, #decreaseHeart, #decreaseVote, #increaseVote, #trackerDivider";
   if (!featureRoles) {
-    document.getElementById("trackers").classList.add("hidden");
-    document.getElementById("roleDistribution").classList.add("shiftContent");
+    document.getElementById("trackers").classList.add("noDisplay");
     document.querySelectorAll(controlElementsSelector).forEach((elem) => {
       elem.classList.add("noDisplay");
     });
@@ -100,16 +99,24 @@ function loadSettings() {
       .getElementById("timerControlsContainer")
       .classList.add("grid-2-columns");
   } else {
-    document.getElementById("trackers").classList.remove("hidden");
-    document
-      .getElementById("roleDistribution")
-      .classList.remove("shiftContent");
+    document.getElementById("trackers").classList.remove("noDisplay");
     document.querySelectorAll(controlElementsSelector).forEach((elem) => {
       elem.classList.remove("noDisplay");
     });
     document
       .getElementById("timerControlsContainer")
       .classList.remove("grid-2-columns");
+  }
+  const featureHideTraveller = (document.getElementById('featureHideTraveller').checked =
+    getBooleanSetting('settings_feature_hide_traveller', false));
+  if (featureHideTraveller) {
+    if (travellercount === 0) {
+      document.querySelector('.characterInformation:last-of-type').classList.add("noDisplay");
+    } else {
+      document.querySelector('.characterInformation:last-of-type').classList.remove("noDisplay");
+    }
+  } else {
+    document.querySelector('.characterInformation:last-of-type').classList.remove("noDisplay");
   }
   volume[2] = document.getElementById("nightVolumeInput").value =
     getNumericSetting("settings_spotify_night", "80");
@@ -245,6 +252,10 @@ function saveSettings() {
   setSetting(
     "settings_feature_roles",
     document.getElementById("featureRoles").checked
+  );
+  setSetting(
+      "settings_feature_hide_traveller",
+      document.getElementById("featureHideTraveller").checked
   );
   setSetting(
     "settings_spotify_night",

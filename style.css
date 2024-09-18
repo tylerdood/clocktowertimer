@@ -180,10 +180,6 @@ a:visited {
   visibility: hidden !important;
 }
 
-.shiftContent {
-  transform: translateX(35%);
-}
-
 .background-endOfDay {
   background-image: url("images/village-end-of-day-new-blur.jpg");
 }
