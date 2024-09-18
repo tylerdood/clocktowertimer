@@ -212,8 +212,8 @@ a:visited {
 .background-night #editTime,
 .background-night #incrementTime,
 .background-night #decrementTime {
-  color: rgb(111, 110, 110);
-  cursor: inherit;
+  color: rgb(111, 110, 110) !important;
+  cursor: default;
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
