@@ -1,5 +1,7 @@
 /* General styles */
 body {
+  margin: 0;
+  height: 100vh;
   text-align: center;
   color: rgba(245, 245, 245, 0.905);
   display: flex;
@@ -178,10 +180,6 @@ a:visited {
   visibility: hidden !important;
 }
 
-.shiftContent {
-  transform: translateX(35%);
-}
-
 .background-endOfDay {
   background-image: url("images/village-end-of-day-new-blur.jpg");
 }
@@ -232,6 +230,7 @@ dialog {
   border-radius: 50px;
   font-size: 1.5rem;
   max-height: calc(100% - 3em);
+  cursor: auto;
 }
 
 dialog h1 {
