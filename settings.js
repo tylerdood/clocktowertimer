@@ -67,9 +67,9 @@ function loadSettings() {
       getNumericSetting("settings_game_night1", timerValues["nightStartValue"])
     ) * 60
   );
-  document.getElementById("settingsDayN").innerHTML = `Day ${Math.ceil(
-    timerValues["totalNumbers"]
-  )}`;
+  const settingsDayN = document.getElementById("settingsDayN");
+  settingsDayN.dataset.i18nOpt = `{"count":"${Math.ceil(timerValues["totalNumbers"])}"}`;
+  translateElement(settingsDayN);
   document.getElementById("dayNTimerInput").value = formatTime(
     roundToNearestQuarter(
       getNumericSetting("settings_game_dayn", timerValues["dayEndValue"])
@@ -193,7 +193,7 @@ function loadSettings() {
   ).innerHTML = getSetting("settings_key_togglesettings", "Q");
   fillAlternativeKeys(keybindings);
 }
-loadSettings();
+document.addEventListener("i18nLoaded", (e) => {loadSettings();});
 
 function fillAlternativeKeys(keys) {
   for (const k in keys) {
@@ -415,9 +415,9 @@ function settingsUpdateTimeValues() {
   const timerValues = calcTimerStartEndValues(
     document.getElementById("playerCountInput").value
   );
-  document.getElementById("settingsDayN").innerHTML = `Day ${Math.ceil(
-    timerValues["totalNumbers"]
-  )}`;
+  const settingsDayN = document.getElementById("settingsDayN");
+  settingsDayN.dataset.i18nOpt = `{"count":"${Math.ceil(timerValues["totalNumbers"])}"}`;
+  translateElement(settingsDayN);
   if (document.getElementById("linkedTimerInput").checked) {
     document.getElementById("day1TimerInput").value = formatTime(
       roundToNearestQuarter(timerValues["dayStartValue"]) * 60
@@ -461,7 +461,7 @@ function settingsUpdateTimer(save = false) {
     nightEndValue,
     totalNumbers
   );
-  let table = "<table><tr><th>Day</th>";
+  let table = `<table><tr><th>${translate("day")}</th>`;
   dayDecayValues.forEach((day, idx) => {
     table += `<td>${idx + 1}</td>`;
   });
