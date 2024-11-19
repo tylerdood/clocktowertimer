@@ -95,12 +95,14 @@ function parseKeydown(e) {
       advanceTime();
       break;
     case "previousphase":
-      if (currentDay == 1 && isNight()) break;
-      if (!isEndOfDay()) {
-        currentDay = currentDay - 1;
+      if (!isTimerRunning) {
+        if (currentDay == 1 && isNight()) break;
+        if (!isEndOfDay()) {
+          currentDay = currentDay - 1;
+        }
+        phase++;
+        advanceTime();
       }
-      phase++;
-      advanceTime();
       break;
     case "aliveplus":
       increase("heartNumber");
@@ -426,32 +428,34 @@ function recall() {
 recallButton.addEventListener("click", recall);
 
 function advanceTime() {
-  phase = (phase + 1) % 3;
+  if (!isTimerRunning) {
+    phase = (phase + 1) % 3;
 
-  if (phase === NIGHT) {
-    currentDay = (currentDay % 15) + 1;
-  }
+    if (phase === NIGHT) {
+      currentDay = (currentDay % 15) + 1;
+    }
 
-  updateToggleButtonText();
-  updateBackground();
-  updateDefaultTime();
-  updateSpanText();
-  dayValue.textContent = currentDay;
+    updateToggleButtonText();
+    updateBackground();
+    updateDefaultTime();
+    updateSpanText();
+    dayValue.textContent = currentDay;
 
-  switch (phase) {
-    case DAY:
-      playDaySound();
-      break;
-    case ENDOFDAY:
-      playEndOfDaySound();
-      break;
-    case NIGHT:
-      playNightSound();
-      break;
-  }
+    switch (phase) {
+      case DAY:
+        playDaySound();
+        break;
+      case ENDOFDAY:
+        playEndOfDaySound();
+        break;
+      case NIGHT:
+        playNightSound();
+        break;
+    }
 
-  if (useSpotify()) {
-    spotifyVolume(volume[phase]);
+    if (useSpotify()) {
+      spotifyVolume(volume[phase]);
+    }
   }
 
   toggleTimeOfDayButton.blur();
