@@ -347,10 +347,13 @@ document.querySelector("#timerEditDialog").addEventListener("close", (e) => {
     const parsedTime = parseTime(userTime);
     if (parsedTime <= 0 || parsedTime > 3599) {
       const message = document.querySelector("#messageDialog");
-      message.querySelector("h1").innerText = "Invalid Timer Value";
-      message.querySelector(
-        "p"
-      ).innerHTML = `Invalid input '${userTime}'<br>Possible formats: 7.5, 7:30, 450s<br>Possible range: 1 second - 59:59`;
+      const title = message.querySelector("h1");
+      title.dataset.i18nKey = "timer-invalid-title";
+      translateElement(title);
+      const text = message.querySelector("p");
+      text.dataset.i18nKey = "timer-invalid-text";
+      text.dataset.i18nOpt = `{"input": "${userTime}"}`;
+      translateElement(text);
       message.showModal();
       return;
     } else {
@@ -484,11 +487,12 @@ function updateToggleButtonText() {
 }
 
 function updateSpanText() {
-  timeOfDayText.innerText = isDay()
-    ? "Day"
+  timeOfDayText.dataset.i18nKey = isDay()
+    ? "day"
     : isEndOfDay()
-    ? "End of Day"
-    : "Night";
+    ? "day-end"
+    : "night";
+  translateElement(timeOfDayText);
 }
 
 updateToggleButtonText();

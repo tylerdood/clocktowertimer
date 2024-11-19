@@ -22,6 +22,8 @@
     />
     <link rel="preload" as="image" href="images/village-day-new-blur.jpg" />
     <link rel="preload" as="image" href="images/village-night-new-blur.jpg" />
+    <link rel="preload" as="fetch" href="lang/en.json" />
+    <link rel="preload" as="fetch" href="lang/de.json" />
     <link rel="icon" type="image/x-icon" href="images/favicon.png" />
   </head>
   <body>
@@ -36,7 +38,7 @@
 
     <div id="container">
       <div id="timeOfDayContainer">
-        <span id="timeOfDayText">Day</span>
+        <span data-i18n-key="night" id="timeOfDayText"></span>
         <span id="dayValue">1</span>
       </div>
       <div id="timerContainer">
@@ -76,87 +78,72 @@
       </div>
       <button id="toggleHideTab"><i class="fa fa-arrow-right"></i></button>
       <div id="timerControlsContainer">
-        <button id="settingsButton" title="Settings">
+        <button data-i18n-key="btn-settings" data-i18n-target="title" id="settingsButton">
           <i class="fas fa-cog"></i>
         </button>
         <span>---</span>
-        <button id="recallButton" title="Recall townsfolk">
+        <button data-i18n-key="btn-recall" data-i18n-target="title" id="recallButton">
           <i class="fas fa-bell"></i>
         </button>
-        <button
+        <button data-i18n-key="btn-phase-next" data-i18n-target="title"
           id="toggleTimeOfDayButton"
           class="restricted"
-          title="Advance to next phase"
           style="min-width: 45px"
         >
           <i class="fas fa-sun"></i>
         </button>
-        <button id="startStopButton" title="Start / Stop">
+        <button data-i18n-key="btn-start-stop" data-i18n-target="title" id="startStopButton">
           <i class="fas fa-play"></i>
         </button>
-        <button id="resetButton" class="restricted" title="Reset timer">
+        <button data-i18n-key="btn-timer-reset" data-i18n-target="title" id="resetButton" class="restricted">
           <i class="fas fa-sync-alt"></i>
         </button>
-        <button id="editTime" class="restricted" title="Edit timer">
+        <button data-i18n-key="btn-timer-edit" data-i18n-target="title" id="editTime" class="restricted">
           <i class="fas fa-keyboard"></i>
         </button>
-        <button id="incrementTime" class="restricted" title="Increment timer">
+        <button data-i18n-key="btn-timer-plus" data-i18n-target="title" id="incrementTime" class="restricted">
           <i class="fas fa-arrow-up"></i>
         </button>
-        <button id="decrementTime" class="restricted" title="Decrement timer">
+        <button data-i18n-key="btn-timer-minus" data-i18n-target="title" id="decrementTime" class="restricted">
           <i class="fas fa-arrow-down"></i>
         </button>
         <span id="trackerDivider">---</span>
-        <button id="increaseHeart" title="Player resurrected">
+        <button data-i18n-key="btn-alive-plus" data-i18n-target="title" id="increaseHeart">
           <i class="fas fa-heart"></i>
         </button>
-        <button id="decreaseHeart" title="Player died">
+        <button data-i18n-key="btn-alive-minus" data-i18n-target="title" id="decreaseHeart">
           <i class="fas fa-skull"></i>
         </button>
-        <button id="increaseVote" title="Dead player voted">
+        <button data-i18n-key="btn-vote-plus" data-i18n-target="title" id="increaseVote">
           <i class="fas fa-check"></i>
         </button>
-        <button id="decreaseVote" title="Dead player voted">
+        <button data-i18n-key="btn-vote-minus" data-i18n-target="title" id="decreaseVote">
           <i class="fas fa-times"></i>
         </button>
       </div>
     </div>
     <dialog id="settings">
-      <h1>Settings</h1>
+      <select data-i18n-switcher>
+        <option value="de">Deutsch</option>
+        <option value="en" selected>English</option>
+      </select>
+      <h1 data-i18n-key="settings-title"></h1>
       <button
         id="infoIcon"
         class="fas fa-info-circle"
         title="Information"
       ></button>
       <div id="dialogueBox" class="noDisplay">
-        <p class="informationParagraph">
-          About: This is a timer that can be used to track the discussion and
-          nomination phases for the social deduction game Blood on the
-          Clocktower. The timer controls can be found at the bottom, allowing to
-          you start, stop, reset, edit, and quick adjust the current time. You
-          can mute all sounds with the "sound" icon. To recall the town
-          immediately (stopping the timer) you can press the Recall Townsfolk
-          button. You can advance to the next phase by pressing the "Wake Up"
-          button. Switching to end of day (nomination phase) will automatically
-          shorten the timer. The timer will also be shortened when advancing the
-          days (to account for fewer alive people as the game progresses). Hope
-          you enjoy!
-        </p>
-        <p class="informationParagraph">
-          You may also control this app using configurable keyboard-shortcuts.
-        </p>
+        <p data-i18n-key="about-info" class="informationParagraph"></p>
+        <p data-i18n-key="about-control" class="informationParagraph"></p>
         <p class="informationParagraph">-</p>
-        <p class="disclaimer">
-          Disclaimer: Clocktowertimer is an open source project and is not
-          affiliated with The Pandemonium Institute. Feel free to contribute on
-          <a href="https://github.com/tydood/clocktowertimer">Github</a>.
-        </p>
+        <p data-i18n-key="about-disclaimer" class="disclaimer"></p>
       </div>
       <form method="dialog">
         <div id="settings-inner">
           <fieldset name="gamestate">
-            <legend>Gamestate</legend>
-            <label for="playerCountInput">Starting Player Count</label>
+            <legend data-i18n-key="settings-gamestate"></legend>
+            <label data-i18n-key="starting-player-count" for="playerCountInput"></label>
             <input
               type="number"
               id="playerCountInput"
@@ -167,9 +154,9 @@
               value=""
               autofocus
             />
-            <label for="linkedTimerInput">Linked Timer</label>
+            <label data-i18n-key="linked-timer" for="linkedTimerInput"></label>
             <input type="checkbox" id="linkedTimerInput" class="pregame" />
-            <label for="travellerCountInput">Traveller Count</label>
+            <label data-i18n-key="traveller-count" for="travellerCountInput"></label>
             <input
               type="number"
               id="travellerCountInput"
@@ -180,14 +167,14 @@
               value=""
             />
             <div id="settingsEditTimer">
-              <span>Day 1</span>
+              <span data-i18n-key="day-n" data-i18n-opt='{"count": "1"}'></span>
               <label for="day1TimerInput"><i class="fa fa-comments"></i></label>
               <input type="text" id="day1TimerInput" class="pregame" />
               <label for="endofday1TimerInput"
                 ><i class="fa fa-skull"></i
               ></label>
               <input type="text" id="endofday1TimerInput" class="pregame" />
-              <span id="settingsDayN">Day N</span>
+              <span data-i18n-key="day-n" data-i18n-opt='{"count": "N"}' id="settingsDayN"></span>
               <label for="dayNTimerInput"><i class="fa fa-comments"></i></label>
               <input type="text" id="dayNTimerInput" class="pregame" />
               <label for="endofdayNTimerInput"
@@ -198,23 +185,21 @@
             <div id="settingsTimerPreview"></div>
           </fieldset>
           <fieldset name="features">
-            <legend>Features</legend>
-            <label for="featureSpotify">Spotify</label>
+            <legend data-i18n-key="settings-features"></legend>
+            <label data-i18n-key="feature-spotify" for="featureSpotify"></label>
             <input type="checkbox" id="featureSpotify" />
-            <label for="featureRoles">Life & Vote Trackers</label>
+            <label data-i18n-key="feature-roles" for="featureRoles"></label>
             <input type="checkbox" id="featureRoles" />
-            <label for="featureHideTraveller">Hide Travellers</label>
+            <label data-i18n-key="feature-hide-traveller" for="featureHideTraveller"></label>
             <input type="checkbox" id="featureHideTraveller" />
-            <label for="featureRoles">App Audio</label>
+            <label data-i18n-key="feature-audio" for="featureRoles"></label>
             <input type="checkbox" id="gameSounds" checked />
           </fieldset>
           <fieldset name="spotify">
-            <legend>Spotify</legend>
-            <a href="spotify.html" target="_blank"
-              >Connect Clocktowertimer to Spotify API</a
-            >
+            <legend data-i18n-key="settings-spotify"></legend>
+            <a data-i18n-key="spotify-connect" href="spotify.html" target="_blank"></a>
             <br />
-            <span>Adjust Volume:</span>
+            <span data-i18n-key="spotify-volume-adjust"></span>
             <label for="nightVolumeInput"><i class="fa fa-moon"></i></label>
             <input
               type="number"
@@ -243,31 +228,20 @@
               value=""
             />
             <div>
-              <span>Test:</span>
-              <button onclick="spotifyTogglePlay(true);return false;">
-                Toggle Play/Pause
-              </button>
+              <span data-i18n-key="spotify-test"></span>
+              <button data-i18n-key="spotify-toggle" onclick="spotifyTogglePlay(true);return false;"></button>
               <br />
-              <button
-                onclick="spotifyVolume(document.getElementById('nightVolumeInput').value, true);return false;"
-              >
-                Volume at Night
-              </button>
-              <button
-                onclick="spotifyVolume(document.getElementById('dawnVolumeInput').value, true);return false;"
-              >
-                Volume at Dawn
-              </button>
-              <button
-                onclick="spotifyVolume(document.getElementById('duskVolumeInput').value, true);return false;"
-              >
-                Volume at Dusk
-              </button>
+              <button data-i18n-key="spotify-volume-night"
+                onclick="spotifyVolume(document.getElementById('nightVolumeInput').value, true);return false;"></button>
+              <button data-i18n-key="spotify-volume-dawn"
+                onclick="spotifyVolume(document.getElementById('dawnVolumeInput').value, true);return false;"></button>
+              <button data-i18n-key="spotify-volume-dusk"
+                onclick="spotifyVolume(document.getElementById('duskVolumeInput').value, true);return false;"></button>
             </div>
           </fieldset>
           <fieldset name="timer">
-            <legend>Timer</legend>
-            <label for="stepSizeInput">Step width for +/-</label>
+            <legend data-i18n-key="settings-timer"></legend>
+            <label data-i18n-key="timer-step-width" for="stepSizeInput"></label>
             <input
               type="number"
               id="stepSizeInput"
@@ -278,74 +252,73 @@
             />
           </fieldset>
           <fieldset name="keybindings">
-            <legend>Keybindings</legend>
-            <label for="timerstart">Start/Stop Timer</label>
+            <legend data-i18n-key="settings-keys"></legend>
+            <label data-i18n-key="keys-start-stop" for="timerstart"></label>
             <button id="timerstart" class="key"></button>
-            <label for="recall">Recall Town</label>
+            <label data-i18n-key="keys-recall" for="recall"></label>
             <button id="recall" class="key"></button>
             <br />
-            <label for="phasenext">Next Phase</label>
+            <label data-i18n-key="keys-phase-next" for="phasenext"></label>
             <button id="phasenext" class="key"></button>
             <button id="phasenextalt" class="key"></button>
-            <label for="phaseprev">Previous Phase</label>
+            <label data-i18n-key="keys-phase-prev" for="phaseprev"></label>
             <button id="phaseprev" class="key"></button>
             <br />
             <div id="trackerkeys">
-              <label for="aliveplus">Resurrect</label>
+              <label data-i18n-key="keys-alive-plus" for="aliveplus"></label>
               <button id="aliveplus" class="key"></button>
-              <label for="aliveminus">Death</label>
+              <label data-i18n-key="keys-alive-minus" for="aliveminus"></label>
               <button id="aliveminus" class="key"></button>
-              <label for="voteplus">Regain Vote</label>
+              <label data-i18n-key="keys-vote-plus" for="voteplus"></label>
               <button id="voteplus" class="key"></button>
-              <label for="voteminus">Ghostvote</label>
+              <label data-i18n-key="keys-vote-minus" for="voteminus"></label>
               <button id="voteminus" class="key"></button>
             </div>
-            <label for="timerreset">Reset Timer</label>
+            <label data-i18n-key="keys-timer-reset" for="timerreset"></label>
             <button id="timerreset" class="key"></button>
-            <label for="timeredit">Edit Timer</label>
+            <label data-i18n-key="keys-timer-edit" for="timeredit"></label>
             <button id="timeredit" class="key"></button>
             <br />
-            <label for="timerplus">Increase Timer</label>
+            <label data-i18n-key="keys-timer-plus" for="timerplus"></label>
             <button id="timerplus" class="key"></button>
             <button id="timerplusalt" class="key"></button>
             <button id="timerplusalt2" class="key"></button>
             <br />
-            <label for="timerminus">Decrease Timer</label>
+            <label data-i18n-key="keys-timer-minus" for="timerminus"></label>
             <button id="timerminus" class="key"></button>
             <button id="timerminusalt" class="key"></button>
             <button id="timerminusalt2" class="key"></button>
             <br />
-            <label for="togglemute">Toggle Mute</label>
+            <label data-i18n-key="keys-toggle-mute" for="togglemute"></label>
             <button id="togglemute" class="key"></button>
-            <label for="togglefullscreen">Toggle Fullscreen</label>
+            <label data-i18n-key="keys-toggle-fullscreen" for="togglefullscreen"></label>
             <button id="togglefullscreen" class="key"></button>
-            <label for="togglesettings">Open Settings</label>
+            <label data-i18n-key="keys-settings" for="togglesettings"></label>
             <button id="togglesettings" class="key"></button>
           </fieldset>
         </div>
-        <button type="submit" value="abort" class="abort">
-          Abort Settings
-        </button>
-        <button type="submit" value="save">Save Settings</button>
+        <button data-i18n-key="settings-abort" type="submit" value="abort" class="abort"></button>
+        <button data-i18n-key="settings-save" type="submit" value="save"></button>
       </form>
     </dialog>
     <dialog id="timerEditDialog">
       <form method="dialog">
-        <label for="timerEditInput">Timer Value</label>
+        <label data-i18n-key="timer-title" for="timerEditInput"></label>
         <br />
         <input type="text" id="timerEditInput" autofocus />
         <br />
-        <button value="confirm">Set Timer</button>
+        <button data-i18n-key="timer-set" value="confirm"></button>
       </form>
     </dialog>
     <dialog id="messageDialog">
       <form method="dialog">
         <h1></h1>
         <p></p>
-        <button type="submit" value="confirm">OK</button>
+        <button data-i18n-key="message-ok" type="submit" value="confirm"></button>
       </form>
     </dialog>
 
+    <script src="i18n.js"></script>
     <script src="helper.js"></script>
     <script src="settings.js"></script>
     <script src="spotify.js"></script>

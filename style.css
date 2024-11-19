@@ -213,7 +213,7 @@ a:visited {
 .background-night #incrementTime,
 .background-night #decrementTime {
   color: rgb(111, 110, 110) !important;
-  cursor: default;
+  cursor: inherit;
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
@@ -292,7 +292,7 @@ fieldset[name="keybindings"] {
   display: inline-block;
 }
 
-dialog fieldset input {
+dialog fieldset input, select[data-i18n-switcher] {
   width: 75px;
   margin: 0.5em 1em 0.5em 0.5em;
   padding: 0.25em;
@@ -300,6 +300,13 @@ dialog fieldset input {
   text-align: center;
   border: none;
   border-radius: 0.5em;
+}
+
+select[data-i18n-switcher] {
+  width: auto;
+  position: absolute;
+  left: 20px;
+  top: 20px;
 }
 
 dialog fieldset input[type="checkbox"] {
