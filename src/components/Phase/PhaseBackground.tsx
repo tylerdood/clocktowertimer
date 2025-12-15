@@ -11,7 +11,7 @@ export function PhaseBackground() {
   const { currentPhase } = usePhaseStore();
 
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden">
+    <div className="fixed inset-0 -z-10 overflow-hidden bg-black">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentPhase}
