@@ -1,25 +1,23 @@
-import { useState, useEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { usePhaseStore } from '../../store/phaseStore';
+import { AnimatePresence, motion } from "framer-motion";
+import { usePhaseStore } from "../../store/phaseStore";
 
 const backgroundImages = {
-  DAY: '/images/village-day-new-blur.jpg',
-  ENDOFDAY: '/images/village-end-of-day-new-blur.jpg',
-  NIGHT: '/images/village-night-new-blur.jpg',
+  DAY: "/images/village-day-new-blur.jpg",
+  ENDOFDAY: "/images/village-end-of-day-new-blur.jpg",
+  NIGHT: "/images/village-night-new-blur.jpg",
 };
 
 export function PhaseBackground() {
   const { currentPhase } = usePhaseStore();
-  const [isInitialMount, setIsInitialMount] = useState(true);
-
-  useEffect(() => {
-    if (isInitialMount) {
-      setIsInitialMount(false);
-    }
-  }, [isInitialMount]);
 
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden bg-black">
+    <div className="fixed inset-0 -z-10 overflow-hidden">
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+        style={{
+          backgroundImage: `url(${backgroundImages[currentPhase]})`,
+        }}
+      />
       <AnimatePresence mode="wait">
         <motion.div
           key={currentPhase}
@@ -27,13 +25,12 @@ export function PhaseBackground() {
           style={{
             backgroundImage: `url(${backgroundImages[currentPhase]})`,
           }}
-          initial={isInitialMount ? { opacity: 1 } : { opacity: 0 }}
+          initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 2.5, ease: 'easeInOut' }}
+          transition={{ duration: 2.5, ease: "easeInOut" }}
         />
       </AnimatePresence>
     </div>
   );
 }
-
