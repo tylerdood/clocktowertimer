@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { usePhaseStore } from '../../store/phaseStore';
 
@@ -9,6 +10,13 @@ const backgroundImages = {
 
 export function PhaseBackground() {
   const { currentPhase } = usePhaseStore();
+  const [isInitialMount, setIsInitialMount] = useState(true);
+
+  useEffect(() => {
+    if (isInitialMount) {
+      setIsInitialMount(false);
+    }
+  }, [isInitialMount]);
 
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden bg-black">
@@ -19,7 +27,7 @@ export function PhaseBackground() {
           style={{
             backgroundImage: `url(${backgroundImages[currentPhase]})`,
           }}
-          initial={{ opacity: 0 }}
+          initial={isInitialMount ? { opacity: 1 } : { opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 2.5, ease: 'easeInOut' }}

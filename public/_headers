@@ -13,18 +13,3 @@
 /assets/*.wasm
   Content-Type: application/wasm
 
-/images/*.jpg
-  Content-Type: image/jpeg
-
-/images/*.jpeg
-  Content-Type: image/jpeg
-
-/images/*.png
-  Content-Type: image/png
-
-/images/*.webp
-  Content-Type: image/webp
-
-/sounds/*.wav
-  Content-Type: audio/wav
-

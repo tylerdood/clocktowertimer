@@ -88,6 +88,7 @@ src/
 ### Keyboard Shortcuts
 
 All keyboard shortcuts are customizable through the settings panel. Default bindings:
+
 - `Space` - Start/Stop timer
 - `N` or `Enter` - Next phase
 - `R` - Recall townsfolk
@@ -97,6 +98,7 @@ All keyboard shortcuts are customizable through the settings panel. Default bind
 ## Migration from Vanilla JS
 
 This React version maintains full feature parity with the original vanilla JavaScript version while adding:
+
 - Better code organization
 - Type safety
 - Smooth animations
@@ -106,4 +108,3 @@ This React version maintains full feature parity with the original vanilla JavaS
 ## License
 
 Open source - feel free to contribute!
-
