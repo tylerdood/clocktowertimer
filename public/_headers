@@ -1,0 +1,15 @@
+/assets/*.js
+  Content-Type: application/javascript
+
+/assets/*.mjs
+  Content-Type: application/javascript
+
+/assets/*.css
+  Content-Type: text/css; charset=utf-8
+
+/assets/*.json
+  Content-Type: application/json
+
+/assets/*.wasm
+  Content-Type: application/wasm
+
