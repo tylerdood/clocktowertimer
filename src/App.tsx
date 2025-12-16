@@ -4,6 +4,7 @@ import { PhaseIndicator } from './components/Phase/PhaseIndicator';
 import { PhaseAdvanceButton } from './components/Phase/PhaseAdvanceButton';
 import { TimerDisplay } from './components/Timer/TimerDisplay';
 import { CharacterTrackers } from './components/Character/CharacterTrackers';
+import { CharacterDisplays } from './components/Character/CharacterDisplays';
 import { ControlPanel } from './components/Controls/ControlPanel';
 import { SettingsButton } from './components/Controls/SettingsButton';
 import { SettingsModal } from './components/Settings/SettingsModal';
@@ -42,6 +43,7 @@ function App() {
       
       <div className="relative z-10 w-full h-full flex flex-col justify-center">
         <SettingsButton onOpenSettings={() => setShowSettings(true)} />
+        <CharacterDisplays />
         <PhaseIndicator />
         <div className="flex justify-center my-2">
           <PhaseAdvanceButton />

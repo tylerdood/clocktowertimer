@@ -5,11 +5,6 @@ import { useSettingsStore } from '../../store/settingsStore';
 
 export function CharacterTrackers() {
   const {
-    townsfolk,
-    outsider,
-    minion,
-    demon,
-    traveler,
     heartCount,
     voteCount,
     increaseHeart,
@@ -19,25 +14,7 @@ export function CharacterTrackers() {
   } = useCharacterStore();
   const { featureRoles } = useSettingsStore();
   const [showDeathEffect, setShowDeathEffect] = useState(false);
-  const [showTownsfolkEffect, setShowTownsfolkEffect] = useState(false);
-  const [showEvilEffect, setShowEvilEffect] = useState(false);
-  const [showTravelerEffect, setShowTravelerEffect] = useState(false);
   const [showVoteEffect, setShowVoteEffect] = useState(false);
-
-  const handleTownsfolkClick = () => {
-    setShowTownsfolkEffect(true);
-    setTimeout(() => setShowTownsfolkEffect(false), 600);
-  };
-
-  const handleEvilClick = () => {
-    setShowEvilEffect(true);
-    setTimeout(() => setShowEvilEffect(false), 600);
-  };
-
-  const handleTravelerClick = () => {
-    setShowTravelerEffect(true);
-    setTimeout(() => setShowTravelerEffect(false), 600);
-  };
 
   const handleHeartLeftClick = () => {
     if (heartCount > 0) {
@@ -66,143 +43,11 @@ export function CharacterTrackers() {
 
   return (
     <div className="flex flex-row justify-center items-center gap-4">
-      <motion.div
-        className="flex flex-col items-center w-[9vw] cursor-pointer relative"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        onClick={handleTownsfolkClick}
-        transition={{ type: 'spring', stiffness: 400 }}
-      >
-        <div className="relative">
-          <img src="/images/townsfolk.png" alt="Townsfolk" className="w-[50px]" />
-          <AnimatePresence>
-            {showTownsfolkEffect && (
-              <motion.div
-                className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                initial={{ opacity: 0, scale: 0.3, rotate: 0 }}
-                animate={{ opacity: 1, scale: 1.3, rotate: 360 }}
-                exit={{ opacity: 0, scale: 1.8, rotate: 360 }}
-                transition={{ 
-                  duration: 0.5,
-                  ease: [0.4, 0, 0.2, 1]
-                }}
-              >
-                <motion.div
-                  className="text-blue-400 font-bold text-3xl"
-                  style={{
-                    textShadow: '0 0 10px rgba(96, 165, 250, 1), 0 0 20px rgba(96, 165, 250, 0.8), 0 0 30px rgba(96, 165, 250, 0.6)',
-                  }}
-                >
-                  ✦
-                </motion.div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-        <motion.span
-          key={`${townsfolk}-${outsider}`}
-          initial={{ scale: 1.2, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          className="leading-[55px]"
-        >
-          {townsfolk} / {outsider}
-        </motion.span>
-      </motion.div>
-
-      <motion.div
-        className="flex flex-col items-center w-[9vw] cursor-pointer relative"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        onClick={handleEvilClick}
-        transition={{ type: 'spring', stiffness: 400 }}
-      >
-        <div className="relative">
-          <img src="/images/evil.png" alt="Evil" className="w-[50px]" />
-          <AnimatePresence>
-            {showEvilEffect && (
-              <motion.div
-                className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                initial={{ opacity: 0, scale: 0.3, rotate: -45 }}
-                animate={{ opacity: 1, scale: 1.4, rotate: -45 }}
-                exit={{ opacity: 0, scale: 2, rotate: -45 }}
-                transition={{ 
-                  duration: 0.5,
-                  ease: [0.4, 0, 0.2, 1]
-                }}
-              >
-                <motion.div
-                  className="text-red-500 font-bold text-3xl"
-                  style={{
-                    textShadow: '0 0 10px rgba(239, 68, 68, 1), 0 0 20px rgba(239, 68, 68, 0.8), 0 0 30px rgba(220, 38, 38, 0.6)',
-                  }}
-                >
-                  ⚡
-                </motion.div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-        <motion.span
-          key={`${minion}-${demon}`}
-          initial={{ scale: 1.2, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          className="leading-[55px]"
-        >
-          {minion} / {demon}
-        </motion.span>
-      </motion.div>
-
-      <motion.div
-        className="flex flex-col items-center w-[9vw] cursor-pointer relative"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        onClick={handleTravelerClick}
-        transition={{ type: 'spring', stiffness: 400 }}
-      >
-        <div className="relative">
-          <img src="/images/travelors.png" alt="Travelers" className="w-[50px]" />
-          <AnimatePresence>
-            {showTravelerEffect && (
-              <motion.div
-                className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                initial={{ opacity: 0, scale: 0.3, rotate: 0 }}
-                animate={{ opacity: 1, scale: 1.3, rotate: 180 }}
-                exit={{ opacity: 0, scale: 1.8, rotate: 360 }}
-                transition={{ 
-                  duration: 0.5,
-                  ease: [0.4, 0, 0.2, 1]
-                }}
-              >
-                <motion.div
-                  className="text-yellow-400 font-bold text-3xl"
-                  style={{
-                    textShadow: '0 0 10px rgba(250, 204, 21, 1), 0 0 20px rgba(250, 204, 21, 0.8), 0 0 30px rgba(234, 179, 8, 0.6)',
-                  }}
-                >
-                  ✨
-                </motion.div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-        <motion.span
-          key={traveler}
-          initial={{ scale: 1.2, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          className="leading-[55px]"
-        >
-          {traveler}
-        </motion.span>
-      </motion.div>
-
       {featureRoles && (
         <>
           <motion.div
             className="flex flex-col items-center cursor-pointer select-none w-[9vw] relative"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleHeartLeftClick}
             onContextMenu={handleHeartRightClick}
@@ -211,12 +56,16 @@ export function CharacterTrackers() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.2 }}
           >
-            <div className="relative">
-              <img src="/images/heart.png" alt="Heart" className="w-[50px] pointer-events-none" />
+            <div className="relative group">
+              <div className="absolute inset-0 rounded-full border-2 border-clocktower-gold/50 shadow-[0_0_6px_rgba(212,175,55,0.3)] pointer-events-none transition-all duration-200 group-hover:border-clocktower-gold/80 group-hover:shadow-[0_0_12px_rgba(212,175,55,0.6)]" style={{ width: '65px', height: '65px', left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }} />
+              <img src="/images/heart.png" alt="Heart" className="w-[50px] pointer-events-none relative z-10" />
+              <div className="absolute -top-1 -right-1 bg-clocktower-gold/80 rounded-full w-4 h-4 flex items-center justify-center pointer-events-none z-20 shadow-[0_0_4px_rgba(212,175,55,0.6)]">
+                <span className="text-[8px] text-black font-bold">±</span>
+              </div>
               <AnimatePresence>
                 {showDeathEffect && (
                   <motion.div
-                    className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                    className="absolute inset-0 flex items-center justify-center pointer-events-none z-30"
                     initial={{ opacity: 0, scale: 0.5, rotate: -45 }}
                     animate={{ opacity: 1, scale: 1.2, rotate: -45 }}
                     exit={{ opacity: 0, scale: 1.5, rotate: -45 }}
@@ -250,7 +99,7 @@ export function CharacterTrackers() {
 
           <motion.div
             className="flex flex-col items-center cursor-pointer select-none w-[9vw] relative"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleVoteLeftClick}
             onContextMenu={handleVoteRightClick}
@@ -259,12 +108,16 @@ export function CharacterTrackers() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.2 }}
           >
-            <div className="relative">
-              <img src="/images/box.png" alt="Box" className="h-[50px] pointer-events-none" />
+            <div className="relative group">
+              <div className="absolute inset-0 rounded-full border-2 border-clocktower-gold/50 shadow-[0_0_6px_rgba(212,175,55,0.3)] pointer-events-none transition-all duration-200 group-hover:border-clocktower-gold/80 group-hover:shadow-[0_0_12px_rgba(212,175,55,0.6)]" style={{ width: '65px', height: '65px', left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }} />
+              <img src="/images/box.png" alt="Box" className="h-[50px] pointer-events-none relative z-10" />
+              <div className="absolute -top-1 -right-1 bg-clocktower-gold/80 rounded-full w-4 h-4 flex items-center justify-center pointer-events-none z-20 shadow-[0_0_4px_rgba(212,175,55,0.6)]">
+                <span className="text-[8px] text-black font-bold">±</span>
+              </div>
               <AnimatePresence>
                 {showVoteEffect && (
                   <motion.div
-                    className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                    className="absolute inset-0 flex items-center justify-center pointer-events-none z-30"
                     initial={{ opacity: 0, scale: 0.5, y: -10 }}
                     animate={{ opacity: 1, scale: 1.2, y: 0 }}
                     exit={{ opacity: 0, scale: 1.5, y: 10 }}

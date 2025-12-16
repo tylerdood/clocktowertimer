@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
-import { usePhase } from '../../hooks/usePhase';
-import { usePhaseStore } from '../../store/phaseStore';
+import { motion } from "framer-motion";
+import { usePhase } from "../../hooks/usePhase";
+import { usePhaseStore } from "../../store/phaseStore";
 
 export function PhaseAdvanceButton() {
   const { advance } = usePhase();
@@ -8,23 +8,23 @@ export function PhaseAdvanceButton() {
 
   const getPhaseIcon = () => {
     switch (currentPhase) {
-      case 'DAY':
-        return 'fas fa-cloud';
-      case 'ENDOFDAY':
-        return 'fas fa-moon';
-      case 'NIGHT':
-        return 'fas fa-sun';
+      case "DAY":
+        return "fas fa-cloud";
+      case "ENDOFDAY":
+        return "fas fa-moon";
+      case "NIGHT":
+        return "fas fa-sun";
     }
   };
 
   const getButtonText = () => {
     switch (currentPhase) {
-      case 'DAY':
-        return 'End of Day';
-      case 'ENDOFDAY':
-        return 'Night';
-      case 'NIGHT':
-        return 'Day';
+      case "DAY":
+        return "Advance to End of Day";
+      case "ENDOFDAY":
+        return "Advance to Night";
+      case "NIGHT":
+        return "Advance to Day";
     }
   };
 
@@ -41,5 +41,3 @@ export function PhaseAdvanceButton() {
     </motion.button>
   );
 }
-
-
