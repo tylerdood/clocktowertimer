@@ -11,7 +11,7 @@ export function PhaseIndicator() {
   const { currentPhase, currentDay } = usePhaseStore();
 
   return (
-    <div className="mt-[5%] text-center">
+    <div className="mt-2 mb-1 text-center">
       <motion.div
         key={`${currentPhase}-${currentDay}`}
         initial={{ opacity: 0, y: -10 }}

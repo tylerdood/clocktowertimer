@@ -47,35 +47,37 @@ export function TimerDisplay() {
   const formattedTime = formatTime(timeRemaining);
 
   return (
-    <div className="flex justify-center">
-      <motion.h1
-        className="text-[22vw] font-xanh-mono text-clocktower-text"
-        animate={
-          isCritical && !isNight
-            ? {
-                scale: [1, 1.05, 1],
-                color: ['rgba(245, 245, 245, 0.97)', 'rgb(177, 36, 36)', 'rgba(245, 245, 245, 0.97)'],
-              }
-            : isLow && !isNight
-            ? {
-                scale: [1, 1.02, 1],
-              }
-            : {}
-        }
-        transition={
-          isCritical && !isNight
-            ? { duration: 1, repeat: Infinity }
-            : isLow && !isNight
-            ? { duration: 1, repeat: Infinity }
-            : {}
-        }
-        style={{
-          visibility: isNight ? 'hidden' : 'visible',
-        }}
-      >
-        {formattedTime}
-      </motion.h1>
-    </div>
+    <motion.h1
+      className="font-xanh-mono text-clocktower-text m-0 p-0"
+      style={{
+        fontSize: 'min(22vw, 22vh)',
+        visibility: isNight ? 'hidden' : 'visible',
+        lineHeight: '1',
+        margin: 0,
+        padding: 0,
+      }}
+      animate={
+        isCritical && !isNight
+          ? {
+              scale: [1, 1.05, 1],
+              color: ['rgba(245, 245, 245, 0.97)', 'rgb(177, 36, 36)', 'rgba(245, 245, 245, 0.97)'],
+            }
+          : isLow && !isNight
+          ? {
+              scale: [1, 1.02, 1],
+            }
+          : {}
+      }
+      transition={
+        isCritical && !isNight
+          ? { duration: 1, repeat: Infinity }
+          : isLow && !isNight
+          ? { duration: 1, repeat: Infinity }
+          : {}
+      }
+    >
+      {formattedTime}
+    </motion.h1>
   );
 }
 
