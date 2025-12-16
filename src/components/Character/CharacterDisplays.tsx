@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { useCharacterStore } from '../../store/characterStore';
+import { useSound } from '../../hooks/useSound';
 
 export function CharacterDisplays() {
   const {
@@ -10,21 +11,25 @@ export function CharacterDisplays() {
     demon,
     traveler,
   } = useCharacterStore();
+  const { playWinSound, playAmbience1, playAccept } = useSound();
   const [showTownsfolkEffect, setShowTownsfolkEffect] = useState(false);
   const [showEvilEffect, setShowEvilEffect] = useState(false);
   const [showTravelerEffect, setShowTravelerEffect] = useState(false);
 
   const handleTownsfolkClick = () => {
+    playWinSound();
     setShowTownsfolkEffect(true);
     setTimeout(() => setShowTownsfolkEffect(false), 600);
   };
 
   const handleEvilClick = () => {
+    playAmbience1();
     setShowEvilEffect(true);
     setTimeout(() => setShowEvilEffect(false), 600);
   };
 
   const handleTravelerClick = () => {
+    playAccept();
     setShowTravelerEffect(true);
     setTimeout(() => setShowTravelerEffect(false), 600);
   };

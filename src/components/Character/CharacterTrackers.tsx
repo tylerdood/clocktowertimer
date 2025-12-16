@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { useCharacterStore } from '../../store/characterStore';
 import { useSettingsStore } from '../../store/settingsStore';
+import { useSound } from '../../hooks/useSound';
 
 export function CharacterTrackers() {
   const {
@@ -13,12 +14,14 @@ export function CharacterTrackers() {
     decreaseVote,
   } = useCharacterStore();
   const { featureRoles } = useSettingsStore();
+  const { playKnifeSharpener, playShortWind, playTissueOutOfBox, playPageTurning } = useSound();
   const [showDeathEffect, setShowDeathEffect] = useState(false);
   const [showVoteEffect, setShowVoteEffect] = useState(false);
 
   const handleHeartLeftClick = () => {
     if (heartCount > 0) {
       decreaseHeart();
+      playKnifeSharpener();
       // Trigger death animation
       setShowDeathEffect(true);
       setTimeout(() => setShowDeathEffect(false), 800);
@@ -28,10 +31,12 @@ export function CharacterTrackers() {
   const handleHeartRightClick = (e: React.MouseEvent) => {
     e.preventDefault();
     increaseHeart();
+    playShortWind();
   };
 
   const handleVoteLeftClick = () => {
     decreaseVote();
+    playTissueOutOfBox();
     setShowVoteEffect(true);
     setTimeout(() => setShowVoteEffect(false), 600);
   };
@@ -39,6 +44,7 @@ export function CharacterTrackers() {
   const handleVoteRightClick = (e: React.MouseEvent) => {
     e.preventDefault();
     increaseVote();
+    playPageTurning();
   };
 
   return (
