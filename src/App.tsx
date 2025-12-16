@@ -41,16 +41,22 @@ function App() {
     <div className="h-screen w-screen overflow-hidden text-center text-clocktower-text font-almendra text-4vw relative">
       <PhaseBackground />
       
-      <div className="relative z-10 w-full h-full flex flex-col justify-center">
+      <div className="relative z-10 w-full h-full flex flex-col">
         <SettingsButton onOpenSettings={() => setShowSettings(true)} />
-        <CharacterDisplays />
-        <PhaseIndicator />
-        <div className="flex justify-center my-2">
-          <PhaseAdvanceButton />
+        <div className="flex-shrink-0 pt-4">
+          <CharacterDisplays />
+          <PhaseIndicator />
         </div>
-        <TimerDisplay />
-        <ControlPanel />
-        <CharacterTrackers />
+        <div className="flex-1 flex flex-col justify-center">
+          <TimerDisplay />
+        </div>
+        <div className="flex-shrink-0 flex flex-col items-center gap-4 pb-4">
+          <div className="flex justify-center">
+            <PhaseAdvanceButton />
+          </div>
+          <ControlPanel />
+          <CharacterTrackers />
+        </div>
       </div>
 
       <SettingsModal

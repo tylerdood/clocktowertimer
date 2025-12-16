@@ -47,9 +47,9 @@ export function TimerDisplay() {
   const formattedTime = formatTime(timeRemaining);
 
   return (
-    <div className="flex justify-center my-[2%]">
+    <div className="flex justify-center">
       <motion.h1
-        className="text-[17vw] font-xanh-mono text-clocktower-text"
+        className="text-[22vw] font-xanh-mono text-clocktower-text"
         animate={
           isCritical && !isNight
             ? {
