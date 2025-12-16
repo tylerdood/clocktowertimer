@@ -18,3 +18,4 @@ export interface CharacterActions {
   decreaseVote: () => void;
 }
 
+

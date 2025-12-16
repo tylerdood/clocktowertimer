@@ -26,3 +26,4 @@ export function setSetting(key: string, value: string | number | boolean): void 
   localStorage.setItem(key, value.toString());
 }
 
+

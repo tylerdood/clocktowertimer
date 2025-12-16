@@ -48,3 +48,4 @@ export function convertToSeconds(values: number[]): number[] {
   return values.map((value) => value * 60);
 }
 
+
