@@ -1,5 +1,6 @@
 import en from './en.json';
 import de from './de.json';
+import { Platform } from 'react-native';
 import { useStore } from '../store';
 
 export type Language = 'auto' | 'en' | 'de';
@@ -15,7 +16,9 @@ export function deviceLanguage(): 'en' | 'de' {
   }
 }
 
+/** German is a web-only feature; the iOS app is always English. */
 export function resolveLanguage(pref: Language): 'en' | 'de' {
+  if (Platform.OS !== 'web') return 'en';
   return pref === 'auto' ? deviceLanguage() : pref;
 }
 

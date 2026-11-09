@@ -132,10 +132,12 @@ export function SettingsSheet({ visible, onClose }: { visible: boolean; onClose:
             {!isWeb && <Row label={t('haptics')}><Toggle value={s.haptics} onChange={(v) => set({ haptics: v })} /></Row>}
             {!isWeb && <Row label={t('keep-awake')}><Toggle value={s.keepAwake} onChange={(v) => set({ keepAwake: v })} /></Row>}
             {spotifySupported && <Row label={t('feature-spotify')}><Toggle value={s.spotify} onChange={(v) => set({ spotify: v })} /></Row>}
-            <View style={[styles.row, { flexDirection: 'column', alignItems: 'stretch', gap: 8, paddingVertical: 12 }]}>
-              <Text style={styles.label}>{t('language')}</Text>
-              <Segmented value={s.language} options={lang} onChange={(v) => set({ language: v })} />
-            </View>
+            {isWeb && (
+              <View style={[styles.row, { flexDirection: 'column', alignItems: 'stretch', gap: 8, paddingVertical: 12 }]}>
+                <Text style={styles.label}>{t('language')}</Text>
+                <Segmented value={s.language} options={lang} onChange={(v) => set({ language: v })} />
+              </View>
+            )}
           </Section>
 
           {spotifySupported && s.spotify && (
