@@ -33,7 +33,8 @@ function Cog({ onPress }: { onPress: () => void }) {
 }
 
 export default function App() {
-  const [fontsLoaded] = useFonts({ Almendra_400Regular, XanhMono_400Regular });
+  const [fontsLoadedRaw, fontError] = useFonts({ Almendra_400Regular, XanhMono_400Regular });
+  const fontsLoaded = fontsLoadedRaw || !!fontError;
   const [hydrated, setHydrated] = useState(useStore.persist.hasHydrated());
   const [settingsOpen, setSettingsOpen] = useState(false);
   const sound = useStore((s) => s.sound);
@@ -42,7 +43,10 @@ export default function App() {
 
   useEffect(() => {
     initAudio();
-    return useStore.persist.onFinishHydration(() => setHydrated(true));
+    const unsub = useStore.persist.onFinishHydration(() => setHydrated(true));
+    // Safety net: never sit on a black screen if hydration stalls.
+    const timer = setTimeout(() => setHydrated(true), 3000);
+    return () => { unsub(); clearTimeout(timer); };
   }, []);
   useWebShortcuts(React.useCallback(() => setSettingsOpen((o) => !o), []));
   useEffect(() => setSoundEnabled(sound), [sound]);

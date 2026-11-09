@@ -86,6 +86,22 @@ const buzz = (s: Prefs, style = Haptics.ImpactFeedbackStyle.Light) => {
   if (s.haptics) Haptics.impactAsync(style).catch(() => {});
 };
 
+/** Never let a corrupt/unreadable saved game block startup: drop it and start fresh. */
+const safeStorage = {
+  getItem: async (name: string) => {
+    try {
+      const raw = await AsyncStorage.getItem(name);
+      if (raw != null) JSON.parse(raw);
+      return raw;
+    } catch {
+      try { await AsyncStorage.removeItem(name); } catch { /* ignore */ }
+      return null;
+    }
+  },
+  setItem: (name: string, value: string) => AsyncStorage.setItem(name, value).catch(() => {}),
+  removeItem: (name: string) => AsyncStorage.removeItem(name).catch(() => {}),
+};
+
 export const useStore = create<Store>()(
   persist(
     (set, get) => ({
@@ -211,7 +227,7 @@ export const useStore = create<Store>()(
     }),
     {
       name: 'clocktower-timer-v3',
-      storage: createJSONStorage(() => AsyncStorage),
+      storage: createJSONStorage(() => safeStorage),
       // Persist preferences and the game in progress (timer is paused on restore).
       partialize: (s) => ({
         playerCount: s.playerCount, travelerCount: s.travelerCount, linkedTimer: s.linkedTimer,
