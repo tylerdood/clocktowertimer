@@ -4,30 +4,33 @@ import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { Press } from './Press';
 import { colors, fonts } from '../theme';
 import { useStore } from '../store';
+import { useT } from '../i18n';
 
-const label = { DAY: 'Day', ENDOFDAY: 'End of Day', NIGHT: 'Night' } as const;
-const next = { DAY: 'End of Day', ENDOFDAY: 'Night', NIGHT: 'Day' } as const;
+const titleKey = { DAY: 'day-n', ENDOFDAY: 'day-end-n', NIGHT: 'night-n' } as const;
+const advanceKey = { DAY: 'advance-endofday', ENDOFDAY: 'advance-night', NIGHT: 'advance-day' } as const;
 const nextIcon = { DAY: 'cloud', ENDOFDAY: 'moon', NIGHT: 'sun' } as const;
 
 export function PhaseTitle() {
   const phase = useStore((s) => s.phase);
   const day = useStore((s) => s.day);
-  return <Text style={styles.title}>{label[phase]} {day}</Text>;
+  const t = useT();
+  return <Text style={styles.title}>{t(titleKey[phase], { count: day })}</Text>;
 }
 
 export function PhaseButton() {
+  const t = useT();
   const phase = useStore((s) => s.phase);
   const advance = useStore((s) => s.advance);
   const previous = useStore((s) => s.previous);
   const canBack = useStore((s) => !(s.day === 1 && s.phase === 'NIGHT'));
   return (
     <View style={styles.wrap}>
-      <Press onPress={previous} disabled={!canBack} accessibilityLabel="Previous phase" style={styles.back}>
+      <Press onPress={previous} disabled={!canBack} accessibilityLabel={t('keys-phase-prev')} style={styles.back}>
         <FontAwesome5 name="chevron-left" size={18} color={colors.text} />
       </Press>
-      <Press onPress={advance} accessibilityLabel="Advance phase" style={styles.main}>
+      <Press onPress={advance} accessibilityLabel={t('btn-phase-next')} style={styles.main}>
         {phase === 'NIGHT' ? <Ionicons name="sunny" size={24} color="#fff" /> : <FontAwesome5 name={nextIcon[phase]} size={20} color="#fff" />}
-        <Text style={styles.mainText} numberOfLines={1} adjustsFontSizeToFit>Advance to {next[phase]}</Text>
+        <Text style={styles.mainText} numberOfLines={1} adjustsFontSizeToFit>{t(advanceKey[phase])}</Text>
       </Press>
     </View>
   );

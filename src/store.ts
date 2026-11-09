@@ -4,6 +4,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Haptics from 'expo-haptics';
 import { CHARACTER_AMOUNTS, MAX_DAYS, MAX_TIME, Phase, buildSchedule } from './logic';
 import { play } from './sound';
+import { applyPhaseVolume, DEFAULT_SPOTIFY_VOLUMES, DEFAULT_SPOTIFY_CLIENT_ID } from './spotify';
+import type { Language } from './i18n';
 
 export interface Prefs {
   playerCount: number;
@@ -18,6 +20,10 @@ export interface Prefs {
   sound: boolean;
   haptics: boolean;
   keepAwake: boolean;
+  language: Language;
+  spotify: boolean;
+  spotifyVolumes: number[];
+  spotifyClientId: string;
 }
 
 const defaultPrefs: Prefs = {
@@ -33,6 +39,10 @@ const defaultPrefs: Prefs = {
   sound: true,
   haptics: true,
   keepAwake: true,
+  language: 'auto',
+  spotify: false,
+  spotifyVolumes: DEFAULT_SPOTIFY_VOLUMES,
+  spotifyClientId: DEFAULT_SPOTIFY_CLIENT_ID,
 };
 
 interface Game {
@@ -170,6 +180,7 @@ export const useStore = create<Store>()(
         buzz(s, Haptics.ImpactFeedbackStyle.Medium);
         play(phase === 'DAY' ? 'day' : phase === 'ENDOFDAY' ? 'endOfDay' : 'night');
         set({ phase, day, endAt: null, ...(t !== null ? { timeRemaining: t, defaultTime: t } : {}) });
+        applyPhaseVolume(phase, s.spotify, s.spotifyVolumes);
       },
       previous: () => {
         const s = get();
@@ -206,6 +217,7 @@ export const useStore = create<Store>()(
         playerCount: s.playerCount, travelerCount: s.travelerCount, linkedTimer: s.linkedTimer,
         day1: s.day1, dayN: s.dayN, night1: s.night1, nightN: s.nightN, stepSize: s.stepSize,
         trackers: s.trackers, sound: s.sound, haptics: s.haptics, keepAwake: s.keepAwake,
+        language: s.language, spotify: s.spotify, spotifyVolumes: s.spotifyVolumes, spotifyClientId: s.spotifyClientId,
         phase: s.phase, day: s.day, timeRemaining: s.timeRemaining, defaultTime: s.defaultTime,
         hearts: s.hearts, votes: s.votes,
       }),

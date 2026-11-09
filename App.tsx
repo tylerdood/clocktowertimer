@@ -17,12 +17,15 @@ import { colors } from './src/theme';
 import { useStore } from './src/store';
 import { initAudio, setSoundEnabled } from './src/sound';
 import { useWebShortcuts } from './src/useWebShortcuts';
+import { handleSpotifyRedirect, volumesFromUrl } from './src/spotify';
+import { useT } from './src/i18n';
 
 function Cog({ onPress }: { onPress: () => void }) {
   const { top } = useSafeAreaInsets();
+  const t = useT();
   return (
     <View style={[styles.cog, { top: top + 2 }]}>
-      <Press style={styles.cogBtn} onPress={onPress} accessibilityLabel="Settings">
+      <Press style={styles.cogBtn} onPress={onPress} accessibilityLabel={t('btn-settings')}>
         <FontAwesome5 name="cog" size={22} color={colors.text} />
       </Press>
     </View>
@@ -47,6 +50,13 @@ export default function App() {
     if (keepAwake) activateKeepAwakeAsync('game').catch(() => {});
     else deactivateKeepAwake('game').catch(() => {});
   }, [keepAwake]);
+  // Web: finish Spotify sign-in if we were just redirected back, and honour ?volume=[..]
+  useEffect(() => {
+    if (!hydrated) return;
+    handleSpotifyRedirect().then((ok) => { if (ok) { useStore.getState().setPrefs({ spotify: true }); setSettingsOpen(true); } });
+    const v = volumesFromUrl();
+    if (v) useStore.getState().setPrefs({ spotifyVolumes: v });
+  }, [hydrated]);
   // A restored game never resumes a running clock.
   useEffect(() => { if (hydrated) useStore.setState({ endAt: null }); }, [hydrated]);
 

@@ -2,6 +2,6 @@
   "version": "0.0.1",
   "configurations": [
     { "name": "web", "runtimeExecutable": "sh", "runtimeArgs": ["-c", "PATH=$HOME/.nvm/versions/node/v23.3.0/bin:$PATH CI=1 npx expo start --web --port 8082"], "port": 8082 },
-    { "name": "ios-metro", "runtimeExecutable": "sh", "runtimeArgs": ["-c", "PATH=$HOME/.nvm/versions/node/v23.3.0/bin:$PATH CI=1 npx expo start --dev-client --port 8081"], "port": 8081 }
+    { "name": "ios-metro", "runtimeExecutable": "sh", "runtimeArgs": ["-c", "PATH=$HOME/.nvm/versions/node/v23.3.0/bin:$PATH CI=1 npx expo start --dev-client --port 8085"], "port": 8085 }
   ]
 }

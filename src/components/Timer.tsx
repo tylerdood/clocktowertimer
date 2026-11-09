@@ -5,6 +5,7 @@ import { Press } from './Press';
 import { colors, fonts } from '../theme';
 import { useStore } from '../store';
 import { formatTime, parseTime } from '../logic';
+import { useT } from '../i18n';
 
 export function TimerDisplay() {
   const { width } = useWindowDimensions();
@@ -54,6 +55,7 @@ function IconBtn({ icon, onPress, disabled, label }: { icon: string; onPress: ()
 
 export function TimerControls() {
   const s = useStore();
+  const t = useT();
   const running = s.endAt !== null;
   const night = s.phase === 'NIGHT';
   const [editing, setEditing] = useState(false);
@@ -62,23 +64,23 @@ export function TimerControls() {
   const confirm = () => {
     const secs = parseTime(text);
     if (secs > 0 && secs <= 3599) { s.setTime(secs); setEditing(false); setText(''); }
-    else Alert.alert('Invalid time', `Try 7.5, 7:30 or 450s.\nRange: 1 second – 59:59`);
+    else Alert.alert(t('timer-invalid-title'), t('timer-invalid-text', { input: text }));
   };
 
   return (
     <>
       <View style={styles.row}>
-        <IconBtn icon={running ? 'stop' : 'play'} label="Start or stop" disabled={night} onPress={running ? s.stop : s.start} />
-        <IconBtn icon="sync-alt" label="Reset timer" disabled={running || night} onPress={s.reset} />
-        <IconBtn icon="keyboard" label="Edit timer" disabled={running || night} onPress={() => setEditing(true)} />
-        <IconBtn icon="arrow-up" label="Add time" disabled={running || night} onPress={() => s.nudge(1)} />
-        <IconBtn icon="arrow-down" label="Remove time" disabled={running || night} onPress={() => s.nudge(-1)} />
-        <IconBtn icon="bell" label="Recall townsfolk" disabled={night} onPress={s.recall} />
+        <IconBtn icon={running ? 'stop' : 'play'} label={t('btn-start-stop')} disabled={night} onPress={running ? s.stop : s.start} />
+        <IconBtn icon="sync-alt" label={t('btn-timer-reset')} disabled={running || night} onPress={s.reset} />
+        <IconBtn icon="keyboard" label={t('btn-timer-edit')} disabled={running || night} onPress={() => setEditing(true)} />
+        <IconBtn icon="arrow-up" label={t('btn-timer-plus')} disabled={running || night} onPress={() => s.nudge(1)} />
+        <IconBtn icon="arrow-down" label={t('btn-timer-minus')} disabled={running || night} onPress={() => s.nudge(-1)} />
+        <IconBtn icon="bell" label={t('btn-recall')} disabled={night} onPress={s.recall} />
       </View>
       <Modal visible={editing} transparent animationType="fade" onRequestClose={() => setEditing(false)}>
         <View style={styles.backdrop}>
           <View style={styles.dialog}>
-            <Text style={styles.dialogTitle}>Set timer</Text>
+            <Text style={styles.dialogTitle}>{t('timer-title')}</Text>
             <TextInput
               autoFocus
               value={text}
@@ -90,8 +92,8 @@ export function TimerControls() {
               style={styles.input}
             />
             <View style={styles.dialogRow}>
-              <Press style={styles.dialogBtn} onPress={() => setEditing(false)}><Text style={styles.dialogBtnText}>Cancel</Text></Press>
-              <Press style={[styles.dialogBtn, { backgroundColor: colors.gold }]} onPress={confirm}><Text style={[styles.dialogBtnText, { color: '#111' }]}>Set</Text></Press>
+              <Press style={styles.dialogBtn} onPress={() => setEditing(false)}><Text style={styles.dialogBtnText}>{t('cancel')}</Text></Press>
+              <Press style={[styles.dialogBtn, { backgroundColor: colors.gold }]} onPress={confirm}><Text style={[styles.dialogBtnText, { color: '#111' }]}>{t('timer-set')}</Text></Press>
             </View>
           </View>
         </View>

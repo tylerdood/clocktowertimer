@@ -5,18 +5,19 @@ import { Press } from './Press';
 import { useFlash } from './Roles';
 import { colors, fonts } from '../theme';
 import { useStore } from '../store';
+import { useT } from '../i18n';
 
-function Tracker({ icon, value, glyph, glow, onMinus, onPlus }: { icon: any; value: number; glyph: string; glow: string; onMinus: () => void; onPlus: () => void }) {
+function Tracker({ icon, value, glyph, glow, onMinus, onPlus, minusLabel, plusLabel }: { icon: any; value: number; glyph: string; glow: string; onMinus: () => void; onPlus: () => void; minusLabel: string; plusLabel: string }) {
   const flash = useFlash();
   return (
     <View style={styles.col}>
-      <Press onPress={() => { if (value > 0) { flash.fire(); onMinus(); } }} style={[styles.ring, { borderColor: colors.gold }]} accessibilityLabel="Decrease">
+      <Press onPress={() => { if (value > 0) { flash.fire(); onMinus(); } }} style={[styles.ring, { borderColor: colors.gold }]} accessibilityLabel={minusLabel}>
         <Image source={icon} style={styles.icon} resizeMode="contain" />
         <Animated.Text pointerEvents="none" style={[styles.glyph, { color: glow, textShadowColor: glow }, flash.style]}>{glyph}</Animated.Text>
       </Press>
       <View style={styles.valueRow}>
         <Text style={styles.value}>{value}</Text>
-        <Press onPress={onPlus} style={styles.plus} accessibilityLabel="Increase">
+        <Press onPress={onPlus} style={styles.plus} accessibilityLabel={plusLabel}>
           <FontAwesome5 name="plus" size={14} color="#111" />
         </Press>
       </View>
@@ -25,14 +26,15 @@ function Tracker({ icon, value, glyph, glow, onMinus, onPlus }: { icon: any; val
 }
 
 export function Trackers() {
+  const t = useT();
   const hearts = useStore((s) => s.hearts);
   const votes = useStore((s) => s.votes);
   const h = useStore((s) => s.hearts_);
   const v = useStore((s) => s.votes_);
   return (
     <View style={styles.row}>
-      <Tracker icon={require('../../assets/images/heart.png')} value={hearts} glyph="✕" glow="#ef4444" onMinus={() => h(-1)} onPlus={() => h(1)} />
-      <Tracker icon={require('../../assets/images/box.png')} value={votes} glyph="✓" glow="#4ade80" onMinus={() => v(-1)} onPlus={() => v(1)} />
+      <Tracker icon={require('../../assets/images/heart.png')} value={hearts} glyph="✕" glow="#ef4444" onMinus={() => h(-1)} onPlus={() => h(1)} minusLabel={t('btn-alive-minus')} plusLabel={t('btn-alive-plus')} />
+      <Tracker icon={require('../../assets/images/box.png')} value={votes} glyph="✓" glow="#4ade80" onMinus={() => v(-1)} onPlus={() => v(1)} minusLabel={t('btn-vote-minus')} plusLabel={t('btn-vote-plus')} />
     </View>
   );
 }
